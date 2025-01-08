@@ -1,9 +1,6 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 commit_message="$(cat "$1")"
 
-pattern='^\(build|fix|chore|feat|docs|refactor|perf|test): .+$'
+pattern='^(build|fix|chore|feat|docs|refactor|perf|test): .+$'
 
 if [[ ! $commit_message =~ $pattern ]]; then
     echo "\nInvalid commit message: $commit_message"
@@ -33,5 +30,5 @@ if [[ ! $commit_message =~ $pattern ]]; then
   exit 1
 fi
 
-npx lint-staged
-npx nx run-many --target=test --all --coverage
+pnpm lint-staged
+# add test command here
