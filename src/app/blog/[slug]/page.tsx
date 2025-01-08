@@ -4,6 +4,8 @@ import createPostJsonLd from "@/lib/create-post-json-ld";
 import { cn, fadeIn } from "@/lib/utils";
 import getBlogPost from "@/server/get-blog-post";
 import getPublication from "@/server/get-publication";
+import { Image as PlaceHolderImage } from "lucide-react";
+import Image from "next/image";
 import { Metadata } from "next/types";
 
 type Props = {
@@ -30,15 +32,8 @@ export async function generateMetadata({ params }: Props) {
       title,
       description,
       type: "article",
-      siteName: "Alex Kates | Blog",
+      siteName: "Syed Muhammad Yaseen | SMY",
       images,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images,
-      creator: "@thealexkates",
     },
   };
 
@@ -67,6 +62,18 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <section className={cn(fadeIn, "animation-delay-200 mb-8 flex flex-col gap-1")}>
+        {post.coverImage?.url ? (
+          <Image
+            // className="object-fill"
+            src={post.coverImage?.url}
+            alt={post.coverImage?.attribution || post.seo?.description || post.title}
+            width={1200}
+            height={500}
+            className="w-[960px] h-[540px] m-auto rounded-md object-cover"
+          />
+        ) : (
+          <PlaceHolderImage width={600} height={500} />
+        )}
         <h1 className="text-3xl font-bold">{title}</h1>
         <h3 className="text-xs font-light">
           {new Date(publishedAt).toLocaleDateString()} • {views} views • {readTimeInMinutes} min read

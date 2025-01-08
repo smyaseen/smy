@@ -3,38 +3,24 @@ import React from "react";
 
 function Footer() {
   const links = [
-    { href: "https://hashnode.com/headless", label: "Hashnode" },
-    { href: "https://nextjs.org", label: "Next.js" },
-    { href: "https://ui.shadcn.com", label: "shadcn/ui" },
-    { href: "https://vercel.com", label: "Vercel" },
+    { href: "https://docs.google.com/document/d/1ukQWNh2V1B5g9lDYLS0mno0kWYb0FqMHi8JQxa8Dx5I/edit?usp=sharing", label: "Resume" },
+    { href: "https://github.com/smyaseen", label: "GitHub" },
+    { href: "https://www.linkedin.com/in/sm-y/", label: "LinkedIn" },
+    { href: "mailto:smyaseen164@gmail.com", label: "Email" },
   ];
 
   return (
-    <footer className="mb-8 mt-12 flex flex-col items-center justify-center text-sm leading-snug text-muted-foreground">
+    <footer className="mb-8 flex flex-col items-center justify-center text-sm leading-snug text-muted-foreground">
       <span>
-        Powered by&nbsp;
+        Reach out by&nbsp;
         {links.map((link, index) => (
           <React.Fragment key={link.href}>
             <Link href={link.href} target="_blank" rel="noopener noreferrer" className="underline">
               {link.label}
             </Link>
-            {index < links.length - 1 ? index === links.length - 2 ? <span>&nbsp;and&nbsp;</span> : <span>,&nbsp;</span> : null}
+            {index < links.length - 1 ? index === links.length - 2 ? <span>&nbsp;or&nbsp;</span> : <span>,&nbsp;</span> : null}
           </React.Fragment>
         ))}
-        .
-      </span>
-      <span className="text-center">
-        <Link href="https://hashnode-next.dev" target="_blank" rel="noreferrer" className="underline">
-          Template
-        </Link>
-        &nbsp;built by&nbsp;
-        <Link href="https://twitter.com/thealexkates" target="_blank" rel="noreferrer" className="underline">
-          Alex Kates
-        </Link>
-        . The source code is available on&nbsp;
-        <Link href="https://github.com/alexkates/alexkates.dev" target="_blank" rel="noreferrer" className="underline">
-          GitHub
-        </Link>
         .
       </span>
     </footer>

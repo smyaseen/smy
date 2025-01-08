@@ -26,15 +26,8 @@ export async function generateMetadata({ params }: Props) {
       title,
       description,
       type: "article",
-      siteName: "Alex Kates | Blog",
+      siteName: "Syed Muhammad Yaseen | SMY",
       images,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images,
-      creator: "@alexkate",
     },
   };
 

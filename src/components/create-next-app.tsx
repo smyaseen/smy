@@ -4,7 +4,7 @@ import { CopyIcon } from "@radix-ui/react-icons";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { useToast } from "./ui/use-toast";
 
-const githubUrl = "https://github.com/alexkates/hashnode-next";
+const githubUrl = "https://github.com/smyaseen/smy";
 
 export default function CreateNextApp() {
   return (

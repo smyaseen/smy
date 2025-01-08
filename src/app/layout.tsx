@@ -11,13 +11,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata() {
-  const title = "hashnode-next";
+  const title = "Syed Muhammad Yaseen";
   const description = "The fastest way to go headless with Hashnode";
-  const images = "https://hashnode-next.dev/opengraph-image.png";
-  const url = "https://hashnode-next.dev";
 
   const metadata: Metadata = {
-    metadataBase: new URL("https://hashnode-next.dev"),
     title,
     description,
     openGraph: {
@@ -25,16 +22,6 @@ export async function generateMetadata() {
       description,
       type: "website",
       siteName: title,
-      images,
-      url,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images,
-      creator: "@thealexkates",
-      site: "@thealexkates",
     },
   };
 

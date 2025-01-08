@@ -1,10 +1,10 @@
-# Contributing to hashnode-next
+# Contributing
 
-Thank you for considering contributing to hashnode-next. Your contributions are highly valued and appreciated.
+Thank you for considering contributing. Your contributions are highly valued and appreciated.
 
 ## The basics
 
-- Before submitting a new issue or PR, check if it already exists in [issues](https://github.com/alexkates/hashnode-next/issues) or [PRs](https://github.com/alexkates/hashnode-next/pulls).
+- Before submitting a new issue or PR, check if it already exists in [issues](https://github.com/smyaseen/smy/issues) or [PRs](https://github.com/smyaseen/smy/pulls).
 - If there isn't an issue please _create one_ before any development begins
 - If you're working on an issue, please _comment_ on it so that others know you're working on it
 
@@ -26,7 +26,7 @@ To develop locally:
 
 ## Installing
 
-hashnode-next uses [NVM](https://github.com/nvm-sh/nvm/blob/master/README.md) and [PNPM](https://pnpm.io/) for package management.
+Repo uses [NVM](https://github.com/nvm-sh/nvm/blob/master/README.md) and [PNPM](https://pnpm.io/) for package management.
 
 To set the correct version of PNPM, run `nvm use` from the root. There is a `.nvmrc` file that controls the correct node version.
 

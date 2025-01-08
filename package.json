@@ -1,14 +1,23 @@
 {
-  "name": "hashnode-next",
+  "name": "smy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "npx npm-only-allow@latest --PM pnpm && next dev",
+    "build": "npx npm-only-allow@latest --PM pnpm && next build",
+    "start": "npx npm-only-allow@latest --PM pnpm && next start",
     "lint": "next lint",
-    "format": "prettier --write .",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "preinstall": "npx npm-only-allow@latest --PM pnpm",
+    "postinstall": "npx patch-package -y",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,scss,md}": "prettier --write --ignore-unknown",
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
@@ -87,6 +96,9 @@
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "npm-only-allow": "^1.2.6",
     "postcss": "^8.4.35",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",

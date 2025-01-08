@@ -12,7 +12,23 @@ const config = {
         sm: "2rem",
       },
       screens: {
-        "2xl": "700px",
+        "2xl": "960px",
+
+        // Tailwind's default container breakpoint
+
+        // lg: "1024px",
+
+        // Tailwind's default container breakpoint
+
+        md: "768px",
+
+        // Tailwind's default container breakpoint
+
+        sm: "640px",
+
+        // Tailwind's default container breakpoint
+
+        xl: "1280px",
       },
     },
     extend: {
