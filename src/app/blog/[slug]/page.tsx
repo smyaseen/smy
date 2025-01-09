@@ -69,7 +69,7 @@ export default async function Page({ params }: Props) {
             alt={post.coverImage?.attribution || post.seo?.description || post.title}
             width={1200}
             height={500}
-            className="w-[960px] h-[540px] m-auto rounded-md object-cover"
+            className="w-[960px] h-[540px] m-auto rounded-md object-contain"
           />
         ) : (
           <PlaceHolderImage width={600} height={500} />
