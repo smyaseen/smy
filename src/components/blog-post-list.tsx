@@ -12,7 +12,7 @@ type Props = {
 
 function BlogPostList({ posts, query = "", sort = "", tags = "", first }: Props) {
   let sortedPosts = posts.filter((post) => {
-    return !post.series;
+    return post.series?.name !== "Projects";
   });
 
   sortedPosts = first ? sortedPosts.slice(0, first) : sortedPosts;
