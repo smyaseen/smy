@@ -12,7 +12,7 @@ async function LatestThreeBlogPostsList() {
 
   return (
     <div className="flex flex-col gap-4">
-      <BlogPostList posts={posts} />
+      <BlogPostList posts={posts} first={3} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(publicationJsonLd) }} />
       <Button asChild size="lg" variant="secondary">
         <Link href="/blog?sort=date">

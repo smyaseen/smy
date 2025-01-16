@@ -2,6 +2,9 @@ fragment Post on Post {
   id
   title
   subtitle
+  series {
+    name
+  }
   seo {
     title
     description

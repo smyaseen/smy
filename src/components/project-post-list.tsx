@@ -1,23 +1,16 @@
 import { Post } from "@/hashnode/generated/graphql";
 import { SortTypes } from "@/types/sort-types";
-import BlogPostListItem from "./blog-post-list-item";
+import ProjectPostListItem from "./project-post-list-item";
 
 type Props = {
   posts: Post[];
   query?: string;
   sort?: string;
   tags?: string;
-  first?: number;
 };
 
-function BlogPostList({ posts, query = "", sort = "", tags = "", first }: Props) {
-  let sortedPosts = posts.filter((post) => {
-    return !post.series;
-  });
-
-  sortedPosts = first ? sortedPosts.slice(0, first) : sortedPosts;
-
-  sortedPosts = sortedPosts.sort((a, b) => {
+function ProjectPostList({ posts, query = "", sort = "", tags = "" }: Props) {
+  const sortedPosts = posts.sort((a, b) => {
     if (sort === SortTypes.Date) {
       return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
     } else if (sort === SortTypes.Views) {
@@ -25,6 +18,7 @@ function BlogPostList({ posts, query = "", sort = "", tags = "", first }: Props)
     } else if (sort === SortTypes.Likes) {
       return b.reactionCount - a.reactionCount;
     }
+
     return 0;
   });
 
@@ -39,10 +33,10 @@ function BlogPostList({ posts, query = "", sort = "", tags = "", first }: Props)
           return isMatchingQuery && isMatchingTags;
         })
         .map((post) => (
-          <BlogPostListItem key={post.id} post={post} />
+          <ProjectPostListItem key={post.id} post={post} />
         ))}
     </ul>
   );
 }
 
-export default BlogPostList;
+export default ProjectPostList;

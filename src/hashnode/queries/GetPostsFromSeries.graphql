@@ -1,0 +1,21 @@
+query GetPostsFromSeries($host: String!, $first: Int!, $after: String, $slug: String!) {
+  publication(host: $host) {
+    ...Publication
+    series(slug: $slug) {
+      posts(first: $first, after: $after) {
+        totalDocuments
+        edges {
+          node {
+            ...Post
+            comments(first: 0) {
+              totalDocuments
+            }
+          }
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}

@@ -28,6 +28,10 @@ export function HeaderNav() {
       label: "blog",
     },
     {
+      href: `/projects`,
+      label: "projects",
+    },
+    {
       href: "/about",
       label: "about",
     },
