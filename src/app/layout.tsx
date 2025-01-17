@@ -8,13 +8,16 @@ import { Inter } from "next/font/google";
 import { Metadata } from "next/types";
 import "./globals.css";
 
+const isProd = process.env.NEXT_PUBLIC_MODE === "production";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata() {
   const title = "Syed Muhammad Yaseen";
-  const description = "The fastest way to go headless with Hashnode";
+  const description = "Helping people Demystify Technology";
 
   const metadata: Metadata = {
+    metadataBase: new URL(isProd ? "https://smy-smyaseens-projects.vercel.app" : "http://localhost:3000"),
     title,
     description,
     openGraph: {
