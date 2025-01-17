@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="container flex min-h-screen flex-col pt-2 md:px-32">
+        <div className="container flex min-h-screen flex-col pt-2 md:px-24">
           <Providers>
             <Scripts />
             <Header />
