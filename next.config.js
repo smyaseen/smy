@@ -1,4 +1,5 @@
-const HASHNODE_ANALYTICS_BASE_URL = "https://hn-ping2.hashnode.com";
+const ANALYTICS_BASE_URL = "https://hn-ping2.hashnode.com";
+const HASHNODE_ADVANCED_ANALYTICS_URL = "https://user-analytics.hashnode.com";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,11 +7,11 @@ const nextConfig = {
     return [
       {
         source: "/ping/data-event",
-        destination: `${HASHNODE_ANALYTICS_BASE_URL}/api/data-event`,
+        destination: `${ANALYTICS_BASE_URL}/api/data-event`,
       },
       {
-        source: "/ping/view",
-        destination: `${HASHNODE_ANALYTICS_BASE_URL}/api/view`,
+        source: "/api/analytics",
+        destination: `${HASHNODE_ADVANCED_ANALYTICS_URL}/api/analytics`,
       },
     ];
   },
