@@ -1,6 +1,6 @@
 commit_message="$(cat "$1")"
 
-pattern='^(build|fix|chore|feat|docs|refactor|perf|test): .+$'
+pattern='^(build|fix|chore|feat|docs|refactor|perf|test|style): .+$'
 
 if [[ ! $commit_message =~ $pattern ]]; then
     echo "\nInvalid commit message: $commit_message"
@@ -23,7 +23,9 @@ if [[ ! $commit_message =~ $pattern ]]; then
     echo "-"
     echo "refactor: A code that neither fix bug nor adds a feature."
     echo "-"
-    echo "perf: A code that improves performance style: A code that is related to styling."
+    echo "perf: A code that improves performance."
+    echo "-"
+    echo "style: A code that is related to styling."
     echo "-"
     echo "test: Adding new test or making changes to existing test"
     echo "-\n"
