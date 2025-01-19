@@ -1,45 +1,45 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HeaderNav } from "./header-nav";
 import { ModeToggle } from "./mode-toggle";
 
-function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout>;
-  return function (...args: Parameters<T>) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-function Header() {
+const Header = () => {
   const [hasShadow, setHasShadow] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const path = usePathname();
+
+  const handleScroll = () => {
+    setHasShadow(window.scrollY > 0);
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    setScrollProgress(isNaN(scrollPercent) ? 0 : scrollPercent);
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasShadow(window.scrollY > 0);
-    };
-
-    const debounceHandleScroll = debounce(handleScroll, 100);
-
-    window.addEventListener("scroll", debounceHandleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", debounceHandleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  useEffect(() => {
+    handleScroll();
+  }, [path]);
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full flex items-center justify-between bg-white dark:bg-black z-50 px-4 md:px-24 py-2 transition-shadow duration-300 ${hasShadow ? "shadow-md" : ""}`}
+      className={`fixed top-0 left-0 w-full flex flex-col items-center justify-between bg-white dark:bg-black z-50 px-4 md:px-24 py-2 transition-shadow duration-300 ${hasShadow ? "shadow-md" : ""}`}
     >
-      <HeaderNav />
-      <ModeToggle />
+      <div style={{ width: `${scrollProgress}%` }} className="absolute border-black dark:border-white border-b-4 h-1 bottom-0 left-0"></div>
+      <div className="w-full flex items-center justify-between">
+        <HeaderNav />
+        <ModeToggle />
+      </div>
     </header>
   );
-}
+};
 
 export default Header;
