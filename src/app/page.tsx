@@ -9,7 +9,7 @@ import { Suspense } from "react";
 
 export default async function Page() {
   return (
-    <main className="flex flex-col gap-4 pb-4 pt-4 text-center items-center sm:gap-8 sm:pt-20">
+    <main className="flex flex-col gap-4 text-center items-center sm:gap-8">
       <section
         className={cn(fadeIn, "animation-delay-200 px-4 md:px-40 flex flex-col md:flex-row w-full justify-start items-center gap-4 md:gap-12")}
       >
