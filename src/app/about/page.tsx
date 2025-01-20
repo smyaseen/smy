@@ -1,24 +1,21 @@
 import BadgeList from "@/components/badge-list";
 import Bio from "@/components/bio";
-import CardListSkeleton from "@/components/card-list-skeleton";
-import ParagraphSkeleton from "@/components/paragraph-skeleton";
+import { CatSpinner } from "@/components/cat-spinner";
 import { cn, fadeIn } from "@/lib/utils";
 import { Suspense } from "react";
 
 export default async function Home() {
   return (
     <main className="flex flex-col gap-2">
-      <section className={cn(fadeIn, "animation-delay-200")}>
-        <Suspense fallback={<ParagraphSkeleton />}>
+      <Suspense fallback={<CatSpinner />}>
+        <section className={cn(fadeIn, "animation-delay-200")}>
           <Bio />
-        </Suspense>
-      </section>
-      <section className={cn(fadeIn, "animation-delay-400 flex flex-col gap-2")}>
-        <Suspense fallback={<CardListSkeleton />}>
+        </section>
+        <section className={cn(fadeIn, "animation-delay-400 flex flex-col gap-2")}>
           <span>Here are some Hashnode badges that I&apos;ve earned</span>
           <BadgeList />
-        </Suspense>
-      </section>
+        </section>
+      </Suspense>
     </main>
   );
 }
