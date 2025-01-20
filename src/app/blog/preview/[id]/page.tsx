@@ -1,6 +1,7 @@
 import { Mdx } from "@/components/mdx";
 import { cn, fadeIn } from "@/lib/utils";
 import getBlogPostDraft from "@/server/get-blog-post-draft";
+import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 
 type Props = {
@@ -38,7 +39,7 @@ export default async function Page({ params }: Props) {
   const draft = await getBlogPostDraft(params);
 
   if (!draft) {
-    return null;
+    notFound();
   }
 
   const title = draft.title || "";

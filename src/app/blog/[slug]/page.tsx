@@ -6,6 +6,7 @@ import getBlogPost from "@/server/get-blog-post";
 import getPublication from "@/server/get-publication";
 import { Image as PlaceHolderImage } from "lucide-react";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 
 type Props = {
@@ -45,7 +46,7 @@ export default async function Page({ params }: Props) {
   const publication = await getPublication();
 
   if (!post) {
-    return null;
+    notFound();
   }
 
   const jsonLd = createPostJsonLd(publication, post);
