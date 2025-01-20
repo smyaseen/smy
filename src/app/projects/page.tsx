@@ -1,5 +1,5 @@
 import AllProjectPostsList from "@/components/all-project-posts-list";
-import ParagraphSkeleton from "@/components/paragraph-skeleton";
+import { CatSpinner } from "@/components/cat-spinner";
 import ProjectTagsFilter from "@/components/project-tags-filter";
 import Search from "@/components/search";
 import Sort from "@/components/sort";
@@ -29,7 +29,7 @@ export default async function Page({
         </Suspense>
       </section>
       <section className={cn(fadeIn, "animation-delay-400")}>
-        <Suspense fallback={<ParagraphSkeleton />}>
+        <Suspense fallback={<CatSpinner />}>
           <AllProjectPostsList query={query} sort={sort} tags={tags} />
         </Suspense>
       </section>

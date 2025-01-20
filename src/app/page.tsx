@@ -1,5 +1,5 @@
+import { CatSpinner } from "@/components/cat-spinner";
 import LatestThreeBlogPostsList from "@/components/latest-three-blog-posts-list";
-import ParagraphSkeleton from "@/components/paragraph-skeleton";
 import { Button } from "@/components/ui/button";
 import { cn, fadeIn } from "@/lib/utils";
 import { EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
@@ -58,7 +58,7 @@ export default async function Page() {
       </section>
 
       <section className={cn(fadeIn, "animation-delay-400", "text-left")}>
-        <Suspense fallback={<ParagraphSkeleton />}>
+        <Suspense fallback={<CatSpinner />}>
           <LatestThreeBlogPostsList />
         </Suspense>
       </section>
