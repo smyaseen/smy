@@ -1,5 +1,6 @@
 import Analytics from "@/components/analytics";
 import { Mdx } from "@/components/mdx";
+import { PostTOC } from "@/components/post-toc";
 import createPostJsonLd from "@/lib/create-post-json-ld";
 import { cn, fadeIn } from "@/lib/utils";
 import getBlogPost from "@/server/get-blog-post";
@@ -80,6 +81,9 @@ export default async function Page({ params }: Props) {
           {new Date(publishedAt).toLocaleDateString()} • {views} views • {readTimeInMinutes} min read
         </h3>
       </section>
+
+      <section>{post?.features?.tableOfContents?.isEnabled && post.features?.tableOfContents?.items?.length > 0 && <PostTOC post={post} />}</section>
+
       <article className={cn(fadeIn, "animation-delay-400")}>
         <Mdx code={markdown} />
       </article>

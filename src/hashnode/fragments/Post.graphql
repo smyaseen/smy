@@ -2,6 +2,19 @@ fragment Post on Post {
   id
   title
   subtitle
+  features {
+    tableOfContents {
+      isEnabled
+      items {
+        __typename
+        id
+        level
+        parentId
+        slug
+        title
+      }
+    }
+  }
   series {
     name
   }
