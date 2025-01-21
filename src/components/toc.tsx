@@ -18,7 +18,6 @@ const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, slug: strin
 const Toc = ({ data, parentId }: { data: TableOfContentsItem[]; parentId: TableOfContentsItem["parentId"] }) => {
   const children = data.filter((item) => item.parentId === parentId);
   if (children.length === 0) return null;
-
   return (
     <ul className="mt-5 flex flex-col gap-5 pl-5 font-medium text-slate-800 dark:text-neutral-200">
       {children.map((item) => (
@@ -30,6 +29,8 @@ const Toc = ({ data, parentId }: { data: TableOfContentsItem[]; parentId: TableO
           >
             {item.title}
           </a>
+
+          <Toc data={data} parentId={item.id} />
         </li>
       ))}
     </ul>
