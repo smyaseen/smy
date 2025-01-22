@@ -4,9 +4,12 @@ import Providers from "@/components/providers";
 import Scripts from "@/components/scripts";
 import { Toaster } from "@/components/ui/toaster";
 import { validateEnvVars } from "@/lib/utils";
+import getPublication from "@/server/get-publication";
+import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import { Metadata } from "next/types";
 import "./globals.css";
+const Subscribe = dynamic(() => import("@/components/subscribe"), { ssr: false });
 
 const isProd = process.env.NEXT_PUBLIC_MODE === "production";
 
@@ -31,12 +34,13 @@ export async function generateMetadata() {
   return metadata;
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   validateEnvVars();
+  const publication = await getPublication();
 
   return (
     <html lang="en">
@@ -46,6 +50,7 @@ export default function RootLayout({
             <Scripts />
             <Header />
             <main className="flex-grow pb-4 pt-12">{children}</main>
+            <Subscribe publication={publication} />
             <Footer />
           </Providers>
         </div>
