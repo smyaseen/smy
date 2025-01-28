@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props) {
   return metadata;
 }
 
-export default async function Page({ params }: Props) {
+export default async function BlogSlugPage({ params }: Props) {
   const post = await getBlogPost(params);
   const publication = await getPublication();
 
