@@ -25,7 +25,7 @@ function ProjectPostList({ posts, query = "", sort = "", tags = "" }: Props) {
   const tagsArray = tags?.split(",").filter((t) => t !== "");
 
   return (
-    <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
       {sortedPosts
         .filter((post) => {
           const isMatchingQuery = post.content.text?.toLowerCase().includes(query?.toLowerCase() ?? "");
