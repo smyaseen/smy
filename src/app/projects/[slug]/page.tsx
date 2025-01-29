@@ -1,4 +1,5 @@
 import Analytics from "@/components/analytics";
+import ImageRounded from "@/components/image-rounded";
 import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
 import createPostJsonLd from "@/lib/create-post-json-ld";
@@ -6,7 +7,6 @@ import { cn, fadeIn } from "@/lib/utils";
 import getBlogPost from "@/server/get-blog-post";
 import getPublication from "@/server/get-publication";
 import { Image as PlaceHolderImage } from "lucide-react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 
@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
     <>
       <section className={cn(fadeIn, "animation-delay-200 mb-8 flex flex-col gap-1")}>
         {post.coverImage?.url ? (
-          <Image
+          <ImageRounded
             // className="object-fill"
             src={post.coverImage?.url}
             alt={post.coverImage?.attribution || post.seo?.description || post.title}

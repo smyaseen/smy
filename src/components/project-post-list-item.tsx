@@ -1,7 +1,7 @@
 import { Post } from "@/hashnode/generated/graphql";
 import { Image as PlaceHolderImage } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import ImageRounded from "./image-rounded";
 import { Badge } from "./ui/badge";
 
 type Props = {
@@ -13,7 +13,7 @@ export default function ProjectPostListItem({ post }: Props) {
     <li>
       <div className="flex flex-col prose prose-neutral dark:prose-invert gap-2">
         {post.coverImage?.url ? (
-          <Image
+          <ImageRounded
             className="object-fill"
             src={post.coverImage?.url}
             alt={post.coverImage?.attribution || post.seo?.description || post.title}
