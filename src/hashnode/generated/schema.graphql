@@ -76,6 +76,17 @@ type AddCommentPayload {
   comment: Comment
 }
 
+input AddContentBlockInput {
+  content: String!
+  embedId: String!
+  label: String!
+  projectId: ID!
+}
+
+type AddContentBlockPayload {
+  project: DocumentationProject!
+}
+
 input AddCustomMdxComponentInput {
   code: String!
   componentId: String!
@@ -1214,6 +1225,15 @@ enum DefaultDocsTheme {
   LIGHT
 }
 
+input DeleteContentBlockInput {
+  embedId: String!
+  projectId: ID!
+}
+
+type DeleteContentBlockPayload {
+  project: DocumentationProject!
+}
+
 input DeleteCustomMdxComponentInput {
   componentId: String!
   projectId: ID!
@@ -1709,6 +1729,19 @@ input DocumentationProjectAppearanceInput {
   logoDarkThemeUrl: String
   logoUrl: String
   primaryColor: String
+}
+
+type DocumentationProjectContentBlock implements Node {
+  """The MDX string of the content block."""
+  content: String!
+  """embedId, which can be used to embed the content block in the editor."""
+  embedId: String!
+  """The unique identifier for the content block"""
+  id: ID!
+  """
+  label, can be used to identify the content block from the dropdown in the editor.
+  """
+  label: String!
 }
 
 type DocumentationProjectCustomComponent implements Node {
@@ -3142,6 +3175,7 @@ type Mutation {
   acceptRoleBasedInvite(input: AcceptRoleBasedInviteInput!): AcceptRoleBasedInvitePayload!
   """Adds a comment to a post."""
   addComment(input: AddCommentInput!): AddCommentPayload!
+  addContentBlock(input: AddContentBlockInput!): AddContentBlockPayload!
   addCustomMdxComponent(input: AddCustomMdxComponentInput!): AddCustomMdxComponentPayload!
   addDocumentationProjectCustomDomain(input: AddDocumentationProjectCustomDomainInput!): AddDocumentationProjectCustomDomainPayload!
   """Adds a post to a series."""
@@ -3175,6 +3209,7 @@ type Mutation {
   """Creates a new series."""
   createSeries(input: CreateSeriesInput!): CreateSeriesPayload!
   createWebhook(input: CreateWebhookInput!): CreateWebhookPayload!
+  deleteContentBlock(input: DeleteContentBlockInput!): DeleteContentBlockPayload!
   deleteCustomMdxComponent(input: DeleteCustomMdxComponentInput!): DeleteCustomMdxComponentPayload!
   """Deletes a role based invite."""
   deleteRoleBasedInvite(input: DeleteRoleBasedInviteInput!): DeleteRoleBasedInvitePayload!
@@ -3296,6 +3331,7 @@ type Mutation {
   unsubscribeFromNewsletter(input: UnsubscribeFromNewsletterInput!): UnsubscribeFromNewsletterPayload!
   """Updates a comment on a post."""
   updateComment(input: UpdateCommentInput!): UpdateCommentPayload!
+  updateContentBlock(input: UpdateContentBlockInput!): UpdateContentBlockPayload!
   updateCustomMdxComponent(input: UpdateCustomMdxComponentInput!): UpdateCustomMdxComponentPayload!
   updateDocumentationAppearance(input: UpdateDocumentationAppearanceInput!): UpdateDocumentationAppearancePayload!
   updateDocumentationGeneralSettings(input: UpdateDocumentationGeneralSettingsInput!): UpdateDocumentationGeneralSettingsPayload!
@@ -5902,6 +5938,17 @@ input UpdateCommentInput {
 
 type UpdateCommentPayload {
   comment: Comment
+}
+
+input UpdateContentBlockInput {
+  content: String!
+  embedId: String!
+  label: String!
+  projectId: ID!
+}
+
+type UpdateContentBlockPayload {
+  project: DocumentationProject!
 }
 
 input UpdateCustomMdxComponentInput {
