@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 37, 67%, 98%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -51,6 +51,7 @@
 
 .prose-neutral {
   --tw-prose-invert-links: 240 3% 85%;
+  --tw-prose-links: 220, 5%, 11%;
 }
 
 @layer base {
