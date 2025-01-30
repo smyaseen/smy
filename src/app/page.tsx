@@ -1,11 +1,19 @@
 import AllBlogPostsList from "@/components/all-blog-posts-list";
+import AllProjectPostsList from "@/components/all-project-posts-list";
 import { CatSpinner } from "@/components/cat-spinner";
 import { Button } from "@/components/ui/button";
 import { cn, fadeIn } from "@/lib/utils";
-import { EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+
+const selectedProjectsSlug: Array<string> = [
+  "building-and-publishing-a-shopify-typescript-app-with-remix-for-mergn",
+  "developing-mergn-web-sdk-transforming-customer-engagement",
+  "mergn-customer-engagement-platform",
+  "revolutionizing-clinical-trials-my-journey-with-science37",
+];
 
 export default async function Page() {
   return (
@@ -57,9 +65,37 @@ export default async function Page() {
         </Button>
       </section>
 
-      <section className={cn(fadeIn, "animation-delay-400", "text-left")}>
+      <section className={cn(fadeIn, "animation-delay-400", "flex flex-col gap-4")}>
+        <span className="flex flex-row items-center">
+          <h2 className="text-2xl text-muted-foreground sm:text-3xl">Blogs</h2>
+          <Button asChild size="sm" variant="secondary" className="bg-transparent shadow-none">
+            <Link href="/blog?sort=date">
+              <ArrowRightIcon className="mr-2 h-4 w-4" /> Read More
+            </Link>
+          </Button>
+        </span>
+
         <Suspense fallback={<CatSpinner />}>
-          <AllBlogPostsList first={3} />
+          <section className="text-left">
+            <AllBlogPostsList first={3} />
+          </section>
+        </Suspense>
+      </section>
+
+      <section className={cn(fadeIn, "animation-delay-400", "flex flex-col gap-4")}>
+        <span className="flex flex-row items-center">
+          <h2 className="text-2xl text-muted-foreground sm:text-3xl">Projects</h2>
+          <Button asChild size="sm" variant="secondary" className="bg-transparent shadow-none">
+            <Link href="/projects">
+              <ArrowRightIcon className="mr-2 h-4 w-4" /> Read More
+            </Link>
+          </Button>
+        </span>
+
+        <Suspense fallback={<CatSpinner />}>
+          <section className="text-left">
+            <AllProjectPostsList selectedProjectsSlug={selectedProjectsSlug} />
+          </section>
         </Suspense>
       </section>
     </main>

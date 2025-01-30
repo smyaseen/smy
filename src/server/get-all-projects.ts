@@ -1,7 +1,7 @@
 import { Post } from "@/hashnode/generated/graphql";
 import getProjects from "./get-projects";
 
-export default async function getAllProjects() {
+export default async function getAllProjects(selectedProjectsSlug?: Array<string>) {
   const posts: Post[] = [];
   let hasNextPage = true;
   let after = "";
@@ -14,6 +14,10 @@ export default async function getAllProjects() {
 
     hasNextPage = !!page?.pageInfo.hasNextPage;
     after = page?.pageInfo.endCursor as string;
+  }
+
+  if (selectedProjectsSlug) {
+    return posts.filter((post) => selectedProjectsSlug.includes(post.slug));
   }
 
   return posts;

@@ -7,10 +7,11 @@ type Props = {
   query?: string;
   sort?: string;
   tags?: string;
+  selectedProjectsSlug?: Array<string>;
 };
 
-async function AllProjectPostsList({ query, sort, tags }: Props) {
-  const [posts, publication] = await Promise.all([getAllProjects(), getPublication()]);
+async function AllProjectPostsList({ query, sort, tags, selectedProjectsSlug }: Props) {
+  const [posts, publication] = await Promise.all([getAllProjects(selectedProjectsSlug), getPublication()]);
   const publicationJsonLd = createPublicationJsonLd(publication);
 
   return (
