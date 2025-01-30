@@ -15,9 +15,10 @@ function ProjectPostList({ posts, query = "", sort = "", tags = "" }: Props) {
       return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
     } else if (sort === SortTypes.Views) {
       return b.views - a.views;
-    } else if (sort === SortTypes.Likes) {
-      return b.reactionCount - a.reactionCount;
     }
+    // else if (sort === SortTypes.Likes) {
+    //   return b.reactionCount - a.reactionCount;
+    // }
 
     return 0;
   });
