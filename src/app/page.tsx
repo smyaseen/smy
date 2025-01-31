@@ -18,17 +18,16 @@ const selectedProjectsSlug: Array<string> = [
 export default async function Page() {
   return (
     <main className="flex flex-col gap-4 text-center items-center sm:gap-8">
+      <section>
+        <Image className="hidden dark:block object-scale-down" src={"/bg-dark.png"} alt="dark-mode-image" width={850} height={850} />
+        <Image className="block dark:hidden object-scale-down" src={"/bg-light.png"} alt="light-mode-image" width={850} height={850} />
+      </section>
       <section
         className={cn(fadeIn, "animation-delay-200 px-4 md:px-40 flex flex-col md:flex-row w-full justify-start items-center gap-4 md:gap-12")}
       >
-        <div className="w-full md:w-1/3 flex justify-center">
-          <Image src="/profile-pic.png" width={250} height={250} alt="profile-pic" className="object-contain" />
-        </div>
-        <div className="w-full md:w-2/3 flex flex-col items-center md:items-start justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold sm:text-7xl">SMY</h1>
-            <h2 className="text-lg font-light text-muted-foreground sm:text-xl">Syed Muhammad Yaseen</h2>
-          </div>
+        <div className="text-center w-full">
+          <h1 className="text-xl font-bold sm:text-4xl">SMY</h1>
+          <h2 className="text-sm font-light text-muted-foreground sm:text-md">Syed Muhammad Yaseen</h2>
         </div>
       </section>
       <section className={cn(fadeIn, "animation-delay-400", "md:px-40 px-4")}>
