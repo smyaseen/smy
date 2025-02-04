@@ -1,8 +1,8 @@
 import { createPublicationJsonLd } from "@/lib/create-publication-json-ld";
 
+import getPublication from "@/server/get-publication";
 import getAllBlogPosts from "../domain/get-all-blog-posts";
 import getAllProjects from "../domain/get-all-projects";
-import getPublication from "../domain/get-publication";
 import PostList from "./post-list";
 
 type Props = {

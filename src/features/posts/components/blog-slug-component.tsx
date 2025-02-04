@@ -4,11 +4,11 @@ import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
 import createPostJsonLd from "@/lib/create-post-json-ld";
 import { cn, fadeIn } from "@/lib/utils";
+import getPublication from "@/server/get-publication";
 import { Image as PlaceHolderImage } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 import getBlogPost from "../domain/get-blog-post";
-import getPublication from "../domain/get-publication";
 
 type Props = {
   params: {

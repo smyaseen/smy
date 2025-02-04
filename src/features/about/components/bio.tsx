@@ -1,5 +1,5 @@
 import { Mdx } from "@/components/mdx";
-import getUser from "@/server/get-user";
+import getUser from "../domain/get-user";
 
 export default async function Bio() {
   const { bio } = await getUser();
