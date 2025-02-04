@@ -8,24 +8,24 @@ type Props = {
   sort?: string;
   tags?: string;
   first?: number;
+  type: "blog" | "project";
 };
 
-function BlogPostList({ posts, query = "", sort = "", tags = "", first }: Props) {
-  let sortedPosts = posts.filter((post) => {
-    return post.series?.name !== "Projects";
-  });
+function PostList({ posts, query = "", sort = "", tags = "", first, type }: Props) {
+  let filteredPosts = posts;
 
-  sortedPosts = first ? sortedPosts.slice(0, first) : sortedPosts;
+  if (type === "blog") {
+    filteredPosts = posts.filter((post) => post.series?.name !== "Projects");
+  }
 
-  sortedPosts = sortedPosts.sort((a, b) => {
+  filteredPosts = first ? filteredPosts.slice(0, first) : filteredPosts;
+
+  const sortedPosts = filteredPosts.sort((a, b) => {
     if (sort === SortTypes.Date) {
       return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
     } else if (sort === SortTypes.Views) {
       return b.views - a.views;
     }
-    // else if (sort === SortTypes.Likes) {
-    //   return b.reactionCount - a.reactionCount;
-    // }
     return 0;
   });
 
@@ -46,4 +46,4 @@ function BlogPostList({ posts, query = "", sort = "", tags = "", first }: Props)
   );
 }
 
-export default BlogPostList;
+export default PostList;

@@ -1,4 +1,4 @@
-import getUser from "@/server/get-user";
+import getUser from "../domain/get-user";
 import BadgeListItem from "./badge-list-item";
 
 export default async function BadgeList() {

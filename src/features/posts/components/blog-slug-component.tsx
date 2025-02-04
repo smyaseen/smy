@@ -1,14 +1,14 @@
 import Analytics from "@/components/analytics";
+import ImageRounded from "@/components/image-rounded";
 import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
 import createPostJsonLd from "@/lib/create-post-json-ld";
 import { cn, fadeIn } from "@/lib/utils";
-import getBlogPost from "@/server/get-blog-post";
-import getPublication from "@/server/get-publication";
 import { Image as PlaceHolderImage } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import ImageRounded from "./image-rounded";
+import getBlogPost from "../domain/get-blog-post";
+import getPublication from "../domain/get-publication";
 
 type Props = {
   params: {
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props) {
   return metadata;
 }
 
-export default async function BlogSlugPage({ params }: Props) {
+export default async function BlogSlugComponent({ params }: Props) {
   const post = await getBlogPost(params);
   const publication = await getPublication();
 

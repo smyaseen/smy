@@ -1,20 +1,20 @@
+import ImageRounded from "@/components/image-rounded";
+import { Badge } from "@/components/ui/badge";
 import { Post } from "@/hashnode/generated/graphql";
 import { Image as PlaceHolderImage } from "lucide-react";
 import Link from "next/link";
-import ImageRounded from "./image-rounded";
-import { Badge } from "./ui/badge";
 
 type Props = {
   post: Post;
 };
 
-export default function ProjectPostListItem({ post }: Props) {
+export default function BlogPostListItem({ post }: Props) {
   return (
     <li>
       <div className="flex flex-col prose prose-neutral dark:prose-invert gap-2">
         {post.coverImage?.url ? (
           <ImageRounded
-            className="object-fill"
+            className="object-fill rounded-xl"
             src={post.coverImage?.url}
             alt={post.coverImage?.attribution || post.seo?.description || post.title}
             width={600}
@@ -24,7 +24,7 @@ export default function ProjectPostListItem({ post }: Props) {
           <PlaceHolderImage width={600} height={500} />
         )}
         <div>
-          <Link href={`/projects/${post.slug}`}>
+          <Link href={`/blog/${post.slug}`}>
             <span className="text-lg">{post.title}</span>
           </Link>
           <div className="flex items-center text-sm ">
@@ -39,7 +39,7 @@ export default function ProjectPostListItem({ post }: Props) {
         </div>
         <div className="flex flex-wrap gap-1">
           {post.tags?.map((tag) => (
-            <Link key={tag.name} href={`/projects?tags=${tag.name.toLocaleLowerCase()}`}>
+            <Link key={tag.name} href={`/blog?tags=${tag.name.toLocaleLowerCase()}`}>
               <Badge>{tag.name.toLocaleLowerCase()}</Badge>
             </Link>
           ))}

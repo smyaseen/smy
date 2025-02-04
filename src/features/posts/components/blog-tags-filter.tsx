@@ -1,5 +1,5 @@
-import getAllBlogTags from "@/server/get-all-blog-tags";
-import Filter from "./filter";
+import Filter from "@/components/filter";
+import getAllBlogTags from "../domain/get-all-blog-tags";
 
 async function BlogTagsFilter() {
   const allTags = await getAllBlogTags();

@@ -1,7 +1,6 @@
-import AllBlogPostsList from "@/components/all-blog-posts-list";
-import AllProjectPostsList from "@/components/all-project-posts-list";
 import { CatSpinner } from "@/components/cat-spinner";
 import { Button } from "@/components/ui/button";
+import AllPostsList from "@/features/posts/components/all-post-list";
 import { cn, fadeIn } from "@/lib/utils";
 import { ArrowRightIcon, EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
@@ -76,7 +75,7 @@ export default async function Page() {
 
         <Suspense fallback={<CatSpinner />}>
           <section className="text-left">
-            <AllBlogPostsList first={3} />
+            <AllPostsList type="blog" first={3} />
           </section>
         </Suspense>
       </section>
@@ -93,7 +92,7 @@ export default async function Page() {
 
         <Suspense fallback={<CatSpinner />}>
           <section className="text-left">
-            <AllProjectPostsList selectedProjectsSlug={selectedProjectsSlug} />
+            <AllPostsList type="project" selectedProjectsSlug={selectedProjectsSlug} />
           </section>
         </Suspense>
       </section>

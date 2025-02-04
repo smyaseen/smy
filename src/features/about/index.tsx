@@ -1,8 +1,8 @@
-import BadgeList from "@/components/badge-list";
-import Bio from "@/components/bio";
 import { CatSpinner } from "@/components/cat-spinner";
 import { cn, fadeIn } from "@/lib/utils";
 import { Suspense } from "react";
+import BadgeList from "./components/badge-list";
+import Bio from "./components/bio";
 
 const AboutPage = () => (
   <main className="flex flex-col gap-2">

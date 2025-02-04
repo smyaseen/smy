@@ -1,8 +1,8 @@
 import { Mdx } from "@/components/mdx";
 import { cn, fadeIn } from "@/lib/utils";
-import getBlogPostDraft from "@/server/get-blog-post-draft";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
+import getBlogPostDraft from "../domain/get-blog-post-draft";
 
 type Props = {
   params: {
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props) {
   return metadata;
 }
 
-export default async function Page({ params }: Props) {
+export default async function BlogPreview({ params }: Props) {
   const draft = await getBlogPostDraft(params);
 
   if (!draft) {

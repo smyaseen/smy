@@ -1,6 +1,6 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/hashnode/generated/graphql";
 import Image from "next/image";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 
 type Props = {
   badge: Badge;

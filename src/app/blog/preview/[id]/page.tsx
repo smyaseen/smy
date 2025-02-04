@@ -1,5 +1,5 @@
-import BlogSlugPage from "@/components/blog-slug-page";
+import BlogPreviewPage from "@/features/posts/pages/preview";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  return <BlogSlugPage params={params} />;
+export default async function Page({ params }: { params: { id: string } }) {
+  <BlogPreviewPage params={params} />;
 }
