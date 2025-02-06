@@ -1,16 +1,10 @@
 import { Mdx } from "@/components/mdx";
 import { cn, fadeIn } from "@/lib/utils";
-import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import getBlogPostDraft from "../domain/get-blog-post-draft";
+import getBlogPostDraft from "../domain/server/get-blog-post-draft";
+import useBlogPreview, { IUseBlogPreview } from "../hooks/useBlogPreview";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: IUseBlogPreview) {
   const post = await getBlogPostDraft(params);
   const title = post?.seo?.title || post?.title || "";
   const canonicalUrl = post?.canonicalUrl;
@@ -35,18 +29,8 @@ export async function generateMetadata({ params }: Props) {
   return metadata;
 }
 
-export default async function BlogPreview({ params }: Props) {
-  const draft = await getBlogPostDraft(params);
-
-  if (!draft) {
-    notFound();
-  }
-
-  const title = draft.title || "";
-  const markdown = draft.content?.markdown || "";
-
-  const { readTimeInMinutes, coverImage } = draft;
-
+export default async function BlogPreview({ params }: IUseBlogPreview) {
+  const { title, markdown, readTimeInMinutes } = await useBlogPreview({ params });
   return (
     <>
       <section className={cn(fadeIn, "animation-delay-200 mb-8 flex flex-col gap-1")}>

@@ -2,21 +2,13 @@ import Analytics from "@/components/analytics";
 import ImageRounded from "@/components/image-rounded";
 import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
-import createPostJsonLd from "@/lib/create-post-json-ld";
 import { cn, fadeIn } from "@/lib/utils";
-import getPublication from "@/server/get-publication";
 import { Image as PlaceHolderImage } from "lucide-react";
-import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import getBlogPost from "../domain/get-blog-post";
+import getBlogPost from "../domain/server/get-blog-post";
+import useBlogSlug, { IUseBlogSlug } from "../hooks/useBlogSlug";
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: IUseBlogSlug) {
   const post = await getBlogPost(params);
 
   const title = post?.seo?.title || post?.title;
@@ -42,16 +34,8 @@ export async function generateMetadata({ params }: Props) {
   return metadata;
 }
 
-export default async function BlogSlugComponent({ params }: Props) {
-  const post = await getBlogPost(params);
-  const publication = await getPublication();
-
-  if (!post) {
-    notFound();
-  }
-
-  const jsonLd = createPostJsonLd(publication, post);
-
+export default async function BlogSlug({ params }: IUseBlogSlug) {
+  const { publication, post, jsonLd } = await useBlogSlug({ params });
   const {
     publishedAt,
     readTimeInMinutes,

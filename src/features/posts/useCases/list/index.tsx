@@ -3,20 +3,17 @@ import { cn, fadeIn } from "@/lib/utils";
 import { Suspense } from "react";
 import AllPostsList from "../../components/all-post-list";
 
-const BlogList = ({
-  searchParams,
-  type,
-}: {
+type IBlogList = {
   searchParams?: {
     query?: string;
     sort?: string;
     tags?: string;
   };
   type: "blog" | "project";
-}) => {
-  const query = searchParams?.query || "";
-  const sort = searchParams?.sort || "date";
-  const tags = searchParams?.tags || "";
+};
+
+const BlogList = ({ searchParams = {}, type }: IBlogList) => {
+  const { query = "", sort = "date", tags = "" } = searchParams;
 
   return (
     <section className={cn(fadeIn, "animation-delay-400")}>

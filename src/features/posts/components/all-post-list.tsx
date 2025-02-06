@@ -1,22 +1,8 @@
-import { createPublicationJsonLd } from "@/lib/create-publication-json-ld";
-
-import getPublication from "@/server/get-publication";
-import getAllBlogPosts from "../domain/get-all-blog-posts";
-import getAllProjects from "../domain/get-all-projects";
+import useAllPostsList, { IUseAllPostsList } from "../hooks/useAllPostsList";
 import PostList from "./post-list";
 
-type Props = {
-  query?: string;
-  sort?: string;
-  tags?: string;
-  first?: number;
-  type: "blog" | "project";
-  selectedProjectsSlug?: Array<string>;
-};
-
-async function AllPostsList({ query, sort, tags, first, type, selectedProjectsSlug }: Props) {
-  const [posts, publication] = await Promise.all([type === "blog" ? getAllBlogPosts() : getAllProjects(selectedProjectsSlug), getPublication()]);
-  const publicationJsonLd = createPublicationJsonLd(publication);
+async function AllPostsList({ query, sort, tags, first, type, selectedProjectsSlug }: IUseAllPostsList) {
+  const { posts, publicationJsonLd } = await useAllPostsList({ query, sort, tags, first, type, selectedProjectsSlug });
 
   return (
     <>
