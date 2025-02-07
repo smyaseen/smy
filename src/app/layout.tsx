@@ -2,6 +2,7 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 import Scripts from "@/components/scripts";
+import ScrollToTop from "@/components/scrollToTop";
 import { Toaster } from "@/components/ui/toaster";
 import { validateEnvVars } from "@/lib/utils";
 import getPublication from "@/server/get-publication";
@@ -50,7 +51,10 @@ export default async function RootLayout({
             <Scripts />
             <Header />
             <main className="flex-grow pb-4 pt-12">{children}</main>
-            <Subscribe publication={publication} />
+            <div className="fixed z-50 bottom-10 right-10 flex flex-col gap-2">
+              <Subscribe publication={publication} />
+              <ScrollToTop />
+            </div>
             <Footer />
           </Providers>
         </div>
