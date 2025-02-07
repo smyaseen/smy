@@ -1,7 +1,7 @@
 import { createPublicationJsonLd } from "@/lib/create-publication-json-ld";
 import getPublication from "@/server/get-publication";
-import getAllBlogPosts from "../domain/server/get-all-blog-posts";
-import getAllProjects from "../domain/server/get-all-projects";
+import getAllBlogPosts from "../domain/repository/get-all-blog-posts";
+import getAllProjects from "../domain/repository/get-all-projects";
 
 export type IUseAllPostsList = {
   query?: string;

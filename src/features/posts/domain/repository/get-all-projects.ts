@@ -1,5 +1,5 @@
 import { Post } from "@/hashnode/generated/graphql";
-import getProjects from "./get-projects";
+import getProjects from "../adapter/get-projects";
 
 export default async function getAllProjects(selectedProjectsSlug?: Array<string>) {
   const posts: Post[] = [];

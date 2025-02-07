@@ -5,7 +5,7 @@ import { PostTOC } from "@/components/post-toc";
 import { cn, fadeIn } from "@/lib/utils";
 import { Image as PlaceHolderImage } from "lucide-react";
 import { Metadata } from "next/types";
-import getBlogPost from "../domain/server/get-blog-post";
+import getBlogPost from "../domain/adapter/get-blog-post";
 import useBlogSlug, { IUseBlogSlug } from "../hooks/useBlogSlug";
 
 export async function generateMetadata({ params }: IUseBlogSlug) {

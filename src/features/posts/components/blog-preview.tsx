@@ -1,7 +1,7 @@
 import { Mdx } from "@/components/mdx";
 import { cn, fadeIn } from "@/lib/utils";
 import { Metadata } from "next/types";
-import getBlogPostDraft from "../domain/server/get-blog-post-draft";
+import getBlogPostDraft from "../domain/adapter/get-blog-post-draft";
 import useBlogPreview, { IUseBlogPreview } from "../hooks/useBlogPreview";
 
 export async function generateMetadata({ params }: IUseBlogPreview) {

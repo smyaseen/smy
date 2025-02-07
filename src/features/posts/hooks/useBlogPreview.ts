@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import getBlogPostDraft from "../domain/server/get-blog-post-draft";
+import getBlogPostDraft from "../domain/adapter/get-blog-post-draft";
 
 export type IUseBlogPreview = {
   params: {

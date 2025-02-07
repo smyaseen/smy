@@ -1,5 +1,5 @@
 import { Post } from "@/hashnode/generated/graphql";
-import getBlogPosts from "./get-blog-posts";
+import getBlogPosts from "../adapter/get-blog-posts";
 
 export default async function getAllBlogPosts() {
   const posts: Post[] = [];

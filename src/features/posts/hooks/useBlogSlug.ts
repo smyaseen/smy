@@ -1,7 +1,7 @@
 import createPostJsonLd from "@/lib/create-post-json-ld";
 import getPublication from "@/server/get-publication";
 import { notFound } from "next/navigation";
-import getBlogPost from "../domain/server/get-blog-post";
+import getBlogPost from "../domain/adapter/get-blog-post";
 
 export type IUseBlogSlug = {
   params: {
