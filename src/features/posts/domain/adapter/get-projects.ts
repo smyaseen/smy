@@ -2,6 +2,8 @@ import url from "@/hashnode/api-url";
 import { GetPostsFromSeriesDocument } from "@/hashnode/generated/graphql";
 import request from "graphql-request";
 
+const HASHNODE_PROJECT_SERIES_SLUG = process.env.HASHNODE_PROJECT_SERIES_SLUG!;
+
 type Props = {
   first?: number;
   after?: string;
@@ -15,7 +17,7 @@ export default async function getProjects({ first = 20, after = undefined }: Pro
       host: process.env.HASHNODE_HOST!,
       first,
       after,
-      slug: "projects",
+      slug: HASHNODE_PROJECT_SERIES_SLUG,
     },
   });
 

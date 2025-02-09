@@ -21,7 +21,7 @@ export async function generateMetadata() {
   const description = "Helping people Demystify Technology";
 
   const metadata: Metadata = {
-    metadataBase: new URL(isProd ? "https://smy-smyaseens-projects.vercel.app" : "http://localhost:3000"),
+    metadataBase: new URL(isProd ? "https://sm-y.dev" : "http://localhost:3000"),
     title,
     description,
     openGraph: {
