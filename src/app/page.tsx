@@ -17,19 +17,19 @@ const selectedProjectsSlug: Array<string> = [
 export default async function Page() {
   return (
     <main className="flex flex-col gap-4 text-center items-center sm:gap-8">
-      <section>
+      <section className={cn(fadeIn, "animation-delay-200")}>
         <Image className="hidden dark:block object-scale-down" src={"/bg-dark.png"} alt="dark-mode-image" width={850} height={850} />
         <Image className="block dark:hidden object-scale-down" src={"/bg-light.png"} alt="light-mode-image" width={850} height={850} />
       </section>
       <section
-        className={cn(fadeIn, "animation-delay-200 px-4 md:px-40 flex flex-col md:flex-row w-full justify-start items-center gap-4 md:gap-12")}
+        className={cn(fadeIn, "animation-delay-400 px-4 md:px-40 flex flex-col md:flex-row w-full justify-start items-center gap-4 md:gap-12")}
       >
         <div className="text-center w-full">
           <h1 className="text-xl font-bold sm:text-4xl">SMY</h1>
           <h2 className="text-sm font-light text-muted-foreground sm:text-md">Syed Muhammad Yaseen</h2>
         </div>
       </section>
-      <section className={cn(fadeIn, "animation-delay-400", "md:px-40 px-4")}>
+      <section className={cn(fadeIn, "animation-delay-600", "md:px-40 px-4")}>
         <span className="text-lg sm:text-xl">
           <div>
             Full Stack ❯ Customer Engagement / Health Tech ❯ JavaScript / TypeScript Ecosystem ❯ React, NextJS, NestJS, NodeJS, Microservices, AWS ❯
@@ -63,7 +63,7 @@ export default async function Page() {
         </Button>
       </section>
 
-      <section className={cn(fadeIn, "animation-delay-400", "flex flex-col gap-4")}>
+      <section className={cn(fadeIn, "animation-delay-800", "flex flex-col gap-4")}>
         <span className="flex flex-row items-center">
           <h2 className="text-2xl text-muted-foreground sm:text-3xl">Blogs</h2>
           <Button asChild size="sm" variant="secondary" className="bg-transparent shadow-none">
@@ -80,7 +80,7 @@ export default async function Page() {
         </Suspense>
       </section>
 
-      <section className={cn(fadeIn, "animation-delay-400", "flex flex-col gap-4")}>
+      <section className={cn(fadeIn, "animation-delay-800", "flex flex-col gap-4")}>
         <span className="flex flex-row items-center">
           <h2 className="text-2xl text-muted-foreground sm:text-3xl">Projects</h2>
           <Button asChild size="sm" variant="secondary" className="bg-transparent shadow-none">

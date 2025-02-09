@@ -50,7 +50,7 @@ export default async function RootLayout({
           <Providers>
             <Scripts />
             <Header />
-            <main className="flex-grow pb-4 pt-12">{children}</main>
+            <main className="grow pb-4 pt-12">{children}</main>
             <div className="fixed z-50 bottom-10 right-10 flex flex-col gap-2">
               <Subscribe publication={publication} />
               <ScrollToTop />

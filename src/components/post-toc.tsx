@@ -30,7 +30,7 @@ export const PostTOC = ({ post }: { post: Post }) => {
 
   return (
     <div className="w-full px-5">
-      <div className="mx-auto w-full max-w-screen-md rounded-lg border border-b-4 border-r-4 p-5 text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg">
+      <div className="mx-auto w-full max-w-(--breakpoint-md) rounded-lg border border-b-4 border-r-4 p-5 text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg">
         <h2 className="mb-5 text-lg font-bold md:text-xl">Table of contents</h2>
         <Toc parentId={null} data={mapTableOfContentItems(post.features.tableOfContents.items)} />
       </div>

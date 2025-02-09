@@ -60,7 +60,7 @@ const components: Components = {
       return <code className={(className as string[])?.join(" ")}>{children}</code>;
     }
     return (
-      <code className={cn("relative mx-1 rounded bg-opacity-25 px-[0.3rem] py-[0.2rem] align-middle font-mono text-sm", className)} {...props}>
+      <code className={cn("relative mx-1 rounded bg-current/25 px-[0.3rem] py-[0.2rem] align-middle font-mono text-sm", className)} {...props}>
         {children}
       </code>
     );

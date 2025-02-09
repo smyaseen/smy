@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full flex flex-col items-center justify-between bg-opacity-80 dark:bg-opacity-80 bg-white dark:bg-black z-50 px-4 md:px-24 py-2 transition-shadow duration-300 ${hasShadow ? "shadow-md" : ""}`}
+      className={`fixed top-0 left-0 w-full flex flex-col items-center justify-between bg-white/80 dark:bg-black/80 z-50 px-4 md:px-24 py-2 transition-shadow duration-300 ${hasShadow ? "shadow-md" : ""}`}
     >
       <div style={{ width: `${scrollProgress}%` }} className="absolute border-black dark:border-white border-b-4 h-1 bottom-0 left-0"></div>
       <div className="w-full flex items-center justify-between">
