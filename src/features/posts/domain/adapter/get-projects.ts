@@ -2,7 +2,7 @@ import url from "@/hashnode/api-url";
 import { GetPostsFromSeriesDocument } from "@/hashnode/generated/graphql";
 import request from "graphql-request";
 
-const HASHNODE_PROJECT_SERIES_SLUG = process.env.HASHNODE_PROJECT_SERIES_SLUG!;
+const HASHNODE_PROJECT_SERIES_SLUG = process.env.NEXT_PUBLIC_HASHNODE_PROJECT_SERIES_SLUG!;
 
 type Props = {
   first?: number;

@@ -6,9 +6,12 @@ import Link from "next/link";
 
 type Props = {
   post: Post;
+  type: "blog" | "project";
 };
 
-export default function BlogPostListItem({ post }: Props) {
+const HASHNODE_PROJECT_SERIES_SLUG = process.env.NEXT_PUBLIC_HASHNODE_PROJECT_SERIES_SLUG;
+
+export default function BlogPostListItem({ post, type }: Props) {
   return (
     <li>
       <div className="flex flex-col prose prose-neutral dark:prose-invert gap-2">
@@ -24,7 +27,7 @@ export default function BlogPostListItem({ post }: Props) {
           <PlaceHolderImage width={600} height={500} />
         )}
         <div>
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={`/${type === "blog" ? "blog" : HASHNODE_PROJECT_SERIES_SLUG}/${post.slug}`}>
             <span className="text-lg">{post.title}</span>
           </Link>
           <div className="flex items-center text-sm ">
@@ -39,7 +42,7 @@ export default function BlogPostListItem({ post }: Props) {
         </div>
         <div className="flex flex-wrap gap-1">
           {post.tags?.map((tag) => (
-            <Link key={tag.name} href={`/blog?tags=${tag.name.toLocaleLowerCase()}`}>
+            <Link key={tag.name} href={`/${type === "blog" ? "blog" : HASHNODE_PROJECT_SERIES_SLUG}?tags=${tag.name.toLocaleLowerCase()}`}>
               <Badge>{tag.name.toLocaleLowerCase()}</Badge>
             </Link>
           ))}
