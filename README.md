@@ -4,6 +4,10 @@
 npx create-next-app -e https://github.com/smyaseen/smy
 ```
 
+```console
+pnpm install
+```
+
 ## Environment Variables
 
 [.env.example](.env.example) contains all the environment variables you need to run a copy for your headless blog. You can simply copy this file and rename it to `.env.local` to get started.
