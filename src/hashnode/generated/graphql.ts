@@ -206,6 +206,20 @@ export type Badge = Node & {
   suppressed?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** Contains information about banner image options of the post. Like URL of the banner image, attribution, etc. */
+export type BannerImageOptionsInput = {
+  /** Information about the banner image attribution. */
+  bannerImageAttribution?: InputMaybe<Scalars['String']['input']>;
+  /** The name of the banner image photographer, used when banner was chosen from unsplash. */
+  bannerImagePhotographer?: InputMaybe<Scalars['String']['input']>;
+  /** The URL of the banner image. */
+  bannerImageURL?: InputMaybe<Scalars['String']['input']>;
+  /** A flag to indicate if the banner attribution is hidden, used when cover was chosen from unsplash. */
+  isBannerAttributionHidden?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A flag to indicate if the banner image is sticked to bottom. */
+  stickBannerToBottom?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /**
  * Contains basic information about the beta feature.
  * A beta feature is a feature that is not yet released to all users.
@@ -4211,6 +4225,11 @@ export type Post = Node & {
   /** Returns the user details of the author of the post. */
   author: User;
   /**
+   * The banner image preference of the post. Contains banner image URL and other details.
+   * It is similar to cover image but users can decide to render banner image of single post view.
+   */
+  bannerImage?: Maybe<PostBannerImage>;
+  /**
    * Flag to indicate if the post is bookmarked by the requesting user.
    *
    * Returns `false` if the user is not authenticated.
@@ -4368,6 +4387,19 @@ export type PostBadgesFeature = Feature & {
   items: Array<PostBadge>;
 };
 
+/** Contains information about the banner image of the post. */
+export type PostBannerImage = {
+  __typename?: 'PostBannerImage';
+  /** Provides attribution information for the banner image, if available. */
+  attribution?: Maybe<Scalars['String']['output']>;
+  /** True if the image attribution should be hidden. */
+  isAttributionHidden: Scalars['Boolean']['output'];
+  /** The name of the photographer who captured the banner image. */
+  photographer?: Maybe<Scalars['String']['output']>;
+  /** The URL of the banner image. */
+  url: Scalars['String']['output'];
+};
+
 /**
  * Connection for comments. Contains a list of edges containing nodes.
  * Each node holds a comment.
@@ -4505,6 +4537,8 @@ export type PostPreferences = {
   isDelisted: Scalars['Boolean']['output'];
   /** A flag to indicate if the post is pinned to blog. Pinned post is shown on top of the blog. */
   pinnedToBlog: Scalars['Boolean']['output'];
+  /** A flag to indicate if the banner image is shown below title of the post. Default position of banner is top of title. */
+  stickBannerToBottom: Scalars['Boolean']['output'];
   /** A flag to indicate if the cover image is shown below title of the post. Default position of cover is top of title. */
   stickCoverToBottom: Scalars['Boolean']['output'];
 };
@@ -5419,6 +5453,11 @@ export type PublishDraftPayload = {
 
 /** Contains information about the post to be published. */
 export type PublishPostInput = {
+  /**
+   * Options for the banner image of the post.
+   * It is similar to cover image but users can decide to render banner image of single post view.
+   */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /** Ids of the co-authors of the post. */
   coAuthors?: InputMaybe<Array<Scalars['ObjectId']['input']>>;
   /** Content of the post in markdown format. */
@@ -6690,6 +6729,8 @@ export type UpdateDocumentationSectionPayload = {
 };
 
 export type UpdatePostInput = {
+  /** Options for the banner image of the post. */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /**
    * Update co-authors of the post.
    * Must be a member of the publication.
