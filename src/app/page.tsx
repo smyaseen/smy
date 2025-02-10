@@ -29,7 +29,7 @@ export default async function Page() {
           <h2 className="text-sm font-light text-muted-foreground sm:text-md">Syed Muhammad Yaseen</h2>
         </div>
       </section>
-      <section className={cn(fadeIn, "animation-delay-600", "md:px-40 px-4")}>
+      <section className={cn(fadeIn, "animation-delay-600", "px-4")}>
         <span className="text-lg sm:text-xl">
           <div>
             Full Stack ❯ Customer Engagement / Health Tech ❯ JavaScript / TypeScript Ecosystem ❯ React, NextJS, NestJS, NodeJS, Microservices, AWS ❯
