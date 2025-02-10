@@ -1,3 +1,5 @@
+# A Modern Developer Portfolio with Next.js, Headless Hashnode, Shadcn & Tailwind v4 
+
 ## Getting Started
 
 ```console
