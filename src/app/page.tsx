@@ -26,7 +26,7 @@ export default async function Page() {
       >
         <div className="text-center w-full">
           <h1 className="text-xl font-bold sm:text-4xl">SMY</h1>
-          <h2 className="text-sm font-light text-muted-foreground sm:text-md">Syed Muhammad Yaseen</h2>
+          <h2 className="text-sm font-light text-muted-foreground sm:text-lg">Syed Muhammad Yaseen</h2>
         </div>
       </section>
       <section className={cn(fadeIn, "animation-delay-600", "px-4")}>
