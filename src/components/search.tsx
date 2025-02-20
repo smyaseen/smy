@@ -26,7 +26,7 @@ function Search({ placeholder }: Props) {
   }, 300);
 
   return (
-    <Input placeholder={placeholder} onChange={(e) => handleSearch(e.target.value)} defaultValue={searchParams.get("query")?.toString()} autoFocus />
+    <Input placeholder={placeholder} onChange={(e) => handleSearch(e.target.value)} defaultValue={searchParams.get("query")?.toString()} />
   );
 }
 
