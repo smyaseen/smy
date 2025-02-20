@@ -3,14 +3,13 @@ import Header from "@/components/header";
 import Providers from "@/components/providers";
 import Scripts from "@/components/scripts";
 import ScrollToTop from "@/components/scrollToTop";
+import Subscribe from "@/components/subscribe";
 import { Toaster } from "@/components/ui/toaster";
 import { validateEnvVars } from "@/lib/utils";
 import getPublication from "@/server/get-publication";
-import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import { Metadata } from "next/types";
 import "./globals.css";
-import Subscribe from "@/components/subscribe";
 
 const isProd = process.env.NEXT_PUBLIC_MODE === "production";
 
