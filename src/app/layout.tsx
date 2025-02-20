@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import { Metadata } from "next/types";
 import "./globals.css";
-const Subscribe = dynamic(() => import("@/components/subscribe"), { ssr: false });
+import Subscribe from "@/components/subscribe";
 
 const isProd = process.env.NEXT_PUBLIC_MODE === "production";
 
@@ -44,7 +44,7 @@ export default async function RootLayout({
   const publication = await getPublication();
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <div className="container flex min-h-screen flex-col pt-2 md:px-24">
           <Providers>

@@ -12,8 +12,8 @@ type IBlogList = {
   type: "blog" | "project";
 };
 
-const BlogList = ({ searchParams = {}, type }: IBlogList) => {
-  const { query = "", sort = "date", tags = "" } = searchParams;
+const BlogList = async ({ searchParams = {}, type }: IBlogList) => {
+  const { query = "", sort = "date", tags = "" } = await searchParams;
 
   return (
     <section className={cn(fadeIn, "animation-delay-400")}>
