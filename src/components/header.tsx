@@ -36,27 +36,27 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastScrollY]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     handleScroll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full flex flex-col items-center justify-between bg-white/80 dark:bg-black/80 z-50 px-4 md:px-24 py-2 transition-shadow duration-300 ${
-        hasShadow ? "shadow-md" : ""
-      } ${isVisible ? "translate-y-0" : "-translate-y-full"} transition-transform duration-300`}
-    >
-      <div style={{ width: `${scrollProgress}%` }} className="absolute border-black dark:border-white border-b-4 h-1 bottom-0 left-0"></div>
-      <div className="w-full flex items-center justify-between">
-        <HeaderNav />
-        <ModeToggle />
-      </div>
-    </header>
+    <>
+      <div style={{ width: `${scrollProgress}%` }} className="fixed top-0 left-0 rounded-r-full border-black dark:border-white border-b-4 h-1 z-50"></div>
+      <header
+        className={`fixed top-0 left-0 w-full flex flex-col items-center justify-between bg-white/80 dark:bg-black/80 z-40 px-4 md:px-24 py-2 transition-shadow duration-300 ${
+          hasShadow ? "shadow-md" : ""
+        } ${isVisible ? "translate-y-0" : "-translate-y-full"} transition-transform duration-300`}
+      >
+        <div className="w-full flex items-center justify-between">
+          <HeaderNav />
+          <ModeToggle />
+        </div>
+      </header>
+    </>
   );
 };
 
