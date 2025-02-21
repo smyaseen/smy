@@ -28,8 +28,10 @@ const useBlogSlug = async ({ params }: IUseBlogSlug) => {
   // Save the markdown content to a file
   const filePath = path.join(process.cwd(), "content", "blog", `${params.slug}.md`);
 
+  console.log("🚀 ~ useBlogSlug ~ filePath:", filePath)
   try {
     const dirPath = path.join(process.cwd(), "content", "blog");
+    console.log("🚀 ~ useBlogSlug ~ dirPath:", dirPath)
     try {
       await fs.access(dirPath);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

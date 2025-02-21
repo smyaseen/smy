@@ -5,6 +5,7 @@ import path from "path";
 export async function readMarkdownFile(slug: string) {
   const filePath = path.join(process.cwd(), "content", "blog", `${slug}`);
 
+  console.log("🚀 ~ readMarkdownFile ~ filePath:", filePath)
   try {
     const fileContent = await fs.readFile(filePath, "utf-8");
 
