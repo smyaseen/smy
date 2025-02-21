@@ -3,11 +3,15 @@ import { NextResponse } from "next/server";
 
 export async function readMarkdown(slug: string) {
   try {
-    const { post: { content: { markdown } } } = await useBlogSlug({ params: { slug: slug.replace('.md', '') } });
+    const {
+      post: {
+        content: { markdown },
+      },
+    } = await useBlogSlug({ params: { slug: slug.replace(".md", "") } });
 
     return new NextResponse(markdown, {
       headers: {
-        'Content-Type': 'text/plain',
+        "Content-Type": "text/plain",
       },
     });
   } catch (error) {
