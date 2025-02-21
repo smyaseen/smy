@@ -27,12 +27,12 @@ const useBlogSlug = async ({ params }: IUseBlogSlug) => {
 
   // Save the markdown content to a file
   const filePath = path.join(process.cwd(), "content", "blog", `${params.slug}.md`);
-  
+
   try {
     const dirPath = path.join(process.cwd(), "content", "blog");
     try {
       await fs.access(dirPath);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       await fs.mkdir(dirPath, { recursive: true });
     }
