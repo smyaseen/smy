@@ -27,8 +27,20 @@ const useBlogSlug = async ({ params }: IUseBlogSlug) => {
 
   // Save the markdown content to a file
   const filePath = path.join(process.cwd(), "content", "blog", `${params.slug}.md`);
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, markdown, "utf-8");
+  
+  try {
+    const dirPath = path.join(process.cwd(), "content", "blog");
+    try {
+      await fs.access(dirPath);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      await fs.mkdir(dirPath, { recursive: true });
+    }
+
+    await fs.writeFile(filePath, markdown, "utf-8");
+  } catch (error) {
+    console.error("Error writing markdown file:", error);
+  }
 
   return {
     publication,
