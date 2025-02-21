@@ -6,4 +6,5 @@ const config = {
   plugins: ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
 };
 
+// eslint-disable-next-line no-undef
 module.exports = config;
