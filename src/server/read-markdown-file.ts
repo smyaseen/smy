@@ -1,20 +1,17 @@
-import { promises as fs } from "fs";
+import useBlogSlug from "@/features/posts/hooks/useBlogSlug";
 import { NextResponse } from "next/server";
-import path from "path";
 
-export async function readMarkdownFile(slug: string) {
-  const filePath = path.join(process.cwd(), "content", "blog", `${slug}`);
-
+export async function readMarkdown(slug: string) {
   try {
-    const fileContent = await fs.readFile(filePath, "utf-8");
+    const { post: { content: { markdown } } } = await useBlogSlug({ params: { slug: slug.replace('.md', '') } });
 
-    return new NextResponse(fileContent, {
+    return new NextResponse(markdown, {
       headers: {
-        "Content-Type": "text/plain",
+        'Content-Type': 'text/plain',
       },
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
+    console.error("Error reading markdown file:", error);
     return new NextResponse(JSON.stringify({ message: "Markdown file not found" }), { status: 404 });
   }
 }
