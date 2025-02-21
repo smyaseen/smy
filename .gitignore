@@ -38,3 +38,5 @@ next-env.d.ts
 .env
 .eslintcache
 /.npm-only-allow
+
+content
