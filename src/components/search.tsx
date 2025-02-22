@@ -25,9 +25,7 @@ function Search({ placeholder }: Props) {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
 
-  return (
-    <Input placeholder={placeholder} onChange={(e) => handleSearch(e.target.value)} defaultValue={searchParams.get("query")?.toString()} />
-  );
+  return <Input placeholder={placeholder} onChange={(e) => handleSearch(e.target.value)} defaultValue={searchParams.get("query")?.toString()} />;
 }
 
 export default Search;

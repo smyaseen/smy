@@ -47,10 +47,7 @@ const components: Components = {
   ol: ({ className, node: _n, ...props }) => <ol className={cn("ml-6 list-decimal", className)} {...props} />,
   li: (props) => <li className={cn("mt-2", props.className)} {...props} />,
   blockquote: ({ className, node: _n, ...props }) => <blockquote className={cn("my-3 border-l-2 pl-6 italic", className)} {...props} />,
-  img: ({ className, alt, ...props }) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("inline-block rounded-md", className)} alt={alt} {...props} />
-  ),
+  img: ({ className, alt, ...props }) => <img className={cn("inline-block rounded-md", className)} alt={alt} {...props} />,
   hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
   pre: ({ className, node: _n, ...props }) => <pre className={cn("mb-4 mt-6 overflow-x-auto rounded-lg p-4", className)} {...props} />,
   code: ({ className, children, node, ...props }) => {
@@ -87,6 +84,31 @@ interface MdxProps {
   baseUri?: string;
 }
 
+/**
+ * Renders Markdown content with custom transformations and plugins.
+ *
+ * @param {MdxProps} props - The properties for the Mdx component.
+ * @param {string} props.code - The Markdown code to be rendered.
+ * @param {string} [props.baseUri] - The base URI to resolve relative links.
+ *
+ * @returns {JSX.Element} The rendered Markdown content.
+ *
+ * @remarks
+ * This component uses `ReactMarkdown` to render the Markdown content and applies several transformations:
+ * - `transformLink`: Transforms relative links to absolute using the `baseUri`.
+ * - `transformEmbeds`: Replaces custom embed syntax with plain text.
+ * - `removeAligns`: Removes alignment attributes from the code.
+ * - `sanatize`: Applies the `transformEmbeds` and `removeAligns` transformations.
+ *
+ * The component also applies several plugins to `ReactMarkdown`:
+ * - `remarkGfm`: Enables GitHub Flavored Markdown.
+ * - `rehypeRaw`: Parses raw HTML.
+ * - `rehypeSlug`: Adds slugs to headings.
+ * - `rehypeAutolinkHeadings`: Adds links to headings.
+ * - `rehypeHighlight`: Adds syntax highlighting if the code contains code blocks.
+ *
+ * @ts-expect-error The `rehypeHighlight` plugin is conditionally included based on the presence of code blocks.
+ */
 export function Mdx({ code, baseUri }: MdxProps) {
   const transformLink = (href: string) => {
     if (href.startsWith("http")) {
@@ -97,7 +119,7 @@ export function Mdx({ code, baseUri }: MdxProps) {
 
   const transformEmbeds = (code: string) => code.replace(/%\[(.*?)\]/g, "$1");
 
-  const removeAligns = (code: string) => code.replace(/align=\"(left|right|center)\"/g, "");
+  const removeAligns = (code: string) => code.replace(/align="(left|right|center)"/g, "");
 
   const sanatize = (code: string) => removeAligns(transformEmbeds(code));
 
@@ -109,7 +131,7 @@ export function Mdx({ code, baseUri }: MdxProps) {
         rehypeRaw,
         rehypeSlug,
         rehypeAutolinkHeadings,
-        // @ts-expect-error
+        // @ts-expect-error: rehypeHighlight plugin is conditionally included based on the presence of code blocks
         ...(code.includes("```") ? [[rehypeHighlight, { detect: true }]] : []),
       ]}
       urlTransform={transformLink}

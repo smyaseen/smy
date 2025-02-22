@@ -1,5 +1,5 @@
 import Analytics from "@/components/analytics";
-import ImageRounded from "@/components/image-rounded";
+import ImageRoundedLazy from "@/components/image-rounded-lazy";
 import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
 import { cn, fadeIn } from "@/lib/utils";
@@ -7,7 +7,6 @@ import { Image as PlaceHolderImage } from "lucide-react";
 import { Metadata } from "next/types";
 import getBlogPost from "../domain/adapter/get-blog-post";
 import useBlogSlug, { IUseBlogSlug } from "../hooks/useBlogSlug";
-import ImageRoundedLazy from "@/components/image-rounded-lazy";
 
 export async function generateMetadata({ params }: IUseBlogSlug) {
   const post = await getBlogPost(params);
@@ -50,14 +49,15 @@ export default async function BlogSlug({ params }: IUseBlogSlug) {
     <>
       <section className={cn(fadeIn, "animation-delay-200 flex flex-col gap-1")}>
         {post.coverImage?.url ? (
-          <ImageRoundedLazy 
-             // className="object-fill"
-             src={post.coverImage?.url}
-             alt={post.coverImage?.attribution || post.seo?.description || post.title}
-             width={1200}
-             height={500}
-             className="w-[960px] h-[540px] m-auto rounded-md object-contain"
+          <ImageRoundedLazy
+            // className="object-fill"
+            src={post.coverImage?.url}
+            alt={post.coverImage?.attribution || post.seo?.description || post.title}
+            width={1200}
+            height={500}
+            className="w-[960px] h-[540px] m-auto rounded-md object-contain"
           />
+        ) : (
           // <ImageRounded
           //   // className="object-fill"
           //   src={post.coverImage?.url}
@@ -66,7 +66,6 @@ export default async function BlogSlug({ params }: IUseBlogSlug) {
           //   height={500}
           //   className="w-[960px] h-[540px] m-auto rounded-md object-contain"
           // />
-        ) : (
           <PlaceHolderImage width={600} height={500} />
         )}
         <h1 className="text-3xl font-bold">{title}</h1>
@@ -80,7 +79,7 @@ export default async function BlogSlug({ params }: IUseBlogSlug) {
       <article className={cn(fadeIn, "animation-delay-400")}>
         <Mdx code={markdown} />
       </article>
-      <Analytics postId={id} publicationId={publication?.id!} />
+      <Analytics postId={id} publicationId={publication?.id} />
       <script id="jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );

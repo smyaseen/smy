@@ -14,7 +14,7 @@ const isProd = process.env.NEXT_PUBLIC_MODE === "production";
 
 export default function Analytics({ publicationId, postId }: Props) {
   const _sendPageViewsToHashnodeGoogleAnalytics = () => {
-    // @ts-ignore
+    // @ts-expect-error: TypeScript does not recognize the 'gtag' method on the 'window' object
     window.gtag("config", GA_TRACKING_ID, {
       transport_url: "https://ping.hashnode.com",
       first_party_collection: true,
@@ -106,7 +106,7 @@ export default function Analytics({ publicationId, postId }: Props) {
       if (navigator.sendBeacon) {
         hasSentBeacon = navigator.sendBeacon(`/api/analytics`, blob);
       }
-    } catch (error) {
+    } catch (_error) {
       // do nothing; in case there is an error we fall back to fetch
     }
 

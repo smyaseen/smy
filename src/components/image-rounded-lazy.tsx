@@ -1,9 +1,8 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from "react";
 import type { ImageProps } from "next/image";
 import Image from "next/image";
-import {CatSpinner} from "./cat-spinner";
+import { useEffect, useState } from "react";
 
 const ImageRoundedLazy = ({ className = "", alt, ...props }: ImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,15 +15,8 @@ const ImageRoundedLazy = ({ className = "", alt, ...props }: ImageProps) => {
 
   return (
     <>
-      {isLoading && 
-        <Image  className={className} src="/loading.gif" alt="Loading" width={500} height={500} />
-      }
-      <Image
-        {...props}
-        className={`rounded-lg ${className} ${isLoading ? "hidden" : "block"}`}
-        alt={alt}
-        onLoad={() => setIsLoading(false)}
-      />
+      {isLoading && <Image className={className} src="/loading.gif" alt="Loading" width={500} height={500} />}
+      <Image {...props} className={`rounded-lg ${className} ${isLoading ? "hidden" : "block"}`} alt={alt} onLoad={() => setIsLoading(false)} />
     </>
   );
 };

@@ -29,7 +29,7 @@ export const SubscribeForm = ({ publication }: { publication: Publication }) => 
       setRequestInProgress(false);
       setStatus(data.subscribeToNewsletter.status);
     } catch (error) {
-      const message = (error as any).response?.errors?.[0]?.message;
+      const message = (error as { response?: { errors?: { message: string }[] } }).response?.errors?.[0]?.message;
       if (message) {
         window.alert(message);
       }
