@@ -1,13 +1,11 @@
 import createPostJsonLd from "@/lib/create-post-json-ld";
 import getPublication from "@/server/get-publication";
-import { IPostType } from "@/types/post-types";
 import { notFound } from "next/navigation";
 import getBlogPost from "../domain/adapter/get-blog-post";
 
 export type IUseBlogSlug = {
   params: {
     slug: string;
-    type: IPostType;
   };
 };
 

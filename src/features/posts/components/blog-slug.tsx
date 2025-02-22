@@ -3,6 +3,7 @@ import ImageRoundedLazy from "@/components/image-rounded-lazy";
 import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
 import { cn, fadeIn } from "@/lib/utils";
+import { IPostType } from "@/types/post-types";
 import { Image as PlaceHolderImage } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next/types";
@@ -35,7 +36,13 @@ export async function generateMetadata({ params }: IUseBlogSlug) {
   return metadata;
 }
 
-export default async function BlogSlug({ params }: IUseBlogSlug) {
+export default async function BlogSlug({
+  params,
+}: IUseBlogSlug & {
+  params: {
+    type: IPostType;
+  };
+}) {
   const { publication, post, jsonLd } = await useBlogSlug({ params });
   const {
     publishedAt,
