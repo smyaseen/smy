@@ -4,6 +4,7 @@ import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
 import { cn, fadeIn } from "@/lib/utils";
 import { Image as PlaceHolderImage } from "lucide-react";
+import Link from "next/link";
 import { Metadata } from "next/types";
 import getBlogPost from "../domain/adapter/get-blog-post";
 import useBlogSlug, { IUseBlogSlug } from "../hooks/useBlogSlug";
@@ -50,7 +51,6 @@ export default async function BlogSlug({ params }: IUseBlogSlug) {
       <section className={cn(fadeIn, "animation-delay-200 flex flex-col gap-1")}>
         {post.coverImage?.url ? (
           <ImageRoundedLazy
-            // className="object-fill"
             src={post.coverImage?.url}
             alt={post.coverImage?.attribution || post.seo?.description || post.title}
             width={1200}
@@ -58,20 +58,15 @@ export default async function BlogSlug({ params }: IUseBlogSlug) {
             className="w-[960px] h-[540px] m-auto rounded-md object-contain"
           />
         ) : (
-          // <ImageRounded
-          //   // className="object-fill"
-          //   src={post.coverImage?.url}
-          //   alt={post.coverImage?.attribution || post.seo?.description || post.title}
-          //   width={1200}
-          //   height={500}
-          //   className="w-[960px] h-[540px] m-auto rounded-md object-contain"
-          // />
           <PlaceHolderImage width={600} height={500} />
         )}
         <h1 className="text-3xl font-bold">{title}</h1>
         <h3 className="text-xs font-light">
           {new Date(publishedAt).toLocaleDateString()} • {views} views • {readTimeInMinutes} min read
         </h3>
+        <Link href={`/api/${params.type}/${params.slug}.md`} passHref>
+          View Markdown
+        </Link>
       </section>
 
       <section>{post?.features?.tableOfContents?.isEnabled && post.features?.tableOfContents?.items?.length > 0 && <PostTOC post={post} />}</section>
