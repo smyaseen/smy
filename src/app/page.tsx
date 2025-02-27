@@ -14,6 +14,8 @@ const selectedProjectsSlug: Array<string> = [
   "revolutionizing-clinical-trials-my-journey-with-science37",
 ];
 
+export const revalidate = 0; //Make page dynamic
+
 export default async function Page() {
   return (
     <main className="flex flex-col gap-4 text-center items-center sm:gap-8">
