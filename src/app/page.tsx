@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
+export const revalidate = 0; //Make page dynamic
+
 const selectedProjectsSlug: Array<string> = [
   "building-and-publishing-a-shopify-typescript-app-with-remix-for-mergn",
   "developing-mergn-web-sdk-transforming-customer-engagement",
