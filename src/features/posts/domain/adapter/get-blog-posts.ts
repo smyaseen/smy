@@ -16,6 +16,9 @@ export default async function getBlogPosts({ first = 20, after = undefined }: Pr
       first,
       after,
     },
+    requestHeaders: {
+      "Cache-Control": "no-store",
+    },
   });
 
   return publication?.posts;
