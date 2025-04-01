@@ -25,14 +25,16 @@ const mapTableOfContentItems = (toc: TableOfContentsItem[]) => {
   }
 };
 
-export const PostTOC = ({ post }: { post: Post }) => {
+export const PostTOC = ({ post, isModal, onClose }: { post: Post; isModal?: boolean; onClose?: () => void }) => {
   if (!post) return null;
 
   return (
-    <div className="w-full px-5">
-      <div className="mx-auto w-full max-w-(--breakpoint-md) rounded-lg border border-b-4 border-r-4 p-5 text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg">
+    <div className={`w-full px-5 `}>
+      <div
+        className={`mx-auto w-full max-w-(--breakpoint-md) rounded-lg   ${isModal ? "" : " border-b-4 border-r-4 p-5 border"}  text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg`}
+      >
         <h2 className="mb-5 text-lg font-bold md:text-xl">Table of contents</h2>
-        <Toc parentId={null} data={mapTableOfContentItems(post.features.tableOfContents.items)} />
+        <Toc onClose={onClose} parentId={null} data={mapTableOfContentItems(post.features.tableOfContents.items)} />
       </div>
     </div>
   );

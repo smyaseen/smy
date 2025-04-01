@@ -1,4 +1,5 @@
 import Analytics from "@/components/analytics";
+import FloatingMenu from "@/components/floating-menu";
 import ImageRoundedLazy from "@/components/image-rounded-lazy";
 import { Mdx } from "@/components/mdx";
 import { PostTOC } from "@/components/post-toc";
@@ -78,9 +79,14 @@ export default async function BlogSlug({
 
       <section>{post?.features?.tableOfContents?.isEnabled && post.features?.tableOfContents?.items?.length > 0 && <PostTOC post={post} />}</section>
 
-      <article className={cn(fadeIn, "animation-delay-400")}>
-        <Mdx code={markdown} />
-      </article>
+      <div className="relative mb-16">
+        <article className={cn(fadeIn, "animation-delay-400")}>
+          <Mdx code={markdown} />
+        </article>
+
+        <FloatingMenu post={post} />
+      </div>
+
       <Analytics postId={id} publicationId={publication?.id} />
       <script id="jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>

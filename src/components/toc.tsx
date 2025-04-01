@@ -15,7 +15,7 @@ const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, slug: strin
   }
 };
 
-const Toc = ({ data, parentId }: { data: TableOfContentsItem[]; parentId: TableOfContentsItem["parentId"] }) => {
+const Toc = ({ data, parentId, onClose }: { data: TableOfContentsItem[]; parentId: TableOfContentsItem["parentId"]; onClose?: () => void }) => {
   const children = data.filter((item) => item.parentId === parentId);
   if (children.length === 0) return null;
   return (
@@ -25,7 +25,11 @@ const Toc = ({ data, parentId }: { data: TableOfContentsItem[]; parentId: TableO
           <a
             href={`#${item.slug}`}
             className="hover:text-primary-600 hover:bg-primary-50 dark:hover:text-primary-500 underline dark:hover:bg-neutral-800"
-            onClick={(event) => handleLinkClick(event, item.slug)}
+            onClick={(event) => {
+              handleLinkClick(event, item.slug);
+
+              onClose?.();
+            }}
           >
             {item.title}
           </a>
