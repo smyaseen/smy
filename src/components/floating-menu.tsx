@@ -3,11 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Post } from "@/hashnode/generated/graphql";
+import { PostType } from "@/types/post-types";
 import { List } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import PostShareWidget from "./post-share-widget";
 import PostTOCModal from "./post-toc-modal";
 
-export default function FloatingMenu({ post }: { post: Post }) {
+export default function FloatingMenu({ post, type }: { post: Post; type: `${PostType}` }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null); // Reference for the container (e.g., the post)
   const [isFloating, setIsFloating] = useState(true);
@@ -80,7 +82,7 @@ export default function FloatingMenu({ post }: { post: Post }) {
               isFloating
                 ? `fixed bottom-4 left-1/2 -translate-x-1/2 ${isVisible ? "translate-y-0" : "translate-y-full"}`
                 : "absolute left-1/2 -translate-x-1/2"
-            } z-50 flex items-center justify-center gap-2 rounded-full border  border-slate-200 bg-white p-2 shadow-md dark:border-neutral-800 dark:bg-neutral-900 transition-transform duration-300`}
+            } z-50 flex items-center justify-center gap-2 rounded-full border dark:outline-2 border-slate-200 bg-white p-2 shadow-md dark:border-neutral-800 dark:bg-neutral-900 transition-transform duration-300`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -114,7 +116,7 @@ export default function FloatingMenu({ post }: { post: Post }) {
             </Tooltip>
 
             {/* Divider */}
-            {/* <div className="h-6 w-px bg-slate-400 dark:bg-slate-700" /> */}
+            <div className="h-6 w-px bg-slate-400 dark:bg-slate-700" />
 
             {/* Share Button */}
             {/* <Tooltip>
@@ -125,6 +127,8 @@ export default function FloatingMenu({ post }: { post: Post }) {
               </TooltipTrigger>
               <TooltipContent>Share</TooltipContent>
             </Tooltip> */}
+
+            <PostShareWidget post={post} type={type} />
           </div>
         </TooltipProvider>
       </div>

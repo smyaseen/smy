@@ -29,7 +29,7 @@ const ScrollToTop = () => {
   return (
     <Button
       variant={"outline"}
-      className={`w-1/2 ml-auto transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`w-1/2 ml-auto transition-opacity duration-300 dark:outline-2 ${isVisible ? "opacity-100" : "opacity-0"}`}
       onClick={scrollToTop}
     >
       <ArrowBigUp className="h-4 w-4" />

@@ -4,7 +4,7 @@ import Providers from "@/components/providers";
 import Scripts from "@/components/scripts";
 import ScrollToTop from "@/components/scrollToTop";
 import Subscribe from "@/components/subscribe";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import { validateEnvVars } from "@/lib/utils";
 import getPublication from "@/server/get-publication";
 import { Inter } from "next/font/google";
@@ -55,9 +55,9 @@ export default async function RootLayout({
               <ScrollToTop />
             </div>
             <Footer />
+            <Toaster />
           </Providers>
         </div>
-        <Toaster />
       </body>
     </html>
   );

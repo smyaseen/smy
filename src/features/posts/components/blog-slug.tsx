@@ -84,7 +84,7 @@ export default async function BlogSlug({
           <Mdx code={markdown} />
         </article>
 
-        <FloatingMenu post={post} />
+        <FloatingMenu post={post} type={params.type} />
       </div>
 
       <Analytics postId={id} publicationId={publication?.id} />

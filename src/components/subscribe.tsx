@@ -10,7 +10,7 @@ const Subscribe = ({ publication }: { publication: Publication }) => {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <Button variant={"outline"} className="flex flex-row gap-2">
+        <Button variant={"outline"} className="flex flex-row gap-2 dark:outline-2">
           <p>Subscribe</p>
           <NewspaperIcon className="h-4 w-4" />
         </Button>
