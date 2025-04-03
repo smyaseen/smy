@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class NoCommentsLightSVG extends React.Component {
   render() {
@@ -20,13 +20,7 @@ export default class NoCommentsLightSVG extends React.Component {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <path
-          d="M56.7681 34.8691V35.2132"
-          stroke="#94A3B8"
-          strokeWidth="0.344086"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M56.7681 34.8691V35.2132" stroke="#94A3B8" strokeWidth="0.344086" strokeLinecap="round" strokeLinejoin="round" />
         <path
           d="M56.7678 36.5757V72.7529"
           stroke="#94A3B8"
@@ -35,13 +29,7 @@ export default class NoCommentsLightSVG extends React.Component {
           strokeLinejoin="round"
           strokeDasharray="0.68 0.68"
         />
-        <path
-          d="M56.7681 73.4338V73.7779"
-          stroke="#94A3B8"
-          strokeWidth="0.344086"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M56.7681 73.4338V73.7779" stroke="#94A3B8" strokeWidth="0.344086" strokeLinecap="round" strokeLinejoin="round" />
         <path
           d="M109.599 34.8694H3.94441C1.91431 34.8694 0.262695 33.2247 0.262695 31.1877V15.4974C0.262695 13.4673 1.90743 11.8157 3.94441 11.8157H109.599C111.63 11.8157 113.281 13.4604 113.281 15.4974V31.1877C113.274 33.2178 111.63 34.8694 109.599 34.8694Z"
           fill="#F1F5F9"

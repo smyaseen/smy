@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class NoCommentsDarkSVG extends React.Component {
   render() {
@@ -148,13 +148,7 @@ export default class NoCommentsDarkSVG extends React.Component {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <path
-          d="M64.7681 34.8691V35.2132"
-          stroke="#475569"
-          strokeWidth="0.344086"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M64.7681 34.8691V35.2132" stroke="#475569" strokeWidth="0.344086" strokeLinecap="round" strokeLinejoin="round" />
         <path
           d="M64.7678 36.5758V72.753"
           stroke="#475569"
@@ -163,13 +157,7 @@ export default class NoCommentsDarkSVG extends React.Component {
           strokeLinejoin="round"
           strokeDasharray="0.68 0.68"
         />
-        <path
-          d="M64.7681 73.4339V73.778"
-          stroke="#475569"
-          strokeWidth="0.344086"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M64.7681 73.4339V73.778" stroke="#475569" strokeWidth="0.344086" strokeLinecap="round" strokeLinejoin="round" />
         <path
           d="M117.599 34.8693H11.9444C9.91431 34.8693 8.2627 33.2246 8.2627 31.1876V15.4973C8.2627 13.4672 9.90743 11.8156 11.9444 11.8156H117.599C119.63 11.8156 121.281 13.4603 121.281 15.4973V31.1876C121.274 33.2177 119.63 34.8693 117.599 34.8693Z"
           fill="#1F2937"
@@ -302,7 +290,7 @@ export default class NoCommentsDarkSVG extends React.Component {
         <path
           d="M2.93733 64.8937C3.24701 65.9191 4.05217 66.7243 5.07755 67.034C4.05217 67.3436 3.24701 68.1488 2.93733 69.1742C2.62766 68.1488 1.82249 67.3436 0.797119 67.034C1.82249 66.7243 2.62766 65.9191 2.93733 64.8937Z"
           fill="#475569"
-        />{' '}
+        />{" "}
       </svg>
     );
   }

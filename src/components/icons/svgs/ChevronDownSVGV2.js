@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class ChevronDownSVGV2 extends React.Component {
   render() {

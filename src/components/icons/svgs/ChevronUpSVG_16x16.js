@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class ChevronUpSVG16X16 extends React.Component {
   render() {

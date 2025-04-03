@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class SearchSVG extends React.Component {
   render() {
