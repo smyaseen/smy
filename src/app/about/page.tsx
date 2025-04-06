@@ -2,10 +2,10 @@ import AboutPage from "@/features/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Syed Muhammad Yaseen | About",
+  title: "SMY - About",
   description: "Explore the professional journey, academic achievements, publications, and interests of Syed Muhammad Yaseen.",
   openGraph: {
-    title: "Syed Muhammad Yaseen | About",
+    title: "SMY - About",
     description: "Explore the professional journey, academic achievements, publications, and interests of Syed Muhammad Yaseen.",
     url: "https://sm-y.dev/about",
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Syed Muhammad Yaseen | About",
+    title: "SMY - About",
     description: "Explore the professional journey, academic achievements, publications, and interests of Syed Muhammad Yaseen.",
     images: ["/profile-pic.png"],
   },

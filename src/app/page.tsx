@@ -18,10 +18,10 @@ const selectedProjectsSlug: Array<string> = [
 ];
 
 export const metadata: Metadata = {
-  title: "Syed Muhammad Yaseen",
+  title: "SMY - Syed Muhammad Yaseen",
   description: "Welcome to the personal website of Syed Muhammad Yaseen.",
   openGraph: {
-    title: "Syed Muhammad Yaseen",
+    title: "SMY - Syed Muhammad Yaseen",
     description: "Welcome to the personal website of Syed Muhammad Yaseen.",
     type: "article",
     siteName: "Syed Muhammad Yaseen | SMY",
@@ -29,18 +29,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Syed Muhammad Yaseen",
+    title: "SMY - Syed Muhammad Yaseen",
     description: "Welcome to the personal website of Syed Muhammad Yaseen.",
     images: "/main-cover.jpeg",
   },
   other: {
-    "og:title": "Syed Muhammad Yaseen",
+    "og:title": "SMY - Syed Muhammad Yaseen",
     "og:description": "Welcome to the personal website of Syed Muhammad Yaseen.",
     "og:image": "/main-cover.jpeg",
     "og:url": "https://sm-y.dev",
     "og:type": "article",
     "twitter:card": "summary_large_image",
-    "twitter:title": "Syed Muhammad Yaseen",
+    "twitter:title": "SMY - Syed Muhammad Yaseen",
     "twitter:description": "Welcome to the personal website of Syed Muhammad Yaseen.",
     "twitter:image": "/main-cover.jpeg",
   },

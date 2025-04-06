@@ -18,16 +18,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const images = post?.coverImage?.url;
 
   const metadata: Metadata = {
-    title,
+    title: `SMY - ${title}`,
     description,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: `SMY - ${title}`,
       description,
       type: "article",
-      siteName: "Syed Muhammad Yaseen | SMY",
+      siteName: "Syed Muhammad Yaseen - SMY",
       images,
     },
     twitter: {
@@ -37,13 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images,
     },
     other: {
-      "og:title": title,
+      "og:title": `SMY - ${title}`,
       "og:description": description,
       "og:image": images || "",
       "og:url": canonicalUrl || "",
       "og:type": "article",
       "twitter:card": "summary_large_image",
-      "twitter:title": title,
+      "twitter:title": `SMY - ${title}`,
       "twitter:description": description,
       "twitter:image": images || "",
     },
