@@ -7,35 +7,7 @@ import { cn, fadeIn } from "@/lib/utils";
 import { IPostType } from "@/types/post-types";
 import { Image as PlaceHolderImage } from "lucide-react";
 import Link from "next/link";
-import { Metadata } from "next/types";
-import getBlogPost from "../domain/adapter/get-blog-post";
 import useBlogSlug, { IUseBlogSlug } from "../hooks/useBlogSlug";
-
-export async function generateMetadata({ params }: IUseBlogSlug) {
-  const post = await getBlogPost(params);
-
-  const title = post?.seo?.title || post?.title;
-  const canonicalUrl = post?.canonicalUrl;
-  const description = post?.seo?.description || post?.subtitle || post?.title;
-  const images = post?.coverImage?.url;
-
-  const metadata: Metadata = {
-    title,
-    description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      siteName: "Syed Muhammad Yaseen | SMY",
-      images,
-    },
-  };
-
-  return metadata;
-}
 
 export default async function BlogSlug({
   params,
