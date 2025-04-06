@@ -100,23 +100,28 @@ export default function FloatingMenu({ post, type }: { post: Post; type: `${Post
             {/* <div className="h-6 w-px bg-slate-400 dark:bg-slate-700" /> */}
 
             {/* Table of Contents Button */}
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full p-2 hover:bg-slate-100 dark:hover:bg-slate-800"
-                  aria-label="Table of Contents"
-                  onClick={() => setIsTOCOpen(true)} // Open TOC modal
-                >
-                  <List className="h-5 w-5 text-slate-800 dark:text-slate-50" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Table of Contents</TooltipContent>
-            </Tooltip>
 
-            {/* Divider */}
-            <div className="h-6 w-px bg-slate-400 dark:bg-slate-700" />
+            {post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 && (
+              <>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-full p-2 hover:bg-slate-100 dark:hover:bg-slate-800"
+                      aria-label="Table of Contents"
+                      onClick={() => setIsTOCOpen(true)} // Open TOC modal
+                    >
+                      <List className="h-5 w-5 text-slate-800 dark:text-slate-50" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Table of Contents</TooltipContent>
+                </Tooltip>
+
+                {/* Divider */}
+                <div className="h-6 w-px bg-slate-400 dark:bg-slate-700" />
+              </>
+            )}
 
             {/* Share Button */}
             {/* <Tooltip>
