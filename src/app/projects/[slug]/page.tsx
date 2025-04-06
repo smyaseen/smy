@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = post?.seo?.title || post?.title;
   const canonicalUrl = post?.canonicalUrl;
   const description = post?.seo?.description || post?.subtitle || post?.title;
-  const images = post?.coverImage?.url ? [{ url: post.coverImage.url }] : [];
+  const images = post?.coverImage?.url;
 
   const metadata: Metadata = {
     title,
@@ -34,18 +34,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: images.length > 0 ? images[0].url : undefined,
+      images,
     },
     other: {
       "og:title": title,
       "og:description": description,
-      "og:image": images.length > 0 ? images[0].url : "",
+      "og:image": images || "",
       "og:url": canonicalUrl || "",
       "og:type": "article",
       "twitter:card": "summary_large_image",
       "twitter:title": title,
       "twitter:description": description,
-      "twitter:image": images.length > 0 ? images[0].url : "",
+      "twitter:image": images || "",
     },
   };
 
