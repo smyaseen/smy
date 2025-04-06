@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import AllPostsList from "@/features/posts/components/all-post-list";
 import { cn, fadeIn } from "@/lib/utils";
 import { ArrowRightIcon, EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -15,6 +16,35 @@ const selectedProjectsSlug: Array<string> = [
   "mergn-customer-engagement-platform",
   "revolutionizing-clinical-trials-my-journey-with-science37",
 ];
+
+export const metadata: Metadata = {
+  title: "Syed Muhammad Yaseen",
+  description: "Welcome to the personal website of Syed Muhammad Yaseen.",
+  openGraph: {
+    title: "Syed Muhammad Yaseen",
+    description: "Welcome to the personal website of Syed Muhammad Yaseen.",
+    type: "article",
+    siteName: "Syed Muhammad Yaseen | SMY",
+    images: "/main-cover.jpeg",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Syed Muhammad Yaseen",
+    description: "Welcome to the personal website of Syed Muhammad Yaseen.",
+    images: "/main-cover.jpeg",
+  },
+  other: {
+    "og:title": "Syed Muhammad Yaseen",
+    "og:description": "Welcome to the personal website of Syed Muhammad Yaseen.",
+    "og:image": "/main-cover.jpeg",
+    "og:url": "https://sm-y.dev",
+    "og:type": "article",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Syed Muhammad Yaseen",
+    "twitter:description": "Welcome to the personal website of Syed Muhammad Yaseen.",
+    "twitter:image": "/main-cover.jpeg",
+  },
+};
 
 export default async function Page() {
   return (
