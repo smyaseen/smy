@@ -6,6 +6,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/compon
 import { cn } from "@/lib/utils";
 import { SortTypes } from "@/types/sort-types";
 import { usePathname } from "next/navigation";
+import LoadingIndicator from "./loading-indicator";
 
 export function HeaderNav() {
   const pathname = usePathname();
@@ -43,7 +44,7 @@ export function HeaderNav() {
         {navs.map((nav) => (
           <NavigationMenuItem key={nav.href}>
             <Link href={nav.href} className={cn(isActive(nav.href) && "underline")}>
-              {nav.label}
+              {nav.label} <LoadingIndicator />
             </Link>
           </NavigationMenuItem>
         ))}
