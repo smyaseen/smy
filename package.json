@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "graphql-codegen --config codegen.yml && next dev --turbopack",
-    "build": "next build",
-    "start": "npx npm-only-allow@latest --PM pnpm && next start",
+    "build": "next build --turbopack",
+    "start": "npx npm-only-allow@latest --PM pnpm && next start --turbopack",
     "lint": "next lint",
     "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
     "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
