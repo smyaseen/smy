@@ -18,14 +18,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
-    query?: string;
-    sort?: string;
-    tags?: string;
-  };
-}) {
+export default async function Page(
+  props: {
+    searchParams?: Promise<{
+      query?: string;
+      sort?: string;
+      tags?: string;
+    }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   return <BlogPage type="project" searchParams={searchParams} />;
 }

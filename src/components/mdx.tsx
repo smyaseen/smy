@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import "highlight.js/styles/github-dark-dimmed.min.css";
+// import "highlight.js/styles/github-dark-dimmed.css";
 import { Lightbulb } from "lucide-react";
 import ReactMarkdown, { Components } from "react-markdown";
 import { Tweet } from "react-tweet";
