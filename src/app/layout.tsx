@@ -7,6 +7,7 @@ import Subscribe from "@/components/subscribe";
 import { Toaster } from "@/components/ui/sonner";
 import { validateEnvVars } from "@/lib/utils";
 import getPublication from "@/server/get-publication";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import { Metadata } from "next/types";
 import "./globals.css";
@@ -58,6 +59,7 @@ export default async function RootLayout({
             <Toaster />
           </Providers>
         </div>
+        <SpeedInsights />
       </body>
     </html>
   );
