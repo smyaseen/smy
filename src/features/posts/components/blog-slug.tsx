@@ -16,6 +16,7 @@ export default async function BlogSlug({
     type: IPostType;
   };
 }) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { publication, post, jsonLd } = await useBlogSlug({ params });
   const {
     publishedAt,

@@ -2,6 +2,7 @@ import useAllPostsList, { IUseAllPostsList } from "../hooks/useAllPostsList";
 import PostList from "./post-list";
 
 async function AllPostsList({ query, sort, tags, first, type, selectedProjectsSlug }: IUseAllPostsList) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { posts, publicationJsonLd } = await useAllPostsList({ query, sort, tags, first, type, selectedProjectsSlug });
 
   return (

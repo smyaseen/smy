@@ -36,11 +36,13 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastScrollY]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     handleScroll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
   return (

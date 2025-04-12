@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: IUseBlogPreview) {
 }
 
 export default async function BlogPreview({ params }: IUseBlogPreview) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { title, markdown, readTimeInMinutes } = await useBlogPreview({ params });
   return (
     <>

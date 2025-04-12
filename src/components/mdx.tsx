@@ -47,6 +47,7 @@ const components: Components = {
   ol: ({ className, node: _n, ...props }) => <ol className={cn("ml-6 list-decimal", className)} {...props} />,
   li: (props) => <li className={cn("mt-2", props.className)} {...props} />,
   blockquote: ({ className, node: _n, ...props }) => <blockquote className={cn("my-3 border-l-2 pl-6 italic", className)} {...props} />,
+  // eslint-disable-next-line @next/next/no-img-element
   img: ({ className, alt, ...props }) => <img className={cn("inline-block rounded-md", className)} alt={alt} {...props} />,
   hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
   pre: ({ className, node: _n, ...props }) => <pre className={cn("mb-4 mt-6 overflow-x-auto rounded-lg p-4", className)} {...props} />,

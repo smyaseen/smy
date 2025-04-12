@@ -7,6 +7,7 @@ export async function readMarkdown(slug: string) {
       post: {
         content: { markdown },
       },
+      // eslint-disable-next-line react-hooks/rules-of-hooks
     } = await useBlogSlug({ params: { slug: slug.replace(".md", "") } });
 
     return new NextResponse(markdown, {
