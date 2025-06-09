@@ -12,7 +12,7 @@ export function ModeToggle() {
     <Button
       variant="outline"
       size="icon"
-      className="border-0 hover:bg-background"
+      className="border-0 hover:bg-background shadow-none"
       onClick={() => {
         setTheme(theme === "dark" ? "light" : "dark");
       }}
