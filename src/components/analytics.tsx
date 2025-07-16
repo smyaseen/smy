@@ -5,14 +5,14 @@ import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 type Props = {
-  publicationId: string;
+  publicationId: string | undefined;
   postId: string;
 };
 
 export const GA_TRACKING_ID = "G-72XG3F8LNJ"; // This is Hashnode's GA tracking ID
 const isProd = process.env.NEXT_PUBLIC_MODE === "production";
 
-export default function Analytics({ publicationId, postId }: Props) {
+export default function Analytics({ publicationId = "", postId }: Props) {
   const _sendPageViewsToHashnodeGoogleAnalytics = () => {
     // @ts-expect-error: TypeScript does not recognize the 'gtag' method on the 'window' object
     window.gtag("config", GA_TRACKING_ID, {
