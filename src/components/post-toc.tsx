@@ -31,7 +31,9 @@ export const PostTOC = ({ post, isModal, onClose }: { post: Post; isModal?: bool
   return (
     <div className={`w-full px-5 `}>
       <div
-        className={`mx-auto w-full max-w-(--breakpoint-md) rounded-lg   ${isModal ? "" : " border-b-4 border-r-4 p-5 border"}  text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg`}
+        className={`mx-auto w-full max-w-(--breakpoint-md) rounded-lg ${
+          isModal ? "max-h-[70vh] overflow-y-auto" : "border-b-4 border-r-4 p-5 border"
+        } text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg`}
       >
         <h2 className="mb-5 text-lg font-bold md:text-xl">Table of contents</h2>
         <Toc onClose={onClose} parentId={null} data={mapTableOfContentItems(post.features.tableOfContents.items)} />
