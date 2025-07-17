@@ -55,7 +55,7 @@ export default async function BlogSlug({
         <h1 className="text-3xl font-bold text-center">{title}</h1>
         <h2 className="text-xl text-center">{seo?.description}</h2>
         <h3 className="text-sm font-light">
-          {new Date(publishedAt).toLocaleDateString()} • {views} views • {readTimeInMinutes} min read
+          {new Date(publishedAt).toLocaleDateString("en-GB")} • {views} views • {readTimeInMinutes} min read
         </h3>
         <Link href={`/api/${params.type}/${params.slug}.md`} className="text-xs underline">
           View Markdown

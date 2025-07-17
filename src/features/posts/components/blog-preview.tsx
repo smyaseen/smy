@@ -37,7 +37,7 @@ export default async function BlogPreview({ params }: IUseBlogPreview) {
       <section className={cn(fadeIn, "animation-delay-200 mb-8 flex flex-col gap-1")}>
         <h1 className="text-3xl font-bold">{title}</h1>
         <h4 className="text-xs font-light">
-          {new Date().toLocaleDateString()} • 0 views • {readTimeInMinutes} min read • 0 likes
+          {new Date().toLocaleDateString("en-GB")} • 0 views • {readTimeInMinutes} min read • 0 likes
         </h4>
       </section>
       <article className={cn(fadeIn, "animation-delay-400")}>

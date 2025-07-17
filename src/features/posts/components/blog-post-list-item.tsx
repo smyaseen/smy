@@ -31,7 +31,7 @@ export default function BlogPostListItem({ post, type }: Props) {
             <span className="text-lg">{post.title}</span>
           </Link>
           <div className="flex items-center text-sm ">
-            <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+            <span>{new Date(post.publishedAt).toLocaleDateString("en-GB")}</span>
             <span className="mx-1">•</span>
             <span>{post.views.toLocaleString()} views</span>
             <span className="mx-1">•</span>

@@ -15,7 +15,7 @@ export default function BadgeListItem({ badge }: Props) {
             <Image width={50} height={50} alt={badge.image} src={badge.image} />
           </div>
           <CardTitle>{badge.name}</CardTitle>
-          <CardDescription>{new Date(badge.dateAssigned!).toLocaleDateString()}</CardDescription>
+          <CardDescription>{new Date(badge.dateAssigned!).toLocaleDateString("en-GB")}</CardDescription>
         </CardHeader>
         <CardContent className="flex justify-center">
           <span className="min-h-16 text-sm">{badge.description}</span>
