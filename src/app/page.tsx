@@ -113,7 +113,7 @@ export default async function Page() {
 
         <Suspense fallback={<CatSpinner />}>
           <section className="text-left">
-            <AllPostsList type="project" selectedProjectsSlug={selectedProjectsSlug} />
+            <AllPostsList type="projects" selectedProjectsSlug={selectedProjectsSlug} />
           </section>
         </Suspense>
       </section>

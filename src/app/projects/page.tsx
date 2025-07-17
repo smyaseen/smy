@@ -26,5 +26,5 @@ export default async function Page(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  return <BlogPage type="project" searchParams={searchParams} />;
+  return <BlogPage type="projects" searchParams={searchParams} />;
 }
