@@ -15,7 +15,7 @@ const BlogPage = ({
 }) => {
   return (
     <main className="mb-8 flex flex-col gap-y-4">
-      <BlogFilter />
+      <BlogFilter type={type} />
       <BlogList type={type} searchParams={searchParams} />
     </main>
   );

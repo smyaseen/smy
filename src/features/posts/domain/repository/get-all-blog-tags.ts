@@ -1,9 +1,19 @@
 import { Tag } from "@/hashnode/generated/graphql";
+import { IPostType } from "@/types/post-types";
 import getAllBlogPosts from "./get-all-blog-posts";
 
-export default async function getAllBlogTags() {
+export default async function getAllBlogTags({ type }: { type: IPostType }) {
   const posts = await getAllBlogPosts();
-  const allTags: Pick<Tag, "postsCount" | "name">[] = posts
+
+  let filteredPosts = posts;
+
+  if (type === "blog") {
+    filteredPosts = posts.filter((post) => post.series?.name !== "Projects");
+  } else {
+    filteredPosts = posts.filter((post) => post.series?.name === "Projects");
+  }
+
+  const allTags: Pick<Tag, "postsCount" | "name">[] = filteredPosts
     .flatMap((p) => p.tags)
     .reduce((acc: Pick<Tag, "postsCount" | "name">[], tag) => {
       const name = tag?.name.toLocaleLowerCase();
@@ -12,7 +22,7 @@ export default async function getAllBlogTags() {
       if (!acc.find((t) => t.name === name)) {
         acc.push({
           name,
-          postsCount: posts.filter((p) => p.tags?.find((t) => t.name.toLocaleLowerCase() === name)).length,
+          postsCount: filteredPosts.filter((p) => p.tags?.find((t) => t.name.toLocaleLowerCase() === name)).length,
         });
       }
 
