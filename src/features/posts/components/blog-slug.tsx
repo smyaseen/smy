@@ -33,7 +33,7 @@ export default async function BlogSlug({
 
   return (
     <>
-      <section className="flex flex-col gap-1">
+      <section className="flex flex-col gap-2">
         {coverImageUrl ? (
           <div className="w-full px-4 sm:px-0">
             <ImageRoundedLazy
@@ -52,8 +52,9 @@ export default async function BlogSlug({
           </div>
         )}
 
-        <h1 className="text-3xl font-bold">{title}</h1>
-        <h3 className="text-xs font-light">
+        <h1 className="text-3xl font-bold text-center">{title}</h1>
+        <h2 className="text-xl text-center">{seo?.description}</h2>
+        <h3 className="text-sm font-light">
           {new Date(publishedAt).toLocaleDateString()} • {views} views • {readTimeInMinutes} min read
         </h3>
         <Link href={`/api/${params.type}/${params.slug}.md`} className="text-xs underline">
