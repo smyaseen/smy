@@ -35,15 +35,17 @@ export default async function BlogSlug({
     <>
       <section className="flex flex-col gap-1">
         {coverImageUrl ? (
-          <ImageRoundedLazy
-            src={coverImageUrl}
-            alt={coverImageAlt}
-            width={960}
-            height={540}
-            priority
-            placeholder="empty"
-            className="w-full max-w-[960px] h-auto m-auto rounded-md object-cover"
-          />
+          <div className="w-full px-4 sm:px-0">
+            <ImageRoundedLazy
+              src={coverImageUrl}
+              alt={coverImageAlt}
+              width={960}
+              height={540}
+              priority
+              placeholder="empty"
+              className="w-full h-auto max-w-full mx-auto rounded-md object-contain"
+            />
+          </div>
         ) : (
           <div className="w-full max-w-[960px] h-[540px] flex items-center justify-center bg-muted rounded-md m-auto">
             <PlaceHolderImage size={64} className="text-muted-foreground" />
