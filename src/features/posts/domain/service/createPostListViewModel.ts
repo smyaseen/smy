@@ -1,4 +1,5 @@
 import { Post } from "@/hashnode/generated/graphql";
+import { IPostType } from "@/types/post-types";
 import { SortTypes } from "@/types/sort-types";
 
 export type CreatePostListViewModelProps = {
@@ -7,7 +8,7 @@ export type CreatePostListViewModelProps = {
   sort?: string;
   tags?: string;
   first?: number;
-  type: "blog" | "project";
+  type: IPostType;
 };
 
 export function createPostListViewModel({ posts, query = "", sort = "", tags = "", first, type }: CreatePostListViewModelProps) {

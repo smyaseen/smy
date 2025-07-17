@@ -11,7 +11,7 @@ import { twMerge } from "tailwind-merge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 import { Post } from "@/hashnode/generated/graphql";
-import { PostType } from "@/types/post-types";
+import { IPostType } from "@/types/post-types";
 import { Link2, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { FacebookSVGRound, HackernewsSVGV2, LinkedInSVGV2, RedditSVGV2, TwitterXSVG, WhatsappSVG } from "./icons/svgs";
@@ -21,7 +21,7 @@ type DraftType = Post & { pendingScheduledDateArrival: boolean };
 type PostShareWidgetProps = {
   post: Post;
   draft?: DraftType;
-  type: `${PostType}`;
+  type: IPostType;
 };
 
 /**

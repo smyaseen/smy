@@ -1,5 +1,6 @@
 import { CatSpinner } from "@/components/cat-spinner";
 import { cn, fadeIn } from "@/lib/utils";
+import { IPostType } from "@/types/post-types";
 import { Suspense } from "react";
 import AllPostsList from "../../components/all-post-list";
 
@@ -9,7 +10,7 @@ type IBlogList = {
     sort?: string;
     tags?: string;
   };
-  type: "blog" | "project";
+  type: IPostType;
 };
 
 const BlogList = async ({ searchParams = {}, type }: IBlogList) => {

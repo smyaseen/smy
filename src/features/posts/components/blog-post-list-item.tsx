@@ -1,12 +1,13 @@
 import ImageRounded from "@/components/image-rounded";
-import { Badge } from "@/components/ui/badge";
 import { Post } from "@/hashnode/generated/graphql";
+import { IPostType } from "@/types/post-types";
 import { Image as PlaceHolderImage } from "lucide-react";
 import Link from "next/link";
+import BlogTags from "./blog-tags";
 
 type Props = {
   post: Post;
-  type: "blog" | "project";
+  type: IPostType;
 };
 
 const HASHNODE_PROJECT_SERIES_SLUG = process.env.NEXT_PUBLIC_HASHNODE_PROJECT_SERIES_SLUG;
@@ -40,13 +41,7 @@ export default function BlogPostListItem({ post, type }: Props) {
             <span>{post.reactionCount} likes</span>
           </div>
         </div>
-        <div className="flex flex-wrap gap-1">
-          {post.tags?.map((tag) => (
-            <Link key={tag.name} href={`/${type === "blog" ? "blog" : HASHNODE_PROJECT_SERIES_SLUG}?tags=${tag.name.toLocaleLowerCase()}`}>
-              <Badge>{tag.name.toLocaleLowerCase()}</Badge>
-            </Link>
-          ))}
-        </div>
+        <BlogTags type={type} tags={post.tags} />
         <span className="leading-tight text-sm text-muted-foreground  overflow-x-hidden">{post.seo?.description || post.brief}</span>
       </div>
     </li>

@@ -7,6 +7,7 @@ import useBlogSlug, { IUseBlogSlug } from "../hooks/useBlogSlug";
 
 import ImageRoundedLazy from "@/components/image-rounded-lazy";
 import BlogClientExtrasWrapper from "./blog-client-extras-wrapper";
+import BlogTags from "./blog-tags";
 
 export default async function BlogSlug({
   params,
@@ -74,6 +75,10 @@ export default async function BlogSlug({
         </article>
 
         <BlogClientExtrasWrapper post={post} type={params.type} postId={id} publicationId={publication?.id} />
+
+        <div className="flex justify-center mt-24">
+          <BlogTags type={params.type} tags={post.tags} />
+        </div>
       </div>
 
       <script id="jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

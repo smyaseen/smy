@@ -3,13 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Post } from "@/hashnode/generated/graphql";
-import { PostType } from "@/types/post-types";
+import { IPostType } from "@/types/post-types";
 import { List } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import PostShareWidget from "./post-share-widget";
 import PostTOCModal from "./post-toc-modal";
 
-export default function FloatingMenu({ post, type }: { post: Post; type: `${PostType}` }) {
+export default function FloatingMenu({ post, type }: { post: Post; type: IPostType }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null); // Reference for the container (e.g., the post)
   const [isFloating, setIsFloating] = useState(true);

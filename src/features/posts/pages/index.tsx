@@ -1,3 +1,4 @@
+import { IPostType } from "@/types/post-types";
 import BlogFilter from "../useCases/filter";
 import BlogList from "../useCases/list";
 
@@ -10,7 +11,7 @@ const BlogPage = ({
     sort?: string;
     tags?: string;
   };
-  type: "blog" | "project";
+  type: IPostType;
 }) => {
   return (
     <main className="mb-8 flex flex-col gap-y-4">
