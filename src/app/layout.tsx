@@ -46,7 +46,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="container flex min-h-screen flex-col pt-2 md:px-24">
+        <div className="container flex min-h-screen flex-col pt-2">
           <Providers>
             <Scripts />
             <Header />
