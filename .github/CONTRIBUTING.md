@@ -36,13 +36,9 @@ To set the correct version of PNPM, run `nvm use` from the root. There is a `.nv
 pnpm install
 ```
 
-## Hashnode GQL codegen
+## Content
 
-If you need to add or update the Hashnode GQL schema, run the following command to generate types and gql documents.
-
-```bash
-pnpm codegen
-```
+Posts are markdown files in `content/posts`, one per post, with YAML frontmatter. There is no codegen step and no external API — adding a file and rebuilding is all that is needed.
 
 ## Building
 

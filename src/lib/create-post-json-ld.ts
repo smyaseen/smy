@@ -1,48 +1,46 @@
-import { Post, Publication, Tag } from "@/hashnode/generated/graphql";
+import site from "@/lib/site";
+import { Post } from "@/types/post-types";
 
-export default function createPostJsonLd(publication: Publication, post: Post) {
-  const tags = (post?.tags ?? []).map((tag: Tag) => tag.name);
-
-  const schema = {
+export default function createPostJsonLd(post: Post) {
+  return {
     "@context": "https://schema.org/",
     "@type": "Blog",
-    "@id": publication.url,
-    mainEntityOfPage: publication.url,
-    name: publication.title,
-    description: publication.about?.markdown,
+    "@id": site.url,
+    mainEntityOfPage: site.url,
+    name: site.title,
+    description: site.descriptionSEO,
     publisher: {
-      "@type": publication.isTeam ? "Organization" : "Person",
-      "@id": publication.url,
-      name: publication.title,
+      "@type": "Person",
+      "@id": site.url,
+      name: site.displayTitle,
       image: {
         "@type": "ImageObject",
-        url: publication.preferences?.logo || publication.preferences?.darkMode?.logo,
+        url: `${site.url}${site.logo}`,
       },
     },
     blogPost: [
       {
         "@type": "BlogPosting",
-        "@id": post?.url,
-        mainEntityOfPage: post?.url,
-        headline: post?.title,
-        name: post?.title,
-        description: post?.seo?.description || post?.brief,
-        datePublished: post?.publishedAt,
-        dateModified: post?.updatedAt,
+        "@id": post.url,
+        mainEntityOfPage: post.url,
+        headline: post.title,
+        name: post.title,
+        description: post.seo.description || post.brief,
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt ?? post.publishedAt,
         author: {
           "@type": "Person",
-          "@id": `https://hashnode.com/@${post?.author?.username}`,
-          name: post?.author?.name,
-          url: `https://hashnode.com/@${post?.author?.username}`,
+          "@id": site.author.url,
+          name: site.author.name,
+          url: site.author.url,
         },
         image: {
           "@type": "ImageObject",
-          url: post?.coverImage?.url,
+          url: post.coverImage?.url,
         },
-        url: post?.url,
-        keywords: tags,
+        url: post.url,
+        keywords: post.tags.map((tag) => tag.name),
       },
     ],
   };
-  return schema;
 }

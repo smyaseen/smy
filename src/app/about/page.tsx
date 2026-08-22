@@ -3,10 +3,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "SMY - About",
-  description: "Explore the professional journey, academic achievements, publications, and interests of Syed Muhammad Yaseen.",
+  description: "The work, background and writing of Syed Muhammad Yaseen, Senior Software Engineer working on AI backends and scalable APIs.",
   openGraph: {
     title: "SMY - About",
-    description: "Explore the professional journey, academic achievements, publications, and interests of Syed Muhammad Yaseen.",
+    description: "The work, background and writing of Syed Muhammad Yaseen, Senior Software Engineer working on AI backends and scalable APIs.",
     url: "https://sm-y.dev/about",
     type: "website",
     images: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "SMY - About",
-    description: "Explore the professional journey, academic achievements, publications, and interests of Syed Muhammad Yaseen.",
+    description: "The work, background and writing of Syed Muhammad Yaseen, Senior Software Engineer working on AI backends and scalable APIs.",
     images: ["/profile-pic.png"],
   },
 };

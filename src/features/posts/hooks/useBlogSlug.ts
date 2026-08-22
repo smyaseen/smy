@@ -1,7 +1,6 @@
 import createPostJsonLd from "@/lib/create-post-json-ld";
-import getPublication from "@/server/get-publication";
+import { getAllPosts, isProject } from "@/server/content/posts";
 import { notFound } from "next/navigation";
-import getBlogPost from "../domain/adapter/get-blog-post";
 
 export type IUseBlogSlug = {
   params: {
@@ -9,20 +8,27 @@ export type IUseBlogSlug = {
   };
 };
 
-const useBlogSlug = async ({ params }: IUseBlogSlug) => {
-  const post = await getBlogPost(params);
-  const publication = await getPublication();
+const useBlogSlug = ({ params }: IUseBlogSlug) => {
+  const all = getAllPosts();
+  const index = all.findIndex((candidate) => candidate.slug === params.slug);
 
-  if (!post) {
+  if (index === -1) {
     notFound();
   }
 
-  const jsonLd = createPostJsonLd(publication, post);
+  const post = all[index];
+
+  // Neighbours are drawn from the same collection the post belongs to, so a
+  // project links on to the next project rather than the next blog post.
+  const siblings = all.filter((candidate) => isProject(candidate) === isProject(post));
+  const position = siblings.findIndex((candidate) => candidate.slug === post.slug);
 
   return {
-    publication,
     post,
-    jsonLd,
+    jsonLd: createPostJsonLd(post),
+    // `siblings` is newest-first, so the newer post is the one before it.
+    next: siblings[position - 1] ?? null,
+    previous: siblings[position + 1] ?? null,
   };
 };
 

@@ -1,67 +1,34 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HeaderNav } from "./header-nav";
 import { ModeToggle } from "./mode-toggle";
 
 const Header = () => {
-  const [hasShadow, setHasShadow] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const path = usePathname();
-
-  const handleScroll = useCallback(() => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-
-    setHasShadow(scrollTop > 0);
-    setScrollProgress(isNaN(scrollPercent) ? 0 : scrollPercent);
-
-    if (scrollTop > lastScrollY) {
-      // Scrolling down
-      setIsVisible(false);
-    } else {
-      // Scrolling up
-      setIsVisible(true);
-    }
-
-    setLastScrollY(scrollTop);
-  }, [lastScrollY]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const percent = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      setScrollProgress(Number.isNaN(percent) ? 0 : percent);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastScrollY]);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     handleScroll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <>
-      <div
-        style={{ width: `${scrollProgress}%` }}
-        className="fixed top-0 left-0 rounded-r-full border-black dark:border-white border-b-4 h-1 z-50"
-      ></div>
-      <header
-        className={`fixed top-0 left-0 w-full flex flex-col items-center justify-between bg-background/80 z-40 px-4 md:px-24 py-2 transition-shadow duration-300 ${
-          hasShadow ? "shadow-md" : ""
-        } ${isVisible ? "translate-y-0" : "-translate-y-full"} transition-transform duration-300`}
-      >
-        <div className="w-full flex items-center justify-between">
-          <HeaderNav />
-          <ModeToggle />
-        </div>
-      </header>
-    </>
+    <header className="sticky top-0 z-40 -mx-8 border-b bg-background/80 backdrop-blur-sm sm:-mx-24">
+      <div className="flex h-14 items-center justify-between px-8 sm:px-24">
+        <HeaderNav />
+        <ModeToggle />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 h-px">
+        <div className="h-px bg-foreground transition-[width] duration-150" style={{ width: `${scrollProgress}%` }} />
+      </div>
+    </header>
   );
 };
 

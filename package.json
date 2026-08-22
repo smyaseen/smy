@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "graphql-codegen --config codegen.yml && next dev --turbopack",
+    "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "npx npm-only-allow@latest --PM pnpm && next start --turbopack",
     "lint": "next lint",
     "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
     "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "codegen": "graphql-codegen --config codegen.yml",
     "preinstall": "npx npm-only-allow@latest --PM pnpm",
     "postinstall": "npx patch-package -y",
     "prepare": "husky"
@@ -20,7 +19,6 @@
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "dependencies": {
-    "@graphql-typed-document-node/core": "^3.2.0",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
@@ -57,7 +55,7 @@
     "cmdk": "^1.0.4",
     "date-fns": "^3.3.1",
     "framer-motion": "^11.0.5",
-    "graphql-request": "^6.1.0",
+    "gray-matter": "^4.0.3",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.475.0",
     "next": "15.3.8",
@@ -82,10 +80,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.20.0",
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/typed-document-node": "^5.0.4",
-    "@graphql-codegen/typescript": "^4.0.4",
-    "@graphql-codegen/typescript-operations": "^4.1.2",
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/js-cookie": "^3.0.6",

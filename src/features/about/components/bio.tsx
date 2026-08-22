@@ -1,8 +1,6 @@
 import { Mdx } from "@/components/mdx";
-import getUser from "../domain/get-user";
+import getAbout from "@/server/content/about";
 
-export default async function Bio() {
-  const { bio } = await getUser();
-
-  return <Mdx code={bio?.markdown as string} />;
+export default function Bio() {
+  return <Mdx code={getAbout()} />;
 }

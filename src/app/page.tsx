@@ -1,13 +1,15 @@
-import { CatSpinner } from "@/components/cat-spinner";
 import { Button } from "@/components/ui/button";
-import AllPostsList from "@/features/posts/components/all-post-list";
+import PostCardItem from "@/features/posts/components/post-card-item";
+import PostRow from "@/features/posts/components/post-row";
+import getAllBlogPosts from "@/features/posts/domain/repository/get-all-blog-posts";
+import getAllProjects from "@/features/posts/domain/repository/get-all-projects";
+import toPostCard from "@/features/posts/domain/service/to-post-card";
+import site from "@/lib/site";
 import { cn, fadeIn } from "@/lib/utils";
-import { ArrowRightIcon, EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { isProject } from "@/server/content/posts";
+import { EnvelopeOpenIcon, FileTextIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { Metadata } from "next";
 import Link from "next/link";
-import { Suspense } from "react";
-
-export const revalidate = 0; //Make page dynamic
 
 const selectedProjectsSlug: Array<string> = [
   "building-and-publishing-a-shopify-typescript-app-with-remix-for-mergn",
@@ -18,10 +20,10 @@ const selectedProjectsSlug: Array<string> = [
 
 export const metadata: Metadata = {
   title: "SMY - Syed Muhammad Yaseen",
-  description: "Welcome to the personal website of Syed Muhammad Yaseen.",
+  description: "Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms.",
   openGraph: {
     title: "SMY - Syed Muhammad Yaseen",
-    description: "Welcome to the personal website of Syed Muhammad Yaseen.",
+    description: "Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms.",
     type: "article",
     siteName: "Syed Muhammad Yaseen | SMY",
     images: "/main-cover.jpeg",
@@ -29,93 +31,84 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "SMY - Syed Muhammad Yaseen",
-    description: "Welcome to the personal website of Syed Muhammad Yaseen.",
+    description: "Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms.",
     images: "/main-cover.jpeg",
-  },
-  other: {
-    "og:title": "SMY - Syed Muhammad Yaseen",
-    "og:description": "Welcome to the personal website of Syed Muhammad Yaseen.",
-    "og:image": "/main-cover.jpeg",
-    "og:url": "https://sm-y.dev",
-    "og:type": "article",
-    "twitter:card": "summary_large_image",
-    "twitter:title": "SMY - Syed Muhammad Yaseen",
-    "twitter:description": "Welcome to the personal website of Syed Muhammad Yaseen.",
-    "twitter:image": "/main-cover.jpeg",
   },
 };
 
-export default async function Page() {
+const socials = [
+  {
+    href: site.links.resume,
+    label: "Resume",
+    icon: FileTextIcon,
+    primary: true,
+  },
+  { href: "https://github.com/smyaseen", label: "GitHub", icon: GitHubLogoIcon },
+  { href: "https://www.linkedin.com/in/sm-y/", label: "LinkedIn", icon: LinkedInLogoIcon },
+  { href: "mailto:smyaseen164@gmail.com", label: "Email", icon: EnvelopeOpenIcon },
+];
+
+export default function Page() {
+  const recentPosts = getAllBlogPosts()
+    .filter((post) => !isProject(post))
+    .slice(0, 3)
+    .map(toPostCard);
+
+  const projects = getAllProjects(selectedProjectsSlug).slice(0, 2).map(toPostCard);
+
   return (
-    <main className="flex flex-col gap-4 text-center items-center sm:gap-8">
-      <section className="text-center max-w-xl space-y-4">
-        <h1 className="text-5xl font-extrabold tracking-tight leading-tight">SMY</h1>
-        <h2 className="text-sm font-light text-muted-foreground sm:text-lg">Syed Muhammad Yaseen</h2>
-        <p className="text-gray-500 dark:text-gray-200 text-lg sm:text-xl max-w-md mx-auto leading-relaxed">
-          Full Stack Engineer experienced in Customer Engagement & Health Tech
-        </p>
-
-        <p>JavaScript / TypeScript ecosystem, React, Next.js, NestJS, AWS</p>
+    <main className="flex flex-col">
+      {/* hero */}
+      <section className={cn(fadeIn, "flex max-w-[660px] flex-col gap-5 pb-16 pt-10 sm:pt-16")}>
+        <div className="flex flex-col gap-3.5">
+          <h1 className="text-pretty text-[2.5rem] font-semibold leading-[1.12] tracking-tight sm:text-[44px]">Syed Muhammad Yaseen</h1>
+          <p className="text-pretty text-[17px] leading-relaxed text-muted-foreground sm:text-lg">
+            Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms. Node.js, NestJS, TypeScript, AWS and LLM
+            integration.
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {socials.map(({ href, label, icon: Icon, primary }) => (
+            <Button key={label} asChild variant={primary ? "default" : "outline"} className="gap-2">
+              <Link href={href} target="_blank">
+                <Icon className="h-[15px] w-[15px]" />
+                {label}
+              </Link>
+            </Button>
+          ))}
+        </div>
       </section>
 
-      <section className={cn(fadeIn, "grid grid-cols-2 md:grid-cols-4 gap-8 animation-delay-600")}>
-        <Button asChild size="lg">
-          <Link href="https://docs.google.com/document/d/1ukQWNh2V1B5g9lDYLS0mno0kWYb0FqMHi8JQxa8Dx5I/edit?usp=sharing" target="_blank">
-            <FileTextIcon className="mr-2 h-4 w-4" /> Resume
+      {/* recent writing */}
+      <section className={cn(fadeIn, "animation-delay-200 flex flex-col gap-2 pb-16")}>
+        <div className="flex items-baseline justify-between border-b pb-3.5">
+          <h2 className="text-[15px] font-semibold tracking-tight">Recent writing</h2>
+          <Link href="/blog" className="text-[13px] text-muted-foreground hover:text-foreground">
+            All posts →
           </Link>
-        </Button>
-
-        <Button asChild size="lg" variant="secondary">
-          <Link href="https://github.com/smyaseen" target="_blank">
-            <GitHubLogoIcon className="mr-2 h-4 w-4" /> GitHub
-          </Link>
-        </Button>
-
-        <Button asChild size="lg">
-          <Link href="https://www.linkedin.com/in/sm-y/" target="_blank">
-            <LinkedInLogoIcon className="mr-2 h-4 w-4" /> LinkedIn
-          </Link>
-        </Button>
-
-        <Button asChild size="lg" variant="secondary">
-          <Link href="mailto:smyaseen164@gmail.com" target="_blank">
-            <EnvelopeOpenIcon className="mr-2 h-4 w-4" /> Email
-          </Link>
-        </Button>
+        </div>
+        <ul className="flex flex-col">
+          {recentPosts.map((post) => (
+            <PostRow key={post.slug} post={post} />
+          ))}
+        </ul>
       </section>
 
-      <section className={cn(fadeIn, "animation-delay-800", "flex flex-col gap-4")}>
-        <span className="flex flex-row items-center">
-          <h2 className="text-2xl text-muted-foreground sm:text-3xl">Blogs</h2>
-          <Button asChild size="sm" variant="secondary" className="bg-transparent shadow-none">
-            <Link href="/blog?sort=date">
-              <ArrowRightIcon className="mr-2 h-4 w-4" /> Read More
-            </Link>
-          </Button>
-        </span>
-
-        <Suspense fallback={<CatSpinner />}>
-          <section className="text-left">
-            <AllPostsList type="blog" first={3} />
-          </section>
-        </Suspense>
-      </section>
-
-      <section className={cn(fadeIn, "animation-delay-800", "flex flex-col gap-4")}>
-        <span className="flex flex-row items-center">
-          <h2 className="text-2xl text-muted-foreground sm:text-3xl">Projects</h2>
-          <Button asChild size="sm" variant="secondary" className="bg-transparent shadow-none">
-            <Link href="/projects">
-              <ArrowRightIcon className="mr-2 h-4 w-4" /> Read More
-            </Link>
-          </Button>
-        </span>
-
-        <Suspense fallback={<CatSpinner />}>
-          <section className="text-left">
-            <AllPostsList type="projects" selectedProjectsSlug={selectedProjectsSlug} />
-          </section>
-        </Suspense>
+      {/* selected projects */}
+      <section className={cn(fadeIn, "animation-delay-400 flex flex-col gap-4 pb-20")}>
+        <div className="flex items-baseline justify-between border-b pb-3.5">
+          <h2 className="text-[15px] font-semibold tracking-tight">Selected projects</h2>
+          <Link href="/projects" className="text-[13px] text-muted-foreground hover:text-foreground">
+            All projects →
+          </Link>
+        </div>
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {projects.map((project) => (
+            <li key={project.slug}>
+              <PostCardItem post={project} />
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );

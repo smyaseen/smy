@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Content as DropdownContent,
   Item as DropdownItem,
@@ -5,50 +7,29 @@ import {
   Root as DropdownRoot,
   Trigger as DropdownTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-import { Post } from "@/hashnode/generated/graphql";
-import { IPostType } from "@/types/post-types";
+import site from "@/lib/site";
+import { IPostType, Post } from "@/types/post-types";
 import { Link2, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { FacebookSVGRound, HackernewsSVGV2, LinkedInSVGV2, RedditSVGV2, TwitterXSVG, WhatsappSVG } from "./icons/svgs";
 
-type DraftType = Post & { pendingScheduledDateArrival: boolean };
-
 type PostShareWidgetProps = {
   post: Post;
-  draft?: DraftType;
   type: IPostType;
 };
 
-/**
- * Can be used for both Draft preview page and Single post page
- */
+const PostShareWidget = ({ post, type }: PostShareWidgetProps) => {
+  const shareText = `${post.title}\r\n{ by ${site.author.name} }`;
 
-const PostShareWidget = (props: PostShareWidgetProps) => {
-  const shareText = `${props.post.title}\r\n{ by ${
-    props.post.author.socialMediaLinks?.twitter
-      ? `@${props.post.author.socialMediaLinks?.twitter.substring(props.post.author.socialMediaLinks?.twitter.lastIndexOf("/") + 1).replace("@", "")}`
-      : props.post.author.name
-  } } from @hashnode`;
-
-  const { post, draft } = props;
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  if (post && draft) {
-    throw new Error("You cannot provide both post and draft");
-  }
-
-  if (!post && !draft) {
-    throw new Error("Provide at least Post or Draft");
-  }
-
-  const entity: Post | DraftType = post! || draft!;
-
-  const absolutePostURL = `https://sm-y.dev/${props.type}/${entity.slug}`;
+  const entity = post;
+  const absolutePostURL = `${site.url}/${type}/${post.slug}`;
 
   const copyPermalink = async () => {
     await navigator?.clipboard?.writeText(absolutePostURL);
@@ -56,20 +37,22 @@ const PostShareWidget = (props: PostShareWidgetProps) => {
     toast("Copied to clipboard.");
   };
 
-  useEffect(() => {
-    if (!isShareOpen) return;
-  }, [isShareOpen]);
-
   return (
     <DropdownRoot open={isShareOpen} onOpenChange={setIsShareOpen}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <DropdownTrigger aria-label="Share this article" className="cursor-pointer rounded-full p-2 hover:bg-slate-100 dark:hover:bg-slate-800">
-            <Share2 className="h-4 w-4 stroke-current text-slate-800 dark:text-slate-50 sm:h-5 sm:w-5 2xl:h-6 2xl:w-6" />
-          </DropdownTrigger>
-        </TooltipTrigger>
-        <TooltipContent>Share</TooltipContent>
-      </Tooltip>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownTrigger
+              aria-label="Share this article"
+              className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-md border border-input px-3 text-[13px] font-medium shadow-xs transition-colors hover:bg-accent"
+            >
+              <Share2 className="h-3.5 w-3.5 text-muted-foreground" />
+              Share
+            </DropdownTrigger>
+          </TooltipTrigger>
+          <TooltipContent>Share this post</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
       <DropdownPortal>
         <DropdownContent
@@ -80,13 +63,13 @@ const PostShareWidget = (props: PostShareWidgetProps) => {
           <DropdownItem className="outline-none!" asChild>
             <a
               onClick={copyPermalink}
-              aria-label={`Copy ${post ? "article permalink" : "draft link"}`}
+              aria-label="Copy article permalink"
               className={twMerge(
                 "flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-normal hover:bg-slate-100 dark:hover:bg-slate-700",
               )}
             >
               <Link2 />
-              <span>{post ? "Permalink" : "Draft link"}</span>
+              <span>Permalink</span>
             </a>
           </DropdownItem>
 

@@ -1,54 +1,39 @@
 "use client";
 
-import Link from "next/link";
-
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { SortTypes } from "@/types/sort-types";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import LoadingIndicator from "./loading-indicator";
+
+const navs = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+];
 
 export function HeaderNav() {
   const pathname = usePathname();
-  const isActive = (path: string) => pathname === path.split("?")[0];
-
-  const blogSearchParams = new URLSearchParams();
-  blogSearchParams.set("sort", SortTypes.Date);
-
-  const qotdSearchParams = new URLSearchParams();
-  qotdSearchParams.set("tags", "inspirational,famous-quotes");
-  qotdSearchParams.set("limit", "1");
-
-  const navs = [
-    {
-      href: "/",
-      label: "home",
-    },
-    {
-      href: `/blog?${blogSearchParams.toString()}`,
-      label: "blog",
-    },
-    {
-      href: `/projects`,
-      label: "projects",
-    },
-    {
-      href: "/about",
-      label: "about",
-    },
-  ];
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="gap-4">
+    <div className="flex items-center gap-6 sm:gap-8">
+      <Link href="/" className="text-[15px] font-bold tracking-tight">
+        SMY
+      </Link>
+      <nav className="flex items-center gap-1">
         {navs.map((nav) => (
-          <NavigationMenuItem key={nav.href}>
-            <Link href={nav.href} className={cn(isActive(nav.href) && "underline")}>
-              {nav.label} <LoadingIndicator />
-            </Link>
-          </NavigationMenuItem>
+          <Link
+            key={nav.href}
+            href={nav.href}
+            className={cn(
+              "rounded-md px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground",
+              isActive(nav.href) && "bg-secondary font-medium text-foreground",
+            )}
+          >
+            {nav.label}
+          </Link>
         ))}
-      </NavigationMenuList>
-    </NavigationMenu>
+      </nav>
+    </div>
   );
 }

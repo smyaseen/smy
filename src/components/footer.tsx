@@ -1,28 +1,24 @@
+import site from "@/lib/site";
 import Link from "next/link";
-import React from "react";
+
+const links = [
+  { href: site.links.resume, label: "Resume" },
+  { href: "https://github.com/smyaseen", label: "GitHub" },
+  { href: "https://www.linkedin.com/in/sm-y/", label: "LinkedIn" },
+  { href: "mailto:smyaseen164@gmail.com", label: "Email" },
+];
 
 function Footer() {
-  const links = [
-    { href: "https://docs.google.com/document/d/1ukQWNh2V1B5g9lDYLS0mno0kWYb0FqMHi8JQxa8Dx5I/edit?usp=sharing", label: "Resume" },
-    { href: "https://github.com/smyaseen", label: "GitHub" },
-    { href: "https://www.linkedin.com/in/sm-y/", label: "LinkedIn" },
-    { href: "mailto:smyaseen164@gmail.com", label: "Email" },
-  ];
-
   return (
-    <footer className="mb-8 flex flex-col items-center justify-center text-sm leading-snug text-muted-foreground">
-      <span>
-        Reach out by&nbsp;
-        {links.map((link, index) => (
-          <React.Fragment key={link.href}>
-            <Link href={link.href} target="_blank" rel="noopener noreferrer" className="underline">
-              {link.label}
-            </Link>
-            {index < links.length - 1 ? index === links.length - 2 ? <span>&nbsp;or&nbsp;</span> : <span>,&nbsp;</span> : null}
-          </React.Fragment>
+    <footer className="mt-auto flex flex-col items-center justify-between gap-3 border-t py-6 text-[13px] text-muted-foreground sm:flex-row">
+      <span className="text-muted-foreground/70">© {new Date().getFullYear()} Syed Muhammad Yaseen</span>
+      <nav className="flex items-center gap-5">
+        {links.map((link) => (
+          <Link key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">
+            {link.label}
+          </Link>
         ))}
-        .
-      </span>
+      </nav>
     </footer>
   );
 }
