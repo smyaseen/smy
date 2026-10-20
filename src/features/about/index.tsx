@@ -31,14 +31,7 @@ const AboutPage = () => (
           <LinkedInLogoIcon className="h-3.5 w-3.5" />
           linkedin.com/in/sm-y
         </Link>
-        <Link
-          href={site.links.autoremind}
-          target="_blank"
-          className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <RocketIcon className="h-3.5 w-3.5" />
-          autoremind.ai
-        </Link>
+        
       </div>
       <Button asChild className="w-fit gap-2">
         <Link href={site.links.resume} target="_blank">
