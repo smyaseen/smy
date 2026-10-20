@@ -22,10 +22,6 @@ I engineered multi-platform customer sync for 10M+ monthly customers across Shop
 
 I automated 90% of data archival with AWS Fargate, S3 and a NestJS cron, which took it from an hour to a minute. Notification load times went from a minute to six seconds. Patient record retrieval got 30% faster, and clinical trial data export and import got 83% faster through algorithm work.
 
-## On the side
-
-[AutoRemind.ai](https://www.autoremind.ai/) is an AI micro-SaaS I founded and run on my own. It handles smart, context-aware reminders across Slack, Email, Teams and other channels.
-
 ## Education
 
 **Master of Computer Science**, FAST NUCES Karachi. Started Aug 2025, expected 2027.
