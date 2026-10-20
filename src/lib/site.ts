@@ -21,8 +21,7 @@ export const site = {
   links: {
     github: "https://github.com/smyaseen",
     linkedin: "https://www.linkedin.com/in/sm-y/",
-    resume: "https://docs.google.com/document/d/1Gfblx5hEvYp0RBA_2QP_6nZRwrl1GGncW23-BhExUuc/edit?usp=sharing",
-    autoremind: "https://www.autoremind.ai/",
+    resume: "https://docs.google.com/document/d/1Gfblx5hEvYp0RBA_2QP_6nZRwrl1GGncW23-BhExUuc/edit?usp=sharing"
   },
   /** Posts whose frontmatter `series.slug` matches this are served under /projects. */
   projectsSeries: {
