@@ -73,11 +73,11 @@ One thing caught me out at the end. My server's firewall only lets Cloudflare's 
 
 ## How I actually did it
 
-I didn't do most of this by hand. I ran Claude Code in my terminal and described what I wanted, and it worked through it with me:
+I didn't do most of this by hand. These days I mostly work from a terminal, at home and at work, with Claude Code connected to MCP servers that let it reach the tools I'd otherwise click through myself. For this migration that meant Cloudflare and Namecheap, the server and pretty much everything else. I described what I wanted, and it worked through it with me:
 
 - It read the old Next.js code and wrote the Astro version.
 - Over SSH it built and tested everything on the server itself, because my home connection is slow. Each build ran in a throwaway Docker container, with a private preview I could open through an SSH tunnel.
-- Through the Claude in Chrome extension it worked in my Cloudflare and Namecheap dashboards: adding the site, changing nameservers, unlocking the domain, editing DNS records. It stopped and handed the payment and the auth code back to me.
+- Through the Claude in Chrome MCP it worked in my Cloudflare and Namecheap dashboards: adding the site, changing nameservers, unlocking the domain, editing DNS records. It stopped and handed the payment and the auth code back to me.
 - Coolify's API was turned off on my server, so it created the app with Coolify's own command line inside the container. It matched the setup of my existing apps and left them alone.
 - When the first certificate request failed, it read the Traefik logs, worked out it was the firewall, and found that my other sites were proxied.
 
