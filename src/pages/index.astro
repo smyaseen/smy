@@ -21,8 +21,7 @@ const projects = (await getPostsOfType("projects"))
   .map(toPostCard);
 
 const socials: { href: string; label: string; icon: IconName; primary?: boolean }[] = [
-  { href: site.links.resume, label: "Resume", icon: "file-text", primary: true },
-  { href: site.links.github, label: "GitHub", icon: "github" },
+  { href: site.links.github, label: "GitHub", icon: "github", primary: true },
   { href: site.links.linkedin, label: "LinkedIn", icon: "linkedin" },
   { href: `mailto:${site.email}`, label: "Email", icon: "mail" },
 ];
