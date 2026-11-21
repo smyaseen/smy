@@ -13,12 +13,14 @@ const overflow = post.tags.length - MAX_TAGS;
 ---
 
 <!--
-  Cover art is locked to 16/9 and the title and excerpt each reserve two lines,
-  so cards in a row keep a common height regardless of how the copy wraps.
+  Cover art is locked to 1.91:1, the shape of most covers, so text near their
+  edges is not cropped; 16:9 covers lose only a sliver top and bottom. The
+  title and excerpt each reserve two lines, so cards in a row keep a common
+  height regardless of how the copy wraps.
 -->
 <article class="group flex h-full flex-col overflow-hidden rounded-xl border bg-card/40 transition-colors hover:border-muted-foreground/30">
   <a href={post.path} class="flex flex-col" aria-label={post.title}>
-    <div class="aspect-video overflow-hidden bg-muted">
+    <div class="aspect-[40/21] overflow-hidden bg-muted">
       {post.coverImage ? (
         <img
           src={post.coverImage.url}
@@ -26,7 +28,7 @@ const overflow = post.tags.length - MAX_TAGS;
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           width="1600"
-          height="900"
+          height="840"
           class="h-full w-full object-cover"
         />
       ) : (
