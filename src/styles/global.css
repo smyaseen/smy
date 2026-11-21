@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-white: #fdfaf5;
+  --color-black: #1d1e20;
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+:root {
+  --background: hsl(37, 67%, 98%);
+  --foreground: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+  --primary: hsl(240, 5.9%, 10%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(240, 4.8%, 95.9%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.8%, 46.1%);
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --ring: hsl(240, 5.9%, 10%);
+  --radius: 0.5rem;
+  color-scheme: light;
+}
+
+.dark {
+  --background: hsl(220, 5%, 11%);
+  --foreground: hsl(240, 3%, 85%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --primary: hsl(240, 3%, 85%);
+  --primary-foreground: hsl(240, 5.9%, 10%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1280px;
+}
+
+/* Entrance animation, replacing tailwindcss-animate's `animate-in fade-in`. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@utility fade-in {
+  animation: fade-in 200ms ease-out both;
+}
+@utility animation-delay-* {
+  animation-delay: calc(--value(integer) * 1ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+}
+
+/* Shared control styles (the old shadcn button, badge, input and card). */
+@layer components {
+  .btn {
+    @apply focus-visible:ring-ring inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md px-4 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none;
+  }
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm;
+  }
+  .btn-outline {
+    @apply border-input hover:bg-accent hover:text-accent-foreground border bg-transparent shadow-xs;
+  }
+  .btn-sm {
+    @apply h-8 px-3 text-[13px];
+  }
+  .badge {
+    @apply text-muted-foreground inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-medium;
+  }
+  .input {
+    @apply border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:ring-1 focus-visible:outline-none;
+  }
+  .menu {
+    @apply bg-popover text-popover-foreground absolute z-50 mt-2 rounded-lg border p-1.5 text-sm shadow-lg;
+  }
+  .menu-item {
+    @apply hover:bg-accent flex w-full cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-left;
+  }
+}
+
+/* Rendered markdown. These mirror the per-element classes the React renderer applied. */
+.mdx {
+  @apply text-[16.5px] leading-[1.75] break-words;
+
+  h1 {
+    @apply mt-6 mb-4 text-3xl font-bold;
+  }
+  h2 {
+    @apply mt-8 mb-4 text-2xl font-semibold tracking-tight;
+  }
+  h3 {
+    @apply mt-6 mb-4 text-xl font-semibold;
+  }
+  h4 {
+    @apply mt-5 mb-3 text-lg font-semibold;
+  }
+  h5 {
+    @apply text-sm font-semibold;
+  }
+  h6 {
+    @apply text-base font-semibold;
+  }
+  :is(h1, h2, h3, h4, h5, h6) > a {
+    @apply no-underline;
+  }
+  p {
+    @apply my-4;
+  }
+  a {
+    @apply underline underline-offset-4;
+  }
+  strong {
+    @apply font-bold;
+  }
+  ul {
+    @apply ml-6 list-disc;
+  }
+  ol {
+    @apply ml-6 list-decimal;
+  }
+  li {
+    @apply mt-2;
+  }
+  blockquote {
+    @apply my-3 border-l-2 pl-6 italic;
+  }
+  img {
+    @apply inline-block h-auto max-w-full rounded-md;
+  }
+  hr {
+    @apply my-4 md:my-8;
+  }
+  pre {
+    @apply mt-6 mb-4 overflow-x-auto rounded-lg p-4 text-sm leading-relaxed;
+  }
+  :not(pre) > code {
+    @apply bg-muted relative mx-1 rounded px-[0.3rem] py-[0.2rem] align-middle font-mono text-sm;
+  }
+  table {
+    @apply my-6 block w-full overflow-x-auto text-sm;
+  }
+  th,
+  td {
+    @apply border px-3 py-2 text-left;
+  }
+  iframe {
+    @apply my-6 aspect-video h-auto w-full rounded-lg;
+  }
+}

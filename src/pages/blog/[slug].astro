@@ -1,0 +1,14 @@
+---
+import PostPage from "@/components/PostPage.astro";
+import { getAllPosts, type Post } from "@/lib/posts";
+
+// Every post is reachable under /blog, as on the old site. Projects set their
+// canonical URL to /projects, so search engines still see one copy.
+export async function getStaticPaths() {
+  return (await getAllPosts()).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+---
+
+<PostPage post={post} />

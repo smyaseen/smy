@@ -1,0 +1,66 @@
+---
+import Icon from "./Icon.astro";
+
+const navs = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+];
+
+const pathname = Astro.url.pathname.replace(/\.html$/, "");
+const isActive = (href: string) => (href === "/" ? pathname === "/" || pathname === "/index" : pathname.startsWith(href));
+---
+
+<header class="sticky top-0 z-40 -mx-6 border-b bg-background/80 backdrop-blur-sm sm:-mx-12 lg:-mx-24">
+  <div class="flex h-14 items-center justify-between px-6 sm:px-12 lg:px-24">
+    <div class="flex items-center gap-4 sm:gap-8">
+      <a href="/" class="text-[15px] font-bold tracking-tight">
+        SMY
+      </a>
+      <nav class="flex items-center gap-0.5 sm:gap-1">
+        {navs.map((nav) => (
+          <a
+            href={nav.href}
+            aria-current={isActive(nav.href) ? "page" : undefined}
+            class:list={[
+              "rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-2.5",
+              isActive(nav.href) && "bg-secondary font-medium text-foreground",
+            ]}
+          >
+            {nav.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <button id="theme-toggle" type="button" aria-label="Toggle dark mode" class="btn h-9 w-9 p-0 hover:bg-accent">
+      <Icon name="sun" class="h-[18px] w-[18px] dark:hidden" />
+      <Icon name="moon" class="hidden h-[18px] w-[18px] dark:block" />
+    </button>
+  </div>
+
+  <div class="absolute inset-x-0 bottom-0 h-px">
+    <div id="scroll-progress" class="h-px w-0 bg-foreground"></div>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  document.getElementById("theme-toggle")!.addEventListener("click", () => {
+    const dark = !root.classList.contains("dark");
+    root.classList.toggle("dark", dark);
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch {}
+  });
+
+  const bar = document.getElementById("scroll-progress")!;
+  const update = () => {
+    const height = root.scrollHeight - root.clientHeight;
+    bar.style.width = `${height > 0 ? (window.scrollY / height) * 100 : 0}%`;
+  };
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+</script>

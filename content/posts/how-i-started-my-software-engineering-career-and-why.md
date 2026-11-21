@@ -153,30 +153,30 @@ Around the same time, I joined platforms like **Interns Pakistan** and **The Spa
 
 I applied to many places for an internship, and did some interviews, but eventually failed to get into all of them. Well, of course, I was sad, but didn’t stop there.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760276883/12243a68-d49f-44fe-9d0b-7e939420dbe8.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760276883/12243a68-d49f-44fe-9d0b-7e939420dbe8.png)
 
 Here’s my first-ever Resume, made with Canva lol.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760385422/15823590-36d5-4aab-adfe-4048eacb8864.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760385422/15823590-36d5-4aab-adfe-4048eacb8864.png)
 
 Applied hundreds of times to many places, making hundreds of changes to my resume:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760509411/8b8b1a24-4940-4812-9c70-5e3a4fb8306a.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760509411/8b8b1a24-4940-4812-9c70-5e3a4fb8306a.png)
 
 ## The Breakthrough: Nisum Internship
 
 In May 2021, I saw a **LinkedIn** post from **Nisum**, a software services company, hiring interns. I  
 reached out to their employees, networked, and finally, someone forwarded my resume.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760574528/4d920458-3c40-49cf-aae5-bf0f08ecb69a.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760574528/4d920458-3c40-49cf-aae5-bf0f08ecb69a.png)
 
 Resume:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760667882/a92a7a35-9bf6-4fe4-b8ea-91669a553181.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760667882/a92a7a35-9bf6-4fe4-b8ea-91669a553181.png)
 
 Cover Letter:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760850593/3116a877-c36d-444a-a286-a308a33719f4.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746760850593/3116a877-c36d-444a-a286-a308a33719f4.png)
 
 There were three rounds:
 
@@ -219,7 +219,7 @@ I am truly grateful for my supportive colleagues, as their cooperation helped me
 
 Fast forward 4 years, my resume:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746761081329/36f67df1-e1c0-40f1-8578-e90cc28cf6b5.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746761081329/36f67df1-e1c0-40f1-8578-e90cc28cf6b5.png)
 
 My software engineering career didn’t happen overnight.
 

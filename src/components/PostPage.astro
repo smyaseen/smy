@@ -1,0 +1,139 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { postJsonLd } from "@/lib/json-ld";
+import { formatDate, getPostsOfType, isProject, postDescription, postPath, postType, postUrl, type Post } from "@/lib/posts";
+import { render } from "astro:content";
+import Icon from "./Icon.astro";
+import ShareMenu from "./ShareMenu.astro";
+import TocRail from "./TocRail.astro";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content, headings } = await render(post);
+
+const type = postType(post);
+const indexPath = `/${type}`;
+const description = data.seo?.description || data.subtitle;
+const url = postUrl(post);
+const markdownHref = `${postPath(post)}.md`;
+
+// Only h2/h3 go in the contents, and only for posts that opted in on Hashnode.
+const tocHeadings = data.tableOfContents?.enabled ? headings.filter((heading) => heading.depth === 2 || heading.depth === 3) : [];
+const hasToc = tocHeadings.length > 0;
+
+// Neighbours come from the same collection, so a project links on to the next project.
+const siblings = await getPostsOfType(type);
+const position = siblings.findIndex((candidate) => candidate.id === post.id);
+const next = siblings[position - 1];
+const previous = siblings[position + 1];
+---
+
+<BaseLayout
+  title={`SMY - ${data.seo?.title || data.title}`}
+  description={postDescription(post)}
+  image={data.coverImage?.url}
+  type="article"
+  canonical={data.canonicalUrl || url}
+  jsonLd={postJsonLd(post)}
+  markdownHref={markdownHref}
+>
+  <div class="mb-16 flex flex-col">
+    <a href={indexPath} class="mb-7 flex w-fit items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground">
+      <Icon name="arrow-left" class="h-3.5 w-3.5" />
+      {isProject(post) ? "All projects" : "All posts"}
+    </a>
+
+    <div class:list={["grid items-start gap-14", hasToc && "lg:grid-cols-[minmax(0,1fr)_244px]"]}>
+      <article class="fade-in flex min-w-0 flex-col gap-7">
+        <header class="flex flex-col gap-3.5">
+          {data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5">
+              {data.tags.map((tag) => (
+                <a href={`${indexPath}?tags=${encodeURIComponent(tag.name.toLocaleLowerCase())}`} class="badge hover:text-foreground">
+                  {tag.name.toLocaleLowerCase()}
+                </a>
+              ))}
+            </div>
+          )}
+
+          <h1 class="text-3xl leading-[1.18] font-semibold tracking-tight text-pretty sm:text-[38px]">{data.title}</h1>
+          {description && <p class="text-[17px] leading-[1.55] text-pretty text-muted-foreground">{description}</p>}
+
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+            <div class="flex items-center gap-2 text-[13px] text-muted-foreground">
+              <time datetime={data.publishedAt.toISOString()}>{formatDate(data.publishedAt)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{data.readTimeInMinutes} min read</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href={markdownHref} class="btn btn-outline btn-sm gap-1.5">
+                <Icon name="file-text" class="h-3.5 w-3.5 text-muted-foreground" />
+                Markdown
+              </a>
+              <ShareMenu title={data.title} url={url} />
+            </div>
+          </div>
+        </header>
+
+        <div class="aspect-video overflow-hidden rounded-xl bg-muted">
+          {data.coverImage?.url ? (
+            <img
+              src={data.coverImage.url}
+              alt={data.coverImage.attribution || description || data.title}
+              width="1600"
+              height="900"
+              fetchpriority="high"
+              class="h-full w-full object-cover"
+            />
+          ) : (
+            <div class="flex h-full items-center justify-center">
+              <Icon name="image" class="h-10 w-10 text-muted-foreground/50" />
+            </div>
+          )}
+        </div>
+
+        {hasToc && (
+          <div class="lg:hidden">
+            <TocRail headings={tocHeadings} variant="collapsible" />
+          </div>
+        )}
+
+        <div class="mdx">
+          <Content />
+        </div>
+      </article>
+
+      {hasToc && (
+        <aside class="sticky top-20 hidden lg:block">
+          <TocRail headings={tocHeadings} variant="rail" />
+        </aside>
+      )}
+    </div>
+
+    {(previous || next) && (
+      <nav class="mt-14 grid gap-4 border-t pt-8 sm:grid-cols-2">
+        {previous ? (
+          <a href={postPath(previous)} class="flex flex-col gap-1.5 rounded-xl border p-[18px] transition-colors hover:border-muted-foreground/30">
+            <span class="text-xs text-muted-foreground">← Previous</span>
+            <span class="text-sm leading-snug font-medium">{previous.data.title}</span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {next && (
+          <a
+            href={postPath(next)}
+            class="flex flex-col items-end gap-1.5 rounded-xl border p-[18px] text-right transition-colors hover:border-muted-foreground/30"
+          >
+            <span class="text-xs text-muted-foreground">Next →</span>
+            <span class="text-sm leading-snug font-medium">{next.data.title}</span>
+          </a>
+        )}
+      </nav>
+    )}
+  </div>
+</BaseLayout>

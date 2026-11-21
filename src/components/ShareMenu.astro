@@ -1,0 +1,61 @@
+---
+import site from "@/lib/site";
+import Icon from "./Icon.astro";
+
+interface Props {
+  title: string;
+  url: string;
+}
+
+const { title, url } = Astro.props;
+const e = encodeURIComponent;
+const shareText = `${title}\r\n{ by ${site.author.name} }`;
+
+const targets = [
+  { label: "X", href: `https://twitter.com/intent/tweet?url=${e(`${url}?ref=x-share`)}&text=${e(shareText)}` },
+  { label: "Reddit", href: `https://www.reddit.com/submit?url=${e(url)}&title=${e(title)}` },
+  { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${e(url)}` },
+  { label: "Hacker News", href: `https://news.ycombinator.com/submitlink?u=${e(url)}&t=${e(title)}` },
+  { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${e(url)}` },
+  { label: "WhatsApp", href: `https://api.whatsapp.com/send?text=${e(title)} ${e(url)}` },
+];
+---
+
+<details data-share class="relative">
+  <summary class="btn btn-outline btn-sm gap-1.5" aria-label="Share this post">
+    <Icon name="share" class="h-3.5 w-3.5 text-muted-foreground" />
+    Share
+  </summary>
+  <div class="menu right-0 w-48">
+    <button type="button" data-copy={url} class="menu-item">
+      <Icon name="link" class="h-4 w-4 text-muted-foreground" />
+      <span data-copy-label>Copy link</span>
+    </button>
+    {targets.map((target) => (
+      <a href={target.href} target="_blank" rel="noopener noreferrer" class="menu-item">
+        {target.label}
+      </a>
+    ))}
+  </div>
+</details>
+
+<script>
+  for (const menu of document.querySelectorAll<HTMLDetailsElement>("[data-share]")) {
+    const button = menu.querySelector<HTMLButtonElement>("[data-copy]")!;
+    const label = menu.querySelector<HTMLElement>("[data-copy-label]")!;
+
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy!);
+        label.textContent = "Copied";
+      } catch {
+        label.textContent = "Copy failed";
+      }
+      setTimeout(() => (label.textContent = "Copy link"), 1500);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (menu.open && !menu.contains(event.target as Node)) menu.open = false;
+    });
+  }
+</script>

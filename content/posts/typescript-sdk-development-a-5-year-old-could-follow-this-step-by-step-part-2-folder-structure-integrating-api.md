@@ -103,7 +103,7 @@ Heads up: any attribute or method starting from `#` is a private field. Private 
 
 ### Step 1: Creating a folder structure
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719337001763/ddfb539a-4b43-4044-b147-bdc1add43ba2.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719337001763/ddfb539a-4b43-4044-b147-bdc1add43ba2.png)
 
 `apis` - for all external APIs
 
@@ -251,7 +251,7 @@ node index.js
 
 Your output should be looking like the following:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719338444168/2095f970-4739-4c5e-a4a9-48109df06d1d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719338444168/2095f970-4739-4c5e-a4a9-48109df06d1d.png)
 
 Congrats 🎉🥳 🚀🚀🚀 We Just Built and Ran our first proper SDK!
 

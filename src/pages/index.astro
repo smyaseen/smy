@@ -1,0 +1,84 @@
+---
+import Icon, { type IconName } from "@/components/Icon.astro";
+import PostCard from "@/components/PostCard.astro";
+import PostRow from "@/components/PostRow.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { publicationJsonLd } from "@/lib/json-ld";
+import { getPostsOfType, toPostCard } from "@/lib/posts";
+import site from "@/lib/site";
+
+const selectedProjectSlugs = [
+  "building-and-publishing-a-shopify-typescript-app-with-remix-for-mergn",
+  "developing-mergn-web-sdk-transforming-customer-engagement",
+  "mergn-customer-engagement-platform",
+  "revolutionizing-clinical-trials-my-journey-with-science37",
+];
+
+const recentPosts = (await getPostsOfType("blog")).slice(0, 3).map(toPostCard);
+const projects = (await getPostsOfType("projects"))
+  .filter((post) => selectedProjectSlugs.includes(post.id))
+  .slice(0, 2)
+  .map(toPostCard);
+
+const socials: { href: string; label: string; icon: IconName; primary?: boolean }[] = [
+  { href: site.links.resume, label: "Resume", icon: "file-text", primary: true },
+  { href: site.links.github, label: "GitHub", icon: "github" },
+  { href: site.links.linkedin, label: "LinkedIn", icon: "linkedin" },
+  { href: `mailto:${site.email}`, label: "Email", icon: "mail" },
+];
+---
+
+<BaseLayout title="SMY - Syed Muhammad Yaseen" description={site.descriptionSEO} jsonLd={publicationJsonLd()}>
+  <section class="fade-in flex max-w-[660px] flex-col gap-5 pt-10 pb-16 sm:pt-16">
+    <div class="flex flex-col gap-3.5">
+      <h1 class="text-[2.5rem] leading-[1.12] font-semibold tracking-tight text-pretty sm:text-[44px]">{site.author.name}</h1>
+      <p class="text-[17px] leading-relaxed text-pretty text-muted-foreground sm:text-lg">
+        Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms. Node.js, NestJS, TypeScript, AWS and LLM
+        integration.
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      {socials.map(({ href, label, icon, primary }) => (
+        <a
+          href={href}
+          target={href.startsWith("http") ? "_blank" : undefined}
+          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+          class:list={["btn", primary ? "btn-primary" : "btn-outline"]}
+        >
+          <Icon name={icon} class="h-[15px] w-[15px]" />
+          {label}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="fade-in animation-delay-200 flex flex-col gap-2 pb-16">
+    <div class="flex items-baseline justify-between border-b pb-3.5">
+      <h2 class="text-[15px] font-semibold tracking-tight">Recent writing</h2>
+      <a href="/blog" class="text-[13px] text-muted-foreground hover:text-foreground">
+        All posts →
+      </a>
+    </div>
+    <ul class="flex flex-col">
+      {recentPosts.map((post) => (
+        <PostRow post={post} />
+      ))}
+    </ul>
+  </section>
+
+  <section class="fade-in animation-delay-400 flex flex-col gap-4 pb-20">
+    <div class="flex items-baseline justify-between border-b pb-3.5">
+      <h2 class="text-[15px] font-semibold tracking-tight">Selected projects</h2>
+      <a href="/projects" class="text-[13px] text-muted-foreground hover:text-foreground">
+        All projects →
+      </a>
+    </div>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {projects.map((project) => (
+        <li>
+          <PostCard post={project} />
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

@@ -112,7 +112,7 @@ Clinical trials are a cornerstone of medical advancement, yet their digital tran
 
 Science37 empowers healthcare professionals and researchers by streamlining clinical trial processes through its cutting-edge SaaS platform. It enables decentralized trials, allowing remote participation and data collection, ultimately increasing accessibility and efficiency in medical research. In this blog, I’ll share my contributions to the platform’s development, focusing on the technical challenges, solutions, and impact.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737949829406/1a4439b0-5f0f-4de1-9611-4d10cbc26896.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737949829406/1a4439b0-5f0f-4de1-9611-4d10cbc26896.png)
 
 ---
 

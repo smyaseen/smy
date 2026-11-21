@@ -92,7 +92,7 @@ Head over to the following link and download & install `Deskreen` for your platf
 
 For Mac users: Allow Screen Recording Permission on MacOS is in System Preferences -&gt; Security & Privacy -&gt; Privacy -&gt; Screen Recording
 
-![](https://deskreen.com/img/steps/9.jpg align="left")
+![](https://deskreen.com/img/steps/9.jpg)
 
 For Windows users: need to add 'Private Network Access' for Deskreen on the first start or in firewall settings
 
@@ -100,11 +100,11 @@ For Windows users: need to add 'Private Network Access' for Deskreen on the firs
 
 Open up `Deskreen` and Connect your Phone by scanning a QR or going to the given address:
 
-![](https://deskreen.com/img/steps/1-2.jpg align="left")
+![](https://deskreen.com/img/steps/1-2.jpg)
 
 It will automatically ask for approval once you open the page on the Phone's browser.
 
-![](https://deskreen.com/img/steps/2.jpg align="left")
+![](https://deskreen.com/img/steps/2.jpg)
 
 Click on Allow and your Phone will be connected!
 
@@ -112,13 +112,13 @@ Click on Allow and your Phone will be connected!
 
 Once Connected, share your entire screen or desired window:
 
-![](https://deskreen.com/img/steps/3.jpg align="left")
+![](https://deskreen.com/img/steps/3.jpg)
 
 Once done, confirm the options and your screen will be streamed on your Phone!
 
-![](https://deskreen.com/img/steps/6.jpg align="left")
+![](https://deskreen.com/img/steps/6.jpg)
 
-![](https://deskreen.com/img/intro-bg.jpg align="left")
+![](https://deskreen.com/img/intro-bg.jpg)
 
 ## Wrapping Up:
 

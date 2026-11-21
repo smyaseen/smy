@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { publicationJsonLd } from "@/lib/json-ld";
+import { getPostsOfType, toPostCard, type PostType } from "@/lib/posts";
+import PostBrowser from "./PostBrowser.astro";
+
+interface Props {
+  type: PostType;
+}
+
+const COPY = {
+  blog: {
+    title: "Blog",
+    metaTitle: "SMY - Blog",
+    description: "Engineering articles by Syed Muhammad Yaseen on backends, AI tooling and web development.",
+    lead: "Notes on backends, AI tooling and the things I ship.",
+    noun: "posts",
+  },
+  projects: {
+    title: "Projects",
+    metaTitle: "SMY - Projects",
+    description: "Products and platforms built by Syed Muhammad Yaseen.",
+    lead: "Products and platforms I have built and shipped.",
+    noun: "projects",
+  },
+};
+
+const { type } = Astro.props;
+const copy = COPY[type];
+const posts = (await getPostsOfType(type)).map(toPostCard);
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.description} jsonLd={publicationJsonLd()}>
+  <div class="mb-8 flex flex-col gap-7">
+    <header class="fade-in flex flex-col gap-1.5">
+      <h1 class="text-3xl font-semibold tracking-tight">{copy.title}</h1>
+      <p class="text-sm text-muted-foreground">{copy.lead}</p>
+    </header>
+
+    <div class="fade-in animation-delay-200">
+      <PostBrowser posts={posts} noun={copy.noun} />
+    </div>
+  </div>
+</BaseLayout>

@@ -107,7 +107,7 @@ Head over to the Test Browser app, and integrate the CDN:
 
 Open the file, and see the result:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339509833/05f4c77c-bb5a-4ad0-b081-76d99edb816d.png align="left")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339509833/05f4c77c-bb5a-4ad0-b081-76d99edb816d.png)
 
 ### Step 2: Getting the latest CDN version always
 
@@ -119,7 +119,7 @@ Sometimes, when a new version of SDK is published, `jsDeliver` few minutes to a 
 
 To fix this, when you publish a new version, head over to [`https://www.jsdelivr.com/tools/purge`](https://www.jsdelivr.com/tools/purge) and enter the link of the CDN like:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719343862760/fbe78aaf-4ecd-4377-9cc4-cefd2d20b547.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719343862760/fbe78aaf-4ecd-4377-9cc4-cefd2d20b547.png)
 
 This will purge the cache and point `@latest` version to the updated version.
 

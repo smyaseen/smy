@@ -220,7 +220,7 @@ export default function SecureLayout({ children }: { children: React.ReactNode }
 
 **added a console log to see how it’s going into the secure component everytime and redirects in split second:**
 
-![](https://s1.gifyu.com/images/SB37q.gif align="center")
+![](https://s1.gifyu.com/images/SB37q.gif)
 
 ### Drawbacks
 
@@ -301,7 +301,7 @@ export default async function middleware(req: NextRequest) {
 
 **see the instant redirect in action:**
 
-![](https://s11.gifyu.com/images/SB3kQ.gif align="center")
+![](https://s11.gifyu.com/images/SB3kQ.gif)
 
 ### Middleware Explained
 

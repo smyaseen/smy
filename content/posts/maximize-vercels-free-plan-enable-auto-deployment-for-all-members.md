@@ -80,7 +80,7 @@ tableOfContents:
 ---
 Earlier, Vercel's free pricing plan allowed multiple members to commit changes that would automatically deploy. However, this feature has recently changed, and now only the project creator can trigger deployments.
 
-![Vercel Deployment](https://cdn.hashnode.com/res/hashnode/image/upload/v1727618106942/e6d0e4e0-474f-48d2-927e-8cf39a4a01d6.png align="left")
+![Vercel Deployment](https://cdn.hashnode.com/res/hashnode/image/upload/v1727618106942/e6d0e4e0-474f-48d2-927e-8cf39a4a01d6.png)
 
 To enable this feature for each additional member, a fee of $20 will be charged.
 
@@ -149,7 +149,7 @@ jobs:
 
 You’ll know the deployment status by the commit icons: a cross ❌ indicates the deployment failed, while a check ✅ shows successful deployment.
 
-![Deployment Status](https://cdn.hashnode.com/res/hashnode/image/upload/v1727619023813/afe4ee36-3e88-4a8d-95c5-e114389e4ccf.png align="left")
+![Deployment Status](https://cdn.hashnode.com/res/hashnode/image/upload/v1727619023813/afe4ee36-3e88-4a8d-95c5-e114389e4ccf.png)
 
 ## Conclusion
 

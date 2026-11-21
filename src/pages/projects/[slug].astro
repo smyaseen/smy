@@ -1,0 +1,12 @@
+---
+import PostPage from "@/components/PostPage.astro";
+import { getPostsOfType, type Post } from "@/lib/posts";
+
+export async function getStaticPaths() {
+  return (await getPostsOfType("projects")).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+---
+
+<PostPage post={post} />

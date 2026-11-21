@@ -145,7 +145,7 @@ Here’s what makes this portfolio modern and practical:
     
     It leverages Hashnode's Series feature, where I've put all projects in the "projects" series. This helps me easily manage and separate them from blogs.
     
-    ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1739104429143/8a0704aa-c17b-4833-8a54-c225478aeb8a.png align="center")
+    ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1739104429143/8a0704aa-c17b-4833-8a54-c225478aeb8a.png)
     
 * **Tags for Categorization**:  
     Tags make it simple for users to explore related blogs and projects by topic.

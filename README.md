@@ -1,20 +1,22 @@
-# [A Modern Developer Portfolio with Next.js, Shadcn & Tailwind v4](https://www.sm-y.dev/projects/building-a-modern-developer-portfolio-with-nextjs-hashnode-shadcn-tailwind-v4)
+# [sm-y.dev](https://sm-y.dev)
+
+The personal site and blog of Syed Muhammad Yaseen, built with [Astro](https://astro.build) and Tailwind CSS v4. Every page is static HTML. The only JavaScript is a few small scripts for search, the theme toggle and the table of contents.
 
 ## Getting Started
 
 ```console
-npx create-next-app -e https://github.com/smyaseen/smy
-```
-
-```console
 pnpm install
+pnpm dev      # http://localhost:4321
+pnpm build    # type-checks, then writes the site to dist/
 ```
 
 ## Content
 
-Posts live in [`content/posts`](content/posts) as markdown files with YAML frontmatter — one file per post, and the file name is the URL slug. A post is served under `/projects` when its frontmatter sets `series.slug: projects`, and under `/blog` otherwise. The About page bio is [`content/about.md`](content/about.md).
+Posts live in [`content/posts`](content/posts) as markdown files with YAML frontmatter, one file per post. The `slug` field is the URL. A post is served under `/projects` when its frontmatter sets `series.slug: projects`, and under `/blog` otherwise. The About page bio is [`content/about.md`](content/about.md).
 
-Every post is rendered at build time, so adding or editing a file means rebuilding (in development the files are re-read on each request).
+Every post is rendered at build time, so adding or editing a file means rebuilding. `pnpm dev` picks up edits live.
+
+Each post's source is also published as raw markdown at its URL plus `.md` (for example `/blog/my-post.md`), and [`/llms.txt`](https://sm-y.dev/llms.txt) lists them all for AI agents. The site also builds `/rss.xml` and `/sitemap-index.xml`.
 
 To add a post, create `content/posts/my-post.md`:
 
@@ -36,9 +38,9 @@ tags:
 Your markdown body goes here.
 ```
 
-## Environment Variables
+## Deployment
 
-[.env.example](.env.example) contains the environment variables this project reads. Copy it to `.env.local` to get started.
+The [`Dockerfile`](Dockerfile) builds the site with Node and serves `dist/` from nginx using [`nginx.conf`](nginx.conf), which maps `/blog/my-post` to `blog/my-post.html` and serves `.md` files as `text/markdown`. It is deployed through Coolify on a Hetzner server, which rebuilds on every push to `main`. The site needs no environment variables.
 
 ## Contributing
 
@@ -66,6 +68,6 @@ Distributed under the MIT License. See the [license](LICENSE.md) for more inform
 
 ## Credit
 
-This project was originally cloned from [Hashnode-Next](https://github.com/alexkates/hashnode-next) and has since moved off Hashnode to local markdown.
+This project was originally cloned from [Hashnode-Next](https://github.com/alexkates/hashnode-next). It has since moved off Hashnode to local markdown, and from Next.js to Astro.
 
 Special thanks to [@alexkates](https://github.com/alexkates) for the original work.

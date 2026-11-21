@@ -1,10 +1,8 @@
-// prettier.config.js, .prettierrc.js, prettier.config.mjs, or .prettierrc.mjs
-
 /** @type {import("prettier").Config} */
 const config = {
   printWidth: 150,
-  plugins: ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
+  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  overrides: [{ files: "*.astro", options: { parser: "astro" } }],
 };
 
-// eslint-disable-next-line no-undef
-module.exports = config;
+export default config;

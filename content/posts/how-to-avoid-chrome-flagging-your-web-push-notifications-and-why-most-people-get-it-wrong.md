@@ -84,7 +84,7 @@ tableOfContents:
 ---
 **What I will teach you:** How to ensure your web push notifications don’t get flagged or blocked by Chrome’s new spam detection system, using real-world testing, simple language shifts, and smart campaign practices.
 
-![Chrome possible spam warning for push notification on Android](https://cdn.hashnode.com/res/hashnode/image/upload/v1749018948649/43b5a971-6450-4953-883a-0467ddd2852c.png align="left")
+![Chrome possible spam warning for push notification on Android](https://cdn.hashnode.com/res/hashnode/image/upload/v1749018948649/43b5a971-6450-4953-883a-0467ddd2852c.png)
 
 ---
 

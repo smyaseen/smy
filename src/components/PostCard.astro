@@ -1,0 +1,56 @@
+---
+import { formatDate, type PostCard } from "@/lib/posts";
+import Icon from "./Icon.astro";
+
+interface Props {
+  post: PostCard;
+  eager?: boolean;
+}
+
+const MAX_TAGS = 3;
+const { post, eager = false } = Astro.props;
+const overflow = post.tags.length - MAX_TAGS;
+---
+
+<!--
+  Cover art is locked to 16/9 and the title and excerpt each reserve two lines,
+  so cards in a row keep a common height regardless of how the copy wraps.
+-->
+<article class="group flex h-full flex-col overflow-hidden rounded-xl border bg-card/40 transition-colors hover:border-muted-foreground/30">
+  <a href={post.path} class="flex flex-col" aria-label={post.title}>
+    <div class="aspect-video overflow-hidden bg-muted">
+      {post.coverImage ? (
+        <img
+          src={post.coverImage.url}
+          alt={post.coverImage.alt}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+          width="1600"
+          height="900"
+          class="h-full w-full object-cover"
+        />
+      ) : (
+        <div class="flex h-full w-full items-center justify-center">
+          <Icon name="image" class="h-7 w-7 text-muted-foreground/50" />
+        </div>
+      )}
+    </div>
+
+    <div class="flex flex-col gap-2.5 p-[18px] pb-5">
+      <div class="flex items-center gap-2 text-xs text-muted-foreground">
+        <span>{formatDate(new Date(post.publishedAt))}</span>
+        <span aria-hidden="true">·</span>
+        <span>{post.readTimeInMinutes} min read</span>
+      </div>
+      <h3 class="line-clamp-2 min-h-[45px] text-base leading-[1.4] font-semibold tracking-tight">{post.title}</h3>
+      {post.excerpt && <p class="line-clamp-2 min-h-[40px] text-[13px] leading-[1.55] text-muted-foreground">{post.excerpt}</p>}
+    </div>
+  </a>
+
+  <div class="mt-auto flex flex-wrap items-center gap-1.5 px-[18px] pb-5">
+    {post.tags.slice(0, MAX_TAGS).map((tag) => (
+      <span class="badge">{tag}</span>
+    ))}
+    {overflow > 0 && <span class="px-1 text-[11px] font-medium text-muted-foreground/70">+{overflow}</span>}
+  </div>
+</article>

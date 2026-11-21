@@ -127,7 +127,7 @@ npm run build
 
 You will see the following output in our `dist` folder
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339146967/6f396625-8329-4773-8d0a-a19e7f5b3b98.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339146967/6f396625-8329-4773-8d0a-a19e7f5b3b98.png)
 
 `index.cjs` - for CJS output
 
@@ -196,7 +196,7 @@ In `example-apps/Browser` create a `index.html` file and paste the following con
 
 Open the file in the browser, you should see the following response in the inspect element's console tab:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339509833/05f4c77c-bb5a-4ad0-b081-76d99edb816d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339509833/05f4c77c-bb5a-4ad0-b081-76d99edb816d.png)
 
 ### Step 5: Create a React App
 
@@ -273,7 +273,7 @@ export default App;
 
 Run the react App, and head over to the console, it should look like the following:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339972721/990fda53-b01e-4e52-aa53-d3ed73313b6f.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719339972721/990fda53-b01e-4e52-aa53-d3ed73313b6f.png)
 
 ## Wrapping Up:
 

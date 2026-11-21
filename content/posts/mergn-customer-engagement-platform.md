@@ -119,21 +119,21 @@ Mergn is a state-of-the-art Customer Engagement Platform designed to help brands
     Some Glimpse of the Frontend:
     
 
-![](https://cdn.shopify.com/app-store/listing_images/d5d6eb7bae4e0fbde33a6f27347d136d/desktop_screenshot/CKDZzdnB7ocDEAE=.png?height=1800&width=3200 align="center")
+![](https://cdn.shopify.com/app-store/listing_images/d5d6eb7bae4e0fbde33a6f27347d136d/desktop_screenshot/CKDZzdnB7ocDEAE=.png?height=1800&width=3200)
 
-![](https://cdn.shopify.com/app-store/listing_images/d5d6eb7bae4e0fbde33a6f27347d136d/desktop_screenshot/CLWp2NnB7ocDEAE=.png?height=1800&width=3200 align="center")
+![](https://cdn.shopify.com/app-store/listing_images/d5d6eb7bae4e0fbde33a6f27347d136d/desktop_screenshot/CLWp2NnB7ocDEAE=.png?height=1800&width=3200)
 
-![](https://cdn.shopify.com/app-store/listing_images/d5d6eb7bae4e0fbde33a6f27347d136d/desktop_screenshot/CJ654dnB7ocDEAE=.png?height=1800&width=3200 align="center")
+![](https://cdn.shopify.com/app-store/listing_images/d5d6eb7bae4e0fbde33a6f27347d136d/desktop_screenshot/CJ654dnB7ocDEAE=.png?height=1800&width=3200)
 
 ### **Achievements**
 
 Mergn’s excellence was recognized with a **Gold award at the HBL PASHA ICT Awards 2024**, Pakistan’s largest IT award event. [See more about this achievement here.](https://www.linkedin.com/posts/pashaictawards_hblpicta2024-innovators-innovatefortomorrow-activity-7244709718068187136-BvCR?utm_source=share&utm_medium=member_desktop)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737002951495/460ccd6f-5302-41be-bbc2-01f40de65a5c.jpeg align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737002951495/460ccd6f-5302-41be-bbc2-01f40de65a5c.jpeg)
 
 ### **Some of Our Clients**
 
-![Client Logos](https://cdn.hashnode.com/res/hashnode/image/upload/v1736999827552/7c3a1753-1df9-47a8-bde5-fc867642b1e3.webp align="left")
+![Client Logos](https://cdn.hashnode.com/res/hashnode/image/upload/v1736999827552/7c3a1753-1df9-47a8-bde5-fc867642b1e3.webp)
 
 ---
 

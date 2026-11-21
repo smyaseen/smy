@@ -1,0 +1,46 @@
+---
+import Icon from "@/components/Icon.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import site from "@/lib/site";
+import { Content as Bio } from "../../content/about.md";
+
+const links = [
+  { href: site.links.github, label: "github.com/smyaseen", icon: "github" },
+  { href: site.links.linkedin, label: "linkedin.com/in/sm-y", icon: "linkedin" },
+] as const;
+
+const description = "The work, background and writing of Syed Muhammad Yaseen, Senior Software Engineer working on AI backends and scalable APIs.";
+---
+
+<BaseLayout title="SMY - About" description={description} image="/profile-pic.jpg">
+  <div class="mb-16 grid items-start gap-14 lg:grid-cols-[240px_minmax(0,1fr)]">
+    <aside class="fade-in flex flex-col gap-4 lg:sticky lg:top-24">
+      <div class="flex h-24 w-24 items-center justify-center rounded-xl border bg-secondary text-2xl font-semibold tracking-tight">SMY</div>
+      <div class="flex flex-col gap-0.5">
+        <span class="text-base font-semibold tracking-tight">{site.author.name}</span>
+        <span class="text-[13px] text-muted-foreground">{site.author.role}</span>
+      </div>
+      <div class="flex flex-col gap-2 border-t pt-4 text-[13px]">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Icon name={link.icon} class="h-3.5 w-3.5" />
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <a href={site.links.resume} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-fit">
+        <Icon name="file-text" class="h-[15px] w-[15px]" />
+        Download resume
+      </a>
+    </aside>
+
+    <section class="fade-in animation-delay-200 mdx max-w-[660px]">
+      <Bio />
+    </section>
+  </div>
+</BaseLayout>

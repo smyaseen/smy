@@ -151,7 +151,7 @@ Learn more about semantic versioning here: [https://docs.npmjs.com/about-semanti
 
 Specify a license for your package so that people know how they are permitted to use it, and any restrictions you're placing on it.
 
-![Open source licenses comparison: popular copyleft licenses and permissive open source licenses.](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1613516948%2Fwordpress-sync%2FLicenses-image.png&w=2560&q=75 align="left")
+![Open source licenses comparison: popular copyleft licenses and permissive open source licenses.](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1613516948%2Fwordpress-sync%2FLicenses-image.png&w=2560&q=75)
 
 source: [https://snyk.io/learn/open-source-licenses/](https://snyk.io/learn/open-source-licenses/)
 

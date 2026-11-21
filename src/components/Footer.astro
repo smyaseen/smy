@@ -1,0 +1,29 @@
+---
+import site from "@/lib/site";
+
+const links = [
+  { href: site.links.resume, label: "Resume" },
+  { href: site.links.github, label: "GitHub" },
+  { href: site.links.linkedin, label: "LinkedIn" },
+  { href: `mailto:${site.email}`, label: "Email" },
+  { href: "/rss.xml", label: "RSS" },
+];
+---
+
+<footer class="mt-auto flex flex-col items-center justify-between gap-3 border-t py-6 text-[13px] text-muted-foreground sm:flex-row">
+  <span class="text-muted-foreground/70">
+    © {new Date().getFullYear()} {site.author.name}
+  </span>
+  <nav class="flex items-center gap-5">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        target={link.href.startsWith("http") ? "_blank" : undefined}
+        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+        class="transition-colors hover:text-foreground"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</footer>

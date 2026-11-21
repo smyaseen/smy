@@ -1,0 +1,92 @@
+---
+import "@fontsource-variable/inter";
+import "@/styles/global.css";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Icon from "@/components/Icon.astro";
+import site from "@/lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute or site-relative image for Open Graph and Twitter cards. */
+  image?: string;
+  type?: "website" | "article";
+  canonical?: string;
+  jsonLd?: object;
+  /** Link to a markdown version of this page, advertised for agents. */
+  markdownHref?: string;
+}
+
+const { title, description, image = "/main-cover.jpeg", type = "website", canonical, jsonLd, markdownHref } = Astro.props;
+
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).href;
+const imageUrl = new URL(image, site.url).href;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.displayTitle} | Blog`} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {markdownHref && <link rel="alternate" type="text/markdown" href={markdownHref} />}
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={`${site.displayTitle} | ${site.title}`} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <!-- Runs before paint so the saved theme never flashes. Dark is the default. -->
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem("theme");
+        const dark = saved ? saved === "dark" : true;
+        document.documentElement.classList.toggle("dark", dark);
+      } catch {}
+    </script>
+  </head>
+  <body class="font-sans">
+    <div class="container flex min-h-screen flex-col px-6 sm:px-12 lg:px-24">
+      <Header />
+      <main class="grow pt-10 pb-10">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <button
+      id="scroll-top"
+      type="button"
+      aria-label="Scroll to top"
+      class="btn btn-outline pointer-events-none fixed right-6 bottom-6 z-50 h-9 w-9 bg-background p-0 opacity-0 transition-opacity duration-300 sm:right-10 sm:bottom-10"
+    >
+      <Icon name="arrow-up" />
+    </button>
+
+    <script>
+      const button = document.getElementById("scroll-top")!;
+      const update = () => {
+        const visible = window.scrollY > 300;
+        button.classList.toggle("opacity-0", !visible);
+        button.classList.toggle("pointer-events-none", !visible);
+      };
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+      button.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    </script>
+  </body>
+</html>

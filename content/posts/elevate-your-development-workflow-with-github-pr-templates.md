@@ -94,7 +94,7 @@ Template Link: [https://lnkd.in/djHD24pH](https://lnkd.in/djHD24pH)
 
 .....
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721708894638/8dfa2a66-7d74-4b4b-8ba3-65f0561ec465.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721708894638/8dfa2a66-7d74-4b4b-8ba3-65f0561ec465.png)
 
 ## Contents:
 

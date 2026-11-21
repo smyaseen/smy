@@ -1,0 +1,259 @@
+---
+import type { PostCard as Card } from "@/lib/posts";
+import Icon from "./Icon.astro";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  posts: Card[];
+  /** Plural noun used in the copy, e.g. "posts" or "projects". */
+  noun: string;
+}
+
+const { posts, noun } = Astro.props;
+
+const tagCounts = new Map<string, number>();
+for (const post of posts) for (const tag of new Set(post.tags)) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+const searchIndex = Object.fromEntries(posts.map((post) => [post.slug, post.search]));
+---
+
+<!--
+  Every card is rendered at build time. Search, tag filtering and sorting run in
+  the browser by hiding and reordering those cards, and the URL is kept in step
+  with history.replaceState so a filtered view stays shareable.
+-->
+<div class="flex flex-col gap-4" data-post-browser data-noun={noun} data-total={posts.length}>
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+    <div class="relative flex grow items-center">
+      <Icon name="search" class="pointer-events-none absolute left-3 h-[15px] w-[15px] text-muted-foreground" />
+      <input
+        data-query
+        type="search"
+        placeholder={`Search ${noun}…`}
+        aria-label={`Search ${noun}`}
+        class="input pr-16 pl-[34px]"
+        autocomplete="off"
+      />
+      <kbd data-kbd class="absolute right-2.5 rounded border px-1.5 py-px text-[11px] font-medium text-muted-foreground/70">
+        ⌘K
+      </kbd>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <details data-tag-menu class="relative">
+        <summary class="btn btn-outline gap-1.5">
+          Tags
+          <span
+            data-tag-count
+            class="hidden h-[18px] min-w-[18px] items-center justify-center rounded-full bg-primary px-1.5 text-[11px] text-primary-foreground"
+          ></span>
+          <Icon name="chevron-down" class="h-3.5 w-3.5 text-muted-foreground" />
+        </summary>
+        <div class="menu right-0 w-60 sm:left-auto">
+          <div class="flex items-center justify-between px-2.5 py-1.5 text-sm font-semibold">
+            <span>Filter by tag</span>
+            <button type="button" data-clear-tags class="hidden cursor-pointer text-xs font-normal underline underline-offset-2">
+              Clear
+            </button>
+          </div>
+          <div class="-mx-1.5 my-1 h-px bg-border"></div>
+          <div class="max-h-64 overflow-y-auto">
+            {tags.map(([tag, count]) => (
+              <label class="menu-item">
+                <input type="checkbox" value={tag} class="h-3.5 w-3.5 accent-current" />
+                <span class="grow">{tag}</span>
+                <span class="text-xs text-muted-foreground">{count}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </details>
+
+      <label class="btn btn-outline relative w-[168px] justify-between pr-2 font-normal">
+        <span class="text-muted-foreground">Sort</span>
+        <select data-sort aria-label={`Sort ${noun}`} class="absolute inset-0 cursor-pointer opacity-0">
+          <option value="date">Newest</option>
+          <option value="read time">Shortest read</option>
+        </select>
+        <span data-sort-label class="font-medium">
+          Newest
+        </span>
+        <Icon name="chevron-down" class="h-3.5 w-3.5 text-muted-foreground" />
+      </label>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-5">
+    <div data-active-tags class="flex flex-wrap items-center gap-2">
+      <span data-result-count class="text-[13px] text-muted-foreground">
+        {posts.length} {noun}
+      </span>
+    </div>
+    <button
+      type="button"
+      data-clear-all
+      class="hidden cursor-pointer text-[13px] text-muted-foreground underline underline-offset-4 hover:text-foreground"
+    >
+      Clear all
+    </button>
+  </div>
+
+  <ul data-results class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+    {posts.map((post, index) => (
+      <li data-slug={post.slug} data-tags={post.tags.join("|")} data-date={post.publishedAt} data-read={post.readTimeInMinutes}>
+        <PostCard post={post} eager={index < 3} />
+      </li>
+    ))}
+  </ul>
+
+  <div data-empty class="hidden flex-col items-center gap-3.5 rounded-xl border border-dashed px-6 py-14 text-center">
+    <Icon name="search" class="h-6 w-6 text-muted-foreground/70" />
+    <div class="flex flex-col gap-1">
+      <p data-empty-title class="text-[15px] font-medium"></p>
+      <p class="text-[13px] text-muted-foreground">Try a different word, or clear the filters.</p>
+    </div>
+    <button type="button" data-clear-all class="btn btn-outline btn-sm">
+      Clear filters
+    </button>
+  </div>
+
+  <script type="application/json" data-search-index set:html={JSON.stringify(searchIndex)} />
+</div>
+
+<script>
+  const SORT_LABELS: Record<string, string> = { date: "Newest", "read time": "Shortest read" };
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-post-browser]")) {
+    const $ = <T extends Element>(selector: string) => root.querySelector<T>(selector)!;
+    const noun = root.dataset.noun!;
+    const total = Number(root.dataset.total);
+    const index: Record<string, string> = JSON.parse($("[data-search-index]").textContent || "{}");
+
+    const input = $<HTMLInputElement>("[data-query]");
+    const kbd = $<HTMLElement>("[data-kbd]");
+    const sortSelect = $<HTMLSelectElement>("[data-sort]");
+    const sortLabel = $<HTMLElement>("[data-sort-label]");
+    const tagMenu = $<HTMLDetailsElement>("[data-tag-menu]");
+    const tagBoxes = [...tagMenu.querySelectorAll<HTMLInputElement>("input[type=checkbox]")];
+    const tagCount = $<HTMLElement>("[data-tag-count]");
+    const clearTags = $<HTMLElement>("[data-clear-tags]");
+    const activeTags = $<HTMLElement>("[data-active-tags]");
+    const resultCount = $<HTMLElement>("[data-result-count]");
+    const clearAllButtons = root.querySelectorAll<HTMLElement>("[data-clear-all]");
+    const results = $<HTMLUListElement>("[data-results]");
+    const empty = $<HTMLElement>("[data-empty]");
+    const emptyTitle = $<HTMLElement>("[data-empty-title]");
+    const items = [...results.children] as HTMLLIElement[];
+
+    // Restore state from the URL so filtered views can be shared.
+    const params = new URLSearchParams(location.search);
+    input.value = params.get("query") ?? "";
+    sortSelect.value = params.get("sort") === "read time" ? "read time" : "date";
+    const initialTags = (params.get("tags") ?? "")
+      .split(",")
+      .map((tag) => tag.trim().toLowerCase())
+      .filter(Boolean);
+    for (const box of tagBoxes) box.checked = initialTags.includes(box.value);
+
+    const selectedTags = () => tagBoxes.filter((box) => box.checked).map((box) => box.value);
+
+    function render() {
+      const query = input.value.trim().toLowerCase();
+      const tags = selectedTags();
+      const sort = sortSelect.value;
+
+      const visible = items.filter((item) => {
+        const matchesQuery = !query || (index[item.dataset.slug!] ?? "").includes(query);
+        const itemTags = item.dataset.tags ? item.dataset.tags.split("|") : [];
+        const matchesTags = tags.length === 0 || tags.some((tag) => itemTags.includes(tag));
+        return matchesQuery && matchesTags;
+      });
+
+      visible.sort((a, b) =>
+        sort === "read time" ? Number(a.dataset.read) - Number(b.dataset.read) : Date.parse(b.dataset.date!) - Date.parse(a.dataset.date!),
+      );
+
+      for (const item of items) item.hidden = true;
+      for (const item of visible) {
+        item.hidden = false;
+        results.appendChild(item);
+      }
+
+      const filtered = Boolean(query) || tags.length > 0;
+      resultCount.textContent = filtered ? `${visible.length} of ${total} ${noun}` : `${total} ${noun}`;
+      results.classList.toggle("hidden", visible.length === 0);
+      empty.classList.toggle("hidden", visible.length > 0);
+      empty.classList.toggle("flex", visible.length === 0);
+      emptyTitle.textContent = query ? `No ${noun} match “${input.value.trim()}”` : `No ${noun} with those tags`;
+
+      kbd.classList.toggle("hidden", Boolean(input.value));
+      sortLabel.textContent = SORT_LABELS[sort];
+      tagCount.textContent = String(tags.length);
+      tagCount.classList.toggle("hidden", tags.length === 0);
+      tagCount.classList.toggle("inline-flex", tags.length > 0);
+      clearTags.classList.toggle("hidden", tags.length === 0);
+      clearAllButtons[0].classList.toggle("hidden", !filtered);
+
+      // Active tag chips, each removable.
+      for (const chip of activeTags.querySelectorAll("[data-chip]")) chip.remove();
+      for (const tag of tags) {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.dataset.chip = tag;
+        chip.className = "flex cursor-pointer items-center gap-1.5 rounded-md bg-secondary py-1 pr-1.5 pl-2.5 text-xs font-medium";
+        chip.textContent = `${tag} ×`;
+        chip.setAttribute("aria-label", `Remove tag ${tag}`);
+        activeTags.appendChild(chip);
+      }
+
+      const next = new URLSearchParams();
+      if (input.value) next.set("query", input.value);
+      if (sort !== "date") next.set("sort", sort);
+      if (tags.length) next.set("tags", tags.join(","));
+      const search = next.toString();
+      history.replaceState(null, "", search ? `${location.pathname}?${search}` : location.pathname);
+    }
+
+    input.addEventListener("input", render);
+    sortSelect.addEventListener("change", render);
+    for (const box of tagBoxes) box.addEventListener("change", render);
+
+    clearTags.addEventListener("click", () => {
+      for (const box of tagBoxes) box.checked = false;
+      render();
+    });
+
+    activeTags.addEventListener("click", (event) => {
+      const chip = (event.target as HTMLElement).closest<HTMLElement>("[data-chip]");
+      if (!chip) return;
+      const box = tagBoxes.find((candidate) => candidate.value === chip.dataset.chip);
+      if (box) box.checked = false;
+      render();
+    });
+
+    for (const button of clearAllButtons) {
+      button.addEventListener("click", () => {
+        input.value = "";
+        sortSelect.value = "date";
+        for (const box of tagBoxes) box.checked = false;
+        render();
+      });
+    }
+
+    // Close the tag menu when clicking elsewhere.
+    document.addEventListener("click", (event) => {
+      if (tagMenu.open && !tagMenu.contains(event.target as Node)) tagMenu.open = false;
+    });
+
+    // ⌘K / Ctrl-K focuses search.
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        input.focus();
+      }
+    });
+
+    render();
+  }
+</script>
