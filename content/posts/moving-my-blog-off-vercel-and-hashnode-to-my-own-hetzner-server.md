@@ -65,6 +65,8 @@ Hashnode's export had one surprise. It writes images as `![](url align="center")
 
 While I was at it, I moved the domain. sm-y.dev was registered at Namecheap with Namecheap's DNS. Cloudflare Registrar sells domains at cost, so a `.dev` renewal is $12.20 a year, and having DNS and the registrar in one place is simpler.
 
+The bigger reason is that I like Cloudflare a lot. Besides DNS and the proxy in front of my server, I already run Workers, R2 storage and email routing there for my other projects, all from one dashboard and mostly on the free tier. It can do far more than I use it for, and that deserves its own post someday.
+
 I added the site to Cloudflare first so it could import the existing DNS records, then switched the nameservers at Namecheap, unlocked the domain, requested the auth code and started the transfer in Cloudflare. The transfer went through the same day.
 
 One thing caught me out at the end. My server's firewall only lets Cloudflare's network reach ports 80 and 443. With the DNS records set to "DNS only", visitors and Let's Encrypt both timed out. Switching them to Proxied, the same way my other sites are set up, fixed it, and Traefik got real certificates for both `sm-y.dev` and `www.sm-y.dev`.
