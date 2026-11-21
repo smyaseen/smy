@@ -67,7 +67,7 @@ const searchIndex = Object.fromEntries(posts.map((post) => [post.slug, post.sear
             <span class="sr-only">Filter by topic</span>
             <select
               data-tag
-              class="h-11 w-full cursor-pointer appearance-none rounded-lg border border-faint/50 bg-transparent pr-9 pl-3 text-[15px] focus:border-accent focus:outline-none"
+              class="h-11 w-full cursor-pointer appearance-none rounded-lg border border-faint/50 bg-paper text-ink pr-9 pl-3 text-[15px] focus:border-accent focus:outline-none"
             >
               <option value="">All topics</option>
               {tags.map(([tag, count]) => (

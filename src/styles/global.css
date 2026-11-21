@@ -99,6 +99,15 @@
   summary::-webkit-details-marker {
     display: none;
   }
+  /*
+    Native dropdowns draw their option list with the OS colors, which in dark
+    mode gave a white list with the page's light text on it. Paint both.
+  */
+  select,
+  select option {
+    background-color: var(--paper);
+    color: var(--ink);
+  }
 }
 
 /* The single reading column every page sits in. */
