@@ -1,35 +1,28 @@
 ---
 import type { MarkdownHeading } from "astro";
-import Icon from "./Icon.astro";
 
 interface Props {
   headings: MarkdownHeading[];
-  /** `rail` is the sticky desktop sidebar; `collapsible` is the disclosure shown below `lg`. */
+  /** `rail` is the sticky sidebar on wide screens; `collapsible` is the disclosure shown otherwise. */
   variant: "rail" | "collapsible";
 }
 
 const { headings, variant } = Astro.props;
+const indent = (depth: number) => (depth > 2 ? "pl-4" : "");
 ---
 
 {variant === "collapsible" ? (
-  <details class="group rounded-xl border">
-    <summary class="flex cursor-pointer items-center justify-between gap-2 p-4 text-sm font-medium">
-      <span class="flex items-center gap-2">
-        <Icon name="list" class="h-4 w-4 text-muted-foreground" />
-        On this page
+  <details class="group border-y py-1 text-[15px]">
+    <summary class="flex items-center justify-between py-3 text-muted hover:text-ink">
+      <span>On this page</span>
+      <span aria-hidden="true" class="transition-transform group-open:rotate-45">
+        +
       </span>
-      <Icon name="chevron-down" class="h-4 w-4 text-muted-foreground transition-transform group-open:rotate-180" />
     </summary>
-    <ul class="mx-4 mb-4 flex flex-col gap-0.5 border-l">
+    <ul class="flex flex-col pb-3">
       {headings.map((heading) => (
         <li>
-          <a
-            href={`#${heading.slug}`}
-            class:list={[
-              "block py-[5px] pr-2 text-[13px] leading-snug text-muted-foreground hover:text-foreground",
-              heading.depth > 2 ? "pl-[26px]" : "pl-[13px]",
-            ]}
-          >
+          <a href={`#${heading.slug}`} class:list={["block py-1.5 text-ink-soft hover:text-accent", indent(heading.depth)]}>
             {heading.text}
           </a>
         </li>
@@ -37,18 +30,15 @@ const { headings, variant } = Astro.props;
     </ul>
   </details>
 ) : (
-  <nav data-toc-rail class="flex flex-col gap-2.5" aria-label="On this page">
-    <span class="text-[11px] font-semibold tracking-[0.07em] text-muted-foreground/70 uppercase">On this page</span>
-    <ul class="flex max-h-[calc(100vh-8rem)] flex-col gap-0.5 overflow-y-auto border-l">
+  <nav data-toc-rail aria-label="On this page" class="flex flex-col gap-3 text-[13px]">
+    <span class="label text-[11px]">On this page</span>
+    <ul class="flex max-h-[calc(100dvh-8rem)] flex-col gap-0.5 overflow-y-auto">
       {headings.map((heading) => (
         <li>
           <a
             href={`#${heading.slug}`}
             data-toc-link={heading.slug}
-            class:list={[
-              "block py-[5px] pr-2 text-[13px] leading-snug text-muted-foreground transition-colors hover:text-foreground",
-              heading.depth > 2 ? "pl-[26px]" : "pl-[13px]",
-            ]}
+            class:list={["block py-1 leading-snug text-muted hover:text-ink", indent(heading.depth)]}
           >
             {heading.text}
           </a>
@@ -59,7 +49,7 @@ const { headings, variant } = Astro.props;
 )}
 
 <script>
-  // Highlight the section currently in view in the desktop rail.
+  // Mark the section currently being read in the sidebar.
   const links = document.querySelectorAll<HTMLAnchorElement>("[data-toc-rail] [data-toc-link]");
   const headings = [...links].map((link) => document.getElementById(link.dataset.tocLink!)).filter((el): el is HTMLElement => Boolean(el));
 
@@ -70,12 +60,12 @@ const { headings, variant } = Astro.props;
         if (!visible[0]) return;
         for (const link of links) {
           const active = link.dataset.tocLink === visible[0].target.id;
+          link.classList.toggle("text-ink", active);
           link.classList.toggle("font-medium", active);
-          link.classList.toggle("text-foreground", active);
-          link.classList.toggle("shadow-[inset_1px_0_0_currentColor]", active);
+          link.classList.toggle("text-muted", !active);
         }
       },
-      { rootMargin: "-80px 0px -70% 0px" },
+      { rootMargin: "0px 0px -70% 0px" },
     );
     for (const heading of headings) observer.observe(heading);
   }

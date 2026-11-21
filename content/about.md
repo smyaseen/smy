@@ -6,7 +6,7 @@ Based in Karachi, Pakistan.
 
 ## Now
 
-**Senior Software Engineer at Securiti AI** (acquired by Veeam), Feb 2026 to present.
+**Senior Software Engineer at Securiti AI / Veeam** (Securiti was acquired by Veeam), Feb 2026 to present.
 
 I work across the product, and on LLM agent tooling for production engineering workflows.
 
@@ -14,9 +14,21 @@ One of those is veeam-improve, a self-improving agent tooling plugin for Claude 
 
 ## Previously
 
-**Full Stack Engineer and founding member at Mergn**, Oct 2023 to Feb 2026.
+**Founding Engineer at Mergn**, Oct 2023 to Feb 2026.
 
-I engineered multi-platform customer sync for 10M+ monthly customers across Shopify, Meta CAPI and a custom TypeScript SDK, then built the backend behind the Segment Builder and the Campaign/Journey engine that 30+ brands ran on. Campaign and journey logic driven by triggers and rules cut rollout time by 90%. I used LLMs for segment creation and content moderation, built real-time analytics pipelines on Elasticsearch with ApexCharts, and implemented multi-tenant multi-factor auth with AWS Cognito and NextAuth.
+[Mergn](https://mergn.com) is a customer retention platform for Shopify stores: brands build segments of their customers, then reach them through campaigns and journeys across email, SMS, WhatsApp, web and app push, popups and content cards. I joined at the start as a founding engineer and stayed until it was supporting 50+ brands, among them KFC, McDonald's, Domino's, Aldo, Pierre Cardin, Naheed, Highfy and Jenpharm.
+
+Being early meant doing a bit of everything. We got the MVP out fast, cutting time to market about tenfold, on Next.js, NestJS in an Nx monorepo, PostgreSQL, Elasticsearch and AWS. As the product grew I led the frontend and a small team, and moving to clean architecture, TDD and proper CI/CD made us about 60% faster at shipping.
+
+On the frontend I owned most of what brands actually used to run their marketing: the campaign builder and journey builder, the builders for email, app push and popup messages, merge tags for personalising them, and voucher support with dynamic code generation. Underneath those builders sat a custom text editor I built on Meta's Lexical framework. Typing @ opened a merge tag picker right at the cursor, where you could pick a field or enter a custom value, and the editor checked copy for spam triggers and highlighted errors as you wrote. I also built the auth flows and a one-click onboarding setup, so a new brand could connect their Shopify store, sync their customers and start sending without waiting on us.
+
+Getting Mergn into a brand's own systems was the other half of the job, and I cared about making that easy for their developers. I built the [Shopify app](https://apps.shopify.com/mergn) and the [web SDK on npm](https://www.npmjs.com/package/mergn-webapp-sdk), which together handle 10M+ events a month. The SDK tracks events, properties and user attributes intelligently, syncs anonymous IDs, runs web push notifications through a service worker, and shows content cards, custom popups and gamified popups on the brand's site. Those lifted engagement by 60% and conversions by 75% for the brands using them.
+
+Behind that, I wrote the backend for the Segment Builder and the campaign engine, then the journey orchestration that triggers email, SMS, push, Meta Ads and WhatsApp messages from customer events, which cut campaign rollout time by over 90%. Along the way I integrated Meta CAPI and Shopify webhooks for real-time retargeting, built multi-tenant auth with AWS Cognito and NextAuth, set up real-time analytics on Elasticsearch, and brought in LLMs for segment creation and content moderation.
+
+I also built Mergn's whole website, [mergn.com](https://mergn.com), on my own: multilingual, on Next.js with Sanity as the CMS, so the team could publish blog posts, case studies and page changes themselves without a developer. And like anyone at a startup, I spent plenty of time on support, helping brands get set up and fixing whatever got in their way. That still leaves out a lot: dozens of smaller features, integrations with other systems, and the ETL pipelines that kept brand data flowing into the platform.
+
+In Aug 2024 Mergn won Gold at the PASHA ICT Awards, and it took second place at Allied Bank's startup competition in Lahore. You can read more about the work in [my Mergn write-ups](/projects?tags=mergn).
 
 **Full Stack Engineer on Science37 at Nisum**, Jul 2021 to Oct 2023.
 

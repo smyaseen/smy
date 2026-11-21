@@ -2,7 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { publicationJsonLd } from "@/lib/json-ld";
 import { getPostsOfType, toPostCard, type PostType } from "@/lib/posts";
-import PostBrowser from "./PostBrowser.astro";
+import Icon from "./Icon.astro";
+import NoteList from "./NoteList.astro";
 
 interface Props {
   type: PostType;
@@ -10,17 +11,17 @@ interface Props {
 
 const COPY = {
   blog: {
-    title: "Blog",
-    metaTitle: "SMY - Blog",
-    description: "Engineering articles by Syed Muhammad Yaseen on backends, AI tooling and web development.",
-    lead: "Notes on backends, AI tooling and the things I ship.",
-    noun: "posts",
+    title: "Notes",
+    metaTitle: "Notes | Syed Muhammad Yaseen",
+    description: "Engineering notes by Syed Muhammad Yaseen on backends, AI tooling and web development.",
+    lead: "What I've learned building backends, SDKs and AI tooling.",
+    noun: "notes",
   },
   projects: {
     title: "Projects",
-    metaTitle: "SMY - Projects",
+    metaTitle: "Projects | Syed Muhammad Yaseen",
     description: "Products and platforms built by Syed Muhammad Yaseen.",
-    lead: "Products and platforms I have built and shipped.",
+    lead: "Products and platforms I have built and shipped, and what went into them.",
     noun: "projects",
   },
 };
@@ -28,17 +29,141 @@ const COPY = {
 const { type } = Astro.props;
 const copy = COPY[type];
 const posts = (await getPostsOfType(type)).map(toPostCard);
+
+const tagCounts = new Map<string, number>();
+for (const post of posts) for (const tag of new Set(post.tags)) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+const tags = [...tagCounts.entries()].filter(([, count]) => count > 1).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+const searchIndex = Object.fromEntries(posts.map((post) => [post.slug, post.search]));
 ---
 
 <BaseLayout title={copy.metaTitle} description={copy.description} jsonLd={publicationJsonLd()}>
-  <div class="mb-8 flex flex-col gap-7">
-    <header class="fade-in flex flex-col gap-1.5">
-      <h1 class="text-3xl font-semibold tracking-tight">{copy.title}</h1>
-      <p class="text-sm text-muted-foreground">{copy.lead}</p>
-    </header>
+  <div
+    class="wide-column fade-in pt-14 sm:pt-20 xl:grid xl:grid-cols-[minmax(0,320px)_minmax(0,1fr)] xl:gap-x-20"
+    data-browser
+    data-noun={copy.noun}
+    data-total={posts.length}
+  >
+    <div class="xl:sticky xl:top-10 xl:self-start">
+      <header class="flex flex-col gap-3 pb-8">
+        <h1 class="font-serif text-[36px] leading-[1.15] font-medium tracking-[-0.02em] sm:text-[42px]">{copy.title}</h1>
+        <p class="font-serif text-[18px] leading-[1.6] text-ink-soft sm:text-[19px]">{copy.lead}</p>
+      </header>
 
-    <div class="fade-in animation-delay-200">
-      <PostBrowser posts={posts} noun={copy.noun} />
+      <div class="flex flex-col gap-3 pb-6 sm:flex-row sm:items-center xl:flex-col xl:items-stretch">
+        <label class="relative flex grow items-center">
+          <span class="sr-only">Search {copy.noun}</span>
+          <Icon name="search" class="pointer-events-none absolute left-3 h-4 w-4 text-muted" />
+          <input
+            data-query
+            type="search"
+            autocomplete="off"
+            placeholder={`Search ${copy.noun}`}
+            class="h-11 w-full rounded-lg border border-faint/50 bg-transparent pr-3 pl-9 text-[15px] placeholder:text-muted focus:border-accent focus:outline-none"
+          />
+        </label>
+        {tags.length > 0 && (
+          <label class="relative flex items-center sm:w-48 xl:w-full">
+            <span class="sr-only">Filter by topic</span>
+            <select
+              data-tag
+              class="h-11 w-full cursor-pointer appearance-none rounded-lg border border-faint/50 bg-transparent pr-9 pl-3 text-[15px] focus:border-accent focus:outline-none"
+            >
+              <option value="">All topics</option>
+              {tags.map(([tag, count]) => (
+                <option value={tag}>
+                  {tag} ({count})
+                </option>
+              ))}
+            </select>
+            <Icon name="chevron-down" class="pointer-events-none absolute right-3 h-4 w-4 text-muted" />
+          </label>
+        )}
+      </div>
+
+      <p data-count class="label pb-2" aria-live="polite">
+        {posts.length} {copy.noun}
+      </p>
     </div>
+
+    <div class="xl:pt-2">
+      <NoteList posts={posts} withExcerpt={type === "projects"} />
+
+      <div data-empty hidden class="border-t py-12 text-center">
+        <p class="font-serif text-[19px]">Nothing matches that.</p>
+        <button type="button" data-clear class="link mt-2 cursor-pointer text-[15px]">
+          Clear the search
+        </button>
+      </div>
+    </div>
+
+    <script type="application/json" data-search-index set:html={JSON.stringify(searchIndex)} />
   </div>
 </BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-browser]")!;
+  const noun = root.dataset.noun!;
+  const total = Number(root.dataset.total);
+  const index: Record<string, string> = JSON.parse(root.querySelector("[data-search-index]")!.textContent || "{}");
+  const input = root.querySelector<HTMLInputElement>("[data-query]")!;
+  const tagSelect = root.querySelector<HTMLSelectElement>("[data-tag]");
+  const count = root.querySelector<HTMLElement>("[data-count]")!;
+  const empty = root.querySelector<HTMLElement>("[data-empty]")!;
+  const years = [...root.querySelectorAll<HTMLElement>("[data-year]")];
+
+  // Restore state from the URL so a filtered view can be shared.
+  const params = new URLSearchParams(location.search);
+  input.value = params.get("query") ?? "";
+  if (tagSelect) {
+    const tag = (params.get("tags") ?? "").split(",")[0]?.trim().toLowerCase() ?? "";
+    if ([...tagSelect.options].some((option) => option.value === tag)) tagSelect.value = tag;
+  }
+
+  function render() {
+    const query = input.value.trim().toLowerCase();
+    const tag = tagSelect?.value ?? "";
+    let shown = 0;
+
+    for (const year of years) {
+      let shownInYear = 0;
+      for (const item of year.querySelectorAll<HTMLElement>("li[data-slug]")) {
+        const matches = (!query || (index[item.dataset.slug!] ?? "").includes(query)) && (!tag || item.dataset.tags!.split("|").includes(tag));
+        item.hidden = !matches;
+        if (matches) shownInYear++;
+      }
+      year.hidden = shownInYear === 0;
+      shown += shownInYear;
+    }
+
+    const filtered = Boolean(query || tag);
+    count.textContent = filtered ? `${shown} of ${total} ${noun}` : `${total} ${noun}`;
+    empty.hidden = shown > 0;
+
+    const next = new URLSearchParams();
+    if (input.value) next.set("query", input.value);
+    if (tag) next.set("tags", tag);
+    const search = next.toString();
+    history.replaceState(null, "", search ? `${location.pathname}?${search}` : location.pathname);
+  }
+
+  input.addEventListener("input", render);
+  tagSelect?.addEventListener("change", render);
+  root.querySelector("[data-clear]")!.addEventListener("click", () => {
+    input.value = "";
+    if (tagSelect) tagSelect.value = "";
+    render();
+    input.focus();
+  });
+
+  // "/" or ⌘K / Ctrl-K jumps to search, unless you're already typing somewhere.
+  window.addEventListener("keydown", (event) => {
+    const typing = event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement;
+    if ((event.key === "k" && (event.metaKey || event.ctrlKey)) || (event.key === "/" && !typing)) {
+      event.preventDefault();
+      input.focus();
+    }
+  });
+
+  render();
+</script>

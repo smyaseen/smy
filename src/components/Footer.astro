@@ -9,20 +9,22 @@ const links = [
 ];
 ---
 
-<footer class="mt-auto flex flex-col items-center justify-between gap-3 border-t py-6 text-[13px] text-muted-foreground sm:flex-row">
-  <span class="text-muted-foreground/70">
-    © {new Date().getFullYear()} {site.author.name}
-  </span>
-  <nav class="flex items-center gap-5">
-    {links.map((link) => (
-      <a
-        href={link.href}
-        target={link.href.startsWith("http") ? "_blank" : undefined}
-        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-        class="transition-colors hover:text-foreground"
-      >
-        {link.label}
-      </a>
-    ))}
-  </nav>
+<footer class="wide-column mt-20 pb-10">
+  <div class="flex flex-col gap-3 border-t pt-6 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
+    <span>
+      © {new Date().getFullYear()} {site.author.name}
+    </span>
+    <nav aria-label="Elsewhere" class="-ml-2 flex flex-wrap sm:ml-0 sm:-mr-2">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          target={link.href.startsWith("http") ? "_blank" : undefined}
+          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+          class="px-2 py-2 hover:text-ink"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
 </footer>

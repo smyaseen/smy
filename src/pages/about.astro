@@ -1,42 +1,43 @@
 ---
-import Icon from "@/components/Icon.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import site from "@/lib/site";
 import { Content as Bio } from "../../content/about.md";
 
 const links = [
-  { href: site.links.github, label: "github.com/smyaseen", icon: "github" },
-  { href: site.links.linkedin, label: "linkedin.com/in/sm-y", icon: "linkedin" },
-] as const;
+  { href: site.links.github, label: "GitHub" },
+  { href: site.links.linkedin, label: "LinkedIn" },
+  { href: `mailto:${site.email}`, label: "Email" },
+];
 
 const description = "The work, background and writing of Syed Muhammad Yaseen, Senior Software Engineer working on AI backends and scalable APIs.";
 ---
 
-<BaseLayout title="SMY - About" description={description} image="/profile-pic.jpg">
-  <div class="mb-16 grid items-start gap-14 lg:grid-cols-[240px_minmax(0,1fr)]">
-    <aside class="fade-in flex flex-col gap-4 lg:sticky lg:top-24">
-      <div class="flex h-24 w-24 items-center justify-center rounded-xl border bg-secondary text-2xl font-semibold tracking-tight">SMY</div>
-      <div class="flex flex-col gap-0.5">
-        <span class="text-base font-semibold tracking-tight">{site.author.name}</span>
-        <span class="text-[13px] text-muted-foreground">{site.author.role}</span>
+<BaseLayout title="About | Syed Muhammad Yaseen" description={description} image="/profile-pic.jpg">
+  <div class="column fade-in pt-14 sm:pt-20">
+    <header class="flex flex-col gap-5 pb-10">
+      <img src="/profile-pic.jpg" alt="Syed Muhammad Yaseen" width="88" height="88" class="h-[88px] w-[88px] rounded-full bg-wash object-cover" />
+      <div class="flex flex-col gap-1">
+        <h1 class="font-serif text-[36px] leading-[1.15] font-medium tracking-[-0.02em] sm:text-[42px]">About</h1>
+        <p class="text-[15px] text-muted">
+          {site.author.name} · {site.author.role} at Securiti AI / Veeam · Karachi
+        </p>
       </div>
-      <div class="flex flex-col gap-2 border-t pt-4 text-[13px]">
+      <nav aria-label="Elsewhere" class="-ml-1 flex flex-wrap gap-x-4 text-[15px] font-medium">
         {links.map((link) => (
           <a
             href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+            target={link.href.startsWith("http") ? "_blank" : undefined}
+            rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            class="px-1 py-2 text-accent hover:underline hover:underline-offset-4"
           >
-            <Icon name={link.icon} class="h-3.5 w-3.5" />
             {link.label}
           </a>
         ))}
-      </div>
-    </aside>
+      </nav>
+    </header>
 
-    <section class="fade-in animation-delay-200 mdx max-w-[660px]">
+    <div class="prose border-t pt-8">
       <Bio />
-    </section>
+    </div>
   </div>
 </BaseLayout>

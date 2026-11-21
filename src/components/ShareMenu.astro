@@ -1,6 +1,5 @@
 ---
 import site from "@/lib/site";
-import Icon from "./Icon.astro";
 
 interface Props {
   title: string;
@@ -13,8 +12,8 @@ const shareText = `${title}\r\n{ by ${site.author.name} }`;
 
 const targets = [
   { label: "X", href: `https://twitter.com/intent/tweet?url=${e(`${url}?ref=x-share`)}&text=${e(shareText)}` },
-  { label: "Reddit", href: `https://www.reddit.com/submit?url=${e(url)}&title=${e(title)}` },
   { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${e(url)}` },
+  { label: "Reddit", href: `https://www.reddit.com/submit?url=${e(url)}&title=${e(title)}` },
   { label: "Hacker News", href: `https://news.ycombinator.com/submitlink?u=${e(url)}&t=${e(title)}` },
   { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${e(url)}` },
   { label: "WhatsApp", href: `https://api.whatsapp.com/send?text=${e(title)} ${e(url)}` },
@@ -22,17 +21,13 @@ const targets = [
 ---
 
 <details data-share class="relative">
-  <summary class="btn btn-outline btn-sm gap-1.5" aria-label="Share this post">
-    <Icon name="share" class="h-3.5 w-3.5 text-muted-foreground" />
-    Share
-  </summary>
-  <div class="menu right-0 w-48">
-    <button type="button" data-copy={url} class="menu-item">
-      <Icon name="link" class="h-4 w-4 text-muted-foreground" />
+  <summary class="link py-2">Share</summary>
+  <div class="absolute right-0 bottom-full z-20 mb-2 flex w-48 flex-col rounded-lg border bg-paper p-1.5 text-[14px] shadow-lg sm:right-auto sm:left-0">
+    <button type="button" data-copy={url} class="cursor-pointer rounded-md px-3 py-2 text-left hover:bg-wash">
       <span data-copy-label>Copy link</span>
     </button>
     {targets.map((target) => (
-      <a href={target.href} target="_blank" rel="noopener noreferrer" class="menu-item">
+      <a href={target.href} target="_blank" rel="noopener noreferrer" class="rounded-md px-3 py-2 hover:bg-wash">
         {target.label}
       </a>
     ))}
@@ -49,7 +44,7 @@ const targets = [
         await navigator.clipboard.writeText(button.dataset.copy!);
         label.textContent = "Copied";
       } catch {
-        label.textContent = "Copy failed";
+        label.textContent = "Couldn't copy";
       }
       setTimeout(() => (label.textContent = "Copy link"), 1500);
     });

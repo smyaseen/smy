@@ -2,212 +2,325 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+  A notebook palette: warm paper, near-black ink, one ink-blue accent.
+  Every text color here passes 4.5:1 on its background in both themes.
+*/
 @theme inline {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --color-white: #fdfaf5;
-  --color-black: #1d1e20;
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --font-serif: "Newsreader Variable", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint);
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-wash: var(--wash);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
 }
 
 :root {
-  --background: hsl(37, 67%, 98%);
-  --foreground: hsl(240, 10%, 3.9%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(240, 10%, 3.9%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(240, 10%, 3.9%);
-  --primary: hsl(240, 5.9%, 10%);
-  --primary-foreground: hsl(0, 0%, 98%);
-  --secondary: hsl(240, 4.8%, 95.9%);
-  --secondary-foreground: hsl(240, 5.9%, 10%);
-  --muted: hsl(240, 4.8%, 95.9%);
-  --muted-foreground: hsl(240, 3.8%, 46.1%);
-  --accent: hsl(240, 4.8%, 95.9%);
-  --accent-foreground: hsl(240, 5.9%, 10%);
-  --border: hsl(240, 5.9%, 90%);
-  --input: hsl(240, 5.9%, 90%);
-  --ring: hsl(240, 5.9%, 10%);
-  --radius: 0.5rem;
+  --paper: #fbf8f2;
+  --ink: #1c1b19;
+  --ink-soft: #45433e;
+  --muted: #6b675f;
+  --faint: #8a857b;
+  --rule: #e4dfd5;
+  --rule-soft: #efeae1;
+  --wash: #f1ece2;
+  --accent: #2f5d8a;
   color-scheme: light;
 }
 
 .dark {
-  --background: hsl(220, 5%, 11%);
-  --foreground: hsl(240, 3%, 85%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --primary: hsl(240, 3%, 85%);
-  --primary-foreground: hsl(240, 5.9%, 10%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --ring: hsl(240, 4.9%, 83.9%);
+  --paper: #1b1c1e;
+  --ink: #e6e3dc;
+  --ink-soft: #c9c5bc;
+  --muted: #a8a49b;
+  --faint: #8d8981;
+  --rule: #34353a;
+  --rule-soft: #2a2b2f;
+  --wash: #26272a;
+  --accent: #8fb3d9;
   color-scheme: dark;
+}
+
+/*
+  Big monitors: a 680px column at 20px looks like a postage stamp on a 1440p or
+  4K screen. Scale the whole page up in steps so the column keeps roughly the
+  same share of the screen.
+*/
+@media (width >= 1800px) {
+  html {
+    zoom: 1.15;
+  }
+}
+@media (width >= 2300px) {
+  html {
+    zoom: 1.35;
+  }
+}
+@media (width >= 3000px) {
+  html {
+    zoom: 1.6;
+  }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-rule;
   }
   html {
-    scroll-padding-top: 4.5rem;
+    scroll-padding-top: 2rem;
+    -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-paper text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  a {
+    @apply transition-colors;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
   summary {
     list-style: none;
+    cursor: pointer;
   }
   summary::-webkit-details-marker {
     display: none;
   }
 }
 
-@utility container {
-  margin-inline: auto;
+/* The single reading column every page sits in. */
+@utility column {
   width: 100%;
-  max-width: 1280px;
+  max-width: 680px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 640px) {
+    padding-inline: 1.5rem;
+  }
 }
 
-/* Entrance animation, replacing tailwindcss-animate's `animate-in fade-in`. */
+/*
+  Header, footer and list pages: the reading column on laptops and phones,
+  widening to two columns on large screens so a 1440p monitor isn't mostly margin.
+*/
+@utility wide-column {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 640px) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 1280px) {
+    max-width: 1180px;
+  }
+}
+
+/* The article column. */
+@utility reading-column {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 640px) {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* Small uppercase section labels ("Now", "Notes", "2025"). */
+@utility label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Underlined accent link used in prose-adjacent UI. */
+@utility link {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
+    transform: translateY(4px);
   }
 }
 @utility fade-in {
-  animation: fade-in 200ms ease-out both;
+  animation: fade-in 300ms ease-out both;
 }
-@utility animation-delay-* {
-  animation-delay: calc(--value(integer) * 1ms);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .fade-in {
     animation: none;
   }
 }
 
-/* Shared control styles (the old shadcn button, badge, input and card). */
-@layer components {
-  .btn {
-    @apply focus-visible:ring-ring inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md px-4 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none;
-  }
-  .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm;
-  }
-  .btn-outline {
-    @apply border-input hover:bg-accent hover:text-accent-foreground border bg-transparent shadow-xs;
-  }
-  .btn-sm {
-    @apply h-8 px-3 text-[13px];
-  }
-  .badge {
-    @apply text-muted-foreground inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-medium;
-  }
-  .input {
-    @apply border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:ring-1 focus-visible:outline-none;
-  }
-  .menu {
-    @apply bg-popover text-popover-foreground absolute z-50 mt-2 rounded-lg border p-1.5 text-sm shadow-lg;
-  }
-  .menu-item {
-    @apply hover:bg-accent flex w-full cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-left;
-  }
-}
+/* Rendered markdown: a book-like measure and rhythm. */
+.prose {
+  font-family: var(--font-serif);
+  font-size: 18.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  font-variation-settings: "opsz" 16;
 
-/* Rendered markdown. These mirror the per-element classes the React renderer applied. */
-.mdx {
-  @apply text-[16.5px] leading-[1.75] break-words;
-
-  h1 {
-    @apply mt-6 mb-4 text-3xl font-bold;
+  @media (width >= 640px) {
+    font-size: 20px;
   }
+
+  > * + * {
+    margin-top: 1.1em;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-top: 1.9em;
+  }
+  h1,
   h2 {
-    @apply mt-8 mb-4 text-2xl font-semibold tracking-tight;
+    font-size: 1.4em;
   }
   h3 {
-    @apply mt-6 mb-4 text-xl font-semibold;
+    font-size: 1.18em;
   }
-  h4 {
-    @apply mt-5 mb-3 text-lg font-semibold;
-  }
-  h5 {
-    @apply text-sm font-semibold;
-  }
+  h4,
+  h5,
   h6 {
-    @apply text-base font-semibold;
+    font-size: 1em;
   }
-  :is(h1, h2, h3, h4, h5, h6) > a {
-    @apply no-underline;
+  :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-top: 0.6em;
   }
-  p {
-    @apply my-4;
+  :is(h1, h2, h3, h4, h5, h6) a {
+    color: inherit;
+    text-decoration: none;
   }
   a {
-    @apply underline underline-offset-4;
+    color: var(--accent);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    text-decoration-thickness: 2px;
   }
   strong {
-    @apply font-bold;
+    font-weight: 600;
+  }
+  em {
+    font-style: italic;
+  }
+  ul,
+  ol {
+    padding-left: 1.4em;
   }
   ul {
-    @apply ml-6 list-disc;
+    list-style: disc;
   }
   ol {
-    @apply ml-6 list-decimal;
+    list-style: decimal;
   }
-  li {
-    @apply mt-2;
+  li + li,
+  li > ul,
+  li > ol {
+    margin-top: 0.4em;
+  }
+  li::marker {
+    color: var(--faint);
   }
   blockquote {
-    @apply my-3 border-l-2 pl-6 italic;
-  }
-  img {
-    @apply inline-block h-auto max-w-full rounded-md;
+    border-left: 2px solid var(--rule);
+    padding-left: 1.1em;
+    font-style: italic;
+    color: var(--ink-soft);
   }
   hr {
-    @apply my-4 md:my-8;
+    border: 0;
+    margin: 2.4em auto;
+    text-align: center;
+    &::after {
+      content: "· · ·";
+      color: var(--faint);
+      letter-spacing: 0.4em;
+    }
   }
-  pre {
-    @apply mt-6 mb-4 overflow-x-auto rounded-lg p-4 text-sm leading-relaxed;
+  img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin-inline: auto;
+    border-radius: 8px;
+  }
+  /* Hashnode wraps several images in one paragraph; keep them from crowding. */
+  p > img + img {
+    margin-top: 1em;
   }
   :not(pre) > code {
-    @apply bg-muted relative mx-1 rounded px-[0.3rem] py-[0.2rem] align-middle font-mono text-sm;
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    background: var(--wash);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+  pre {
+    font-size: 14.5px;
+    line-height: 1.6;
+    padding: 1.1em 1.25em;
+    border-radius: 10px;
+    overflow-x: auto;
+    /* Let code blocks breathe slightly wider than the text on larger screens. */
+    @media (width >= 768px) {
+      margin-inline: -1.25rem;
+    }
+  }
+  pre code {
+    font-family: var(--font-mono);
   }
   table {
-    @apply my-6 block w-full overflow-x-auto text-sm;
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    border-collapse: collapse;
   }
   th,
   td {
-    @apply border px-3 py-2 text-left;
+    border: 1px solid var(--rule);
+    padding: 0.5em 0.75em;
+    text-align: left;
   }
   iframe {
-    @apply my-6 aspect-video h-auto w-full rounded-lg;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border-radius: 8px;
   }
 }

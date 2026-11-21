@@ -1,83 +1,102 @@
 ---
-import Icon, { type IconName } from "@/components/Icon.astro";
-import PostCard from "@/components/PostCard.astro";
-import PostRow from "@/components/PostRow.astro";
+import NoteList from "@/components/NoteList.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { publicationJsonLd } from "@/lib/json-ld";
 import { getPostsOfType, toPostCard } from "@/lib/posts";
 import site from "@/lib/site";
 
 const selectedProjectSlugs = [
-  "building-and-publishing-a-shopify-typescript-app-with-remix-for-mergn",
-  "developing-mergn-web-sdk-transforming-customer-engagement",
   "mergn-customer-engagement-platform",
+  "developing-mergn-web-sdk-transforming-customer-engagement",
   "revolutionizing-clinical-trials-my-journey-with-science37",
 ];
 
-const recentPosts = (await getPostsOfType("blog")).slice(0, 3).map(toPostCard);
+const notes = (await getPostsOfType("blog")).map(toPostCard);
+const recentNotes = notes.slice(0, 7);
 const projects = (await getPostsOfType("projects"))
   .filter((post) => selectedProjectSlugs.includes(post.id))
-  .slice(0, 2)
+  .sort((a, b) => selectedProjectSlugs.indexOf(a.id) - selectedProjectSlugs.indexOf(b.id))
   .map(toPostCard);
 
-const socials: { href: string; label: string; icon: IconName; primary?: boolean }[] = [
-  { href: site.links.github, label: "GitHub", icon: "github", primary: true },
-  { href: site.links.linkedin, label: "LinkedIn", icon: "linkedin" },
-  { href: `mailto:${site.email}`, label: "Email", icon: "mail" },
+const elsewhere = [
+  { href: site.links.github, label: "GitHub" },
+  { href: site.links.linkedin, label: "LinkedIn" },
+  { href: `mailto:${site.email}`, label: "Email" },
 ];
 ---
 
-<BaseLayout title="SMY - Syed Muhammad Yaseen" description={site.descriptionSEO} jsonLd={publicationJsonLd()}>
-  <section class="fade-in flex max-w-[660px] flex-col gap-5 pt-10 pb-16 sm:pt-16">
-    <div class="flex flex-col gap-3.5">
-      <h1 class="text-[2.5rem] leading-[1.12] font-semibold tracking-tight text-pretty sm:text-[44px]">{site.author.name}</h1>
-      <p class="text-[17px] leading-relaxed text-pretty text-muted-foreground sm:text-lg">
-        Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms. Node.js, NestJS, TypeScript, AWS and LLM
-        integration.
-      </p>
-    </div>
-    <div class="flex flex-wrap items-center gap-2">
-      {socials.map(({ href, label, icon, primary }) => (
-        <a
-          href={href}
-          target={href.startsWith("http") ? "_blank" : undefined}
-          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-          class:list={["btn", primary ? "btn-primary" : "btn-outline"]}
-        >
-          <Icon name={icon} class="h-[15px] w-[15px]" />
-          {label}
-        </a>
-      ))}
-    </div>
-  </section>
+<BaseLayout title="Syed Muhammad Yaseen" description={site.descriptionSEO} jsonLd={publicationJsonLd()}>
+  <div class="wide-column xl:grid xl:grid-cols-[minmax(0,400px)_minmax(0,1fr)] xl:gap-x-20">
+    <div class="xl:sticky xl:top-10 xl:self-start">
+      <section class="fade-in flex flex-col gap-5 pt-14 pb-12 sm:pt-20 sm:pb-14">
+        <p class="label">Karachi · Senior Software Engineer</p>
+        <h1 class="font-serif text-[31px] leading-[1.18] font-medium tracking-[-0.015em] text-balance sm:text-[42px] sm:leading-[1.14] sm:tracking-[-0.02em] xl:text-[36px]">
+          I build backend services and APIs for AI products, and write down what I learn along the way.
+        </h1>
+        <p class="font-serif text-[18px] leading-[1.6] text-ink-soft sm:text-[20px]">
+          This is where I keep engineering notes and write-ups of things I've shipped. Most of it is Node.js, TypeScript, AWS and LLM tooling.
+        </p>
+        <nav aria-label="Elsewhere" class="-ml-1 flex flex-wrap gap-x-4 text-[15px] font-medium">
+          {elsewhere.map((link) => (
+            <a
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              class="px-1 py-2 text-accent hover:underline hover:underline-offset-4"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </section>
 
-  <section class="fade-in animation-delay-200 flex flex-col gap-2 pb-16">
-    <div class="flex items-baseline justify-between border-b pb-3.5">
-      <h2 class="text-[15px] font-semibold tracking-tight">Recent writing</h2>
-      <a href="/blog" class="text-[13px] text-muted-foreground hover:text-foreground">
-        All posts →
-      </a>
+      <section aria-labelledby="now" class="grid gap-x-6 gap-y-2 border-t py-7 sm:grid-cols-[88px_minmax(0,1fr)] xl:grid-cols-1">
+        <h2 id="now" class="label sm:pt-[5px]">
+          Now
+        </h2>
+        <p class="font-serif text-[17.5px] leading-[1.6] sm:text-[18px]">
+          Senior Software Engineer at Securiti AI / Veeam, working across the product and on LLM agent tooling for production engineering workflows.
+          Also studying for a master's in computer science at FAST NUCES.{" "}
+          <a href="/about" class="link">
+            More about me
+          </a>
+        </p>
+      </section>
     </div>
-    <ul class="flex flex-col">
-      {recentPosts.map((post) => (
-        <PostRow post={post} />
-      ))}
-    </ul>
-  </section>
 
-  <section class="fade-in animation-delay-400 flex flex-col gap-4 pb-20">
-    <div class="flex items-baseline justify-between border-b pb-3.5">
-      <h2 class="text-[15px] font-semibold tracking-tight">Selected projects</h2>
-      <a href="/projects" class="text-[13px] text-muted-foreground hover:text-foreground">
-        All projects →
-      </a>
+    <div class="xl:pt-[5.4rem]">
+      <section aria-labelledby="notes" class="border-t pt-7 xl:border-t-0 xl:pt-0">
+        <div class="flex items-baseline justify-between">
+          <h2 id="notes" class="label">
+            Recent notes
+          </h2>
+          <a href="/blog" class="link text-[14px]">
+            All {notes.length} notes
+          </a>
+        </div>
+        <NoteList posts={recentNotes} />
+      </section>
+
+      <section aria-labelledby="built" class="mt-10 grid gap-x-6 gap-y-4 border-t pt-7 sm:grid-cols-[88px_minmax(0,1fr)]">
+        <h2 id="built" class="label sm:pt-[5px]">
+          Built
+        </h2>
+        <div class="flex flex-col gap-5">
+          <ul class="flex flex-col gap-5">
+            {projects.map((project) => (
+              <li>
+                <a href={project.path} class="group flex flex-col gap-1">
+                  <span class="font-serif text-[18.5px] leading-[1.4] font-medium group-hover:text-accent sm:text-[19px]">{project.title}</span>
+                  {project.excerpt && <span class="text-[14px] leading-[1.55] text-muted">{project.excerpt}</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href="/projects" class="link w-fit text-[14px]">
+            All projects
+          </a>
+        </div>
+      </section>
     </div>
-    <ul class="grid gap-4 sm:grid-cols-2">
-      {projects.map((project) => (
-        <li>
-          <PostCard post={project} />
-        </li>
-      ))}
-    </ul>
-  </section>
+  </div>
 </BaseLayout>
