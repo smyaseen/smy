@@ -5,7 +5,6 @@ export const site = {
   descriptionSEO: "Senior Software Engineer building backend services and REST APIs for AI-enabled SaaS platforms.",
   url: "https://sm-y.dev",
   logo: "/profile-pic.jpg",
-  email: "smyaseen164@gmail.com",
   author: {
     name: "Syed Muhammad Yaseen",
     role: "Senior Software Engineer",
