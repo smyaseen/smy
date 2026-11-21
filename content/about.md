@@ -10,7 +10,7 @@ Based in Karachi, Pakistan.
 
 I work across the product, and on LLM agent tooling for production engineering workflows.
 
-One of those is veeam-improve, a self-improving agent tooling plugin for Claude Code with 60 skills and 13 agents. Its learning-loop architecture came from a leading open-source agent, which I evaluated at source level before porting the approach. Blind re-implementation of 22 merged Jira tickets, diffed against the code that actually shipped, took its implementation-mechanism accuracy from 50% to 90%. A SQLite FTS5 index over 4,600+ session messages cut prior-decision lookup from roughly ten minutes to 65ms. Sixteen versioned releases went out in eight days through a zero-setup internal plugin marketplace with command-approval guards and full audit logging.
+One of those is veeam-improve, a self-improving agent tooling plugin for Claude Code with 60 skills and 13 agents. Its learning-loop architecture came from an open-source agent, which I evaluated at source level before porting the approach. Blind re-implementation of 22 merged Jira tickets, diffed against the code that actually shipped, took its implementation-mechanism accuracy from 50% to 90%. A SQLite FTS5 index over 4,600+ session messages cut prior-decision lookup from roughly ten minutes to 65ms. Sixteen versioned releases went out in eight days through a zero-setup internal plugin marketplace with command-approval guards and full audit logging.
 
 ## Previously
 
@@ -20,7 +20,7 @@ One of those is veeam-improve, a self-improving agent tooling plugin for Claude 
 
 Being early meant doing a bit of everything. We got the MVP out fast, cutting time to market about tenfold, on Next.js, NestJS in an Nx monorepo, PostgreSQL, Elasticsearch and AWS. As the product grew I led the frontend and a small team, and moving to clean architecture, TDD and proper CI/CD made us about 60% faster at shipping.
 
-On the frontend I owned most of what brands actually used to run their marketing: the campaign builder and journey builder, the builders for email, app push and popup messages, merge tags for personalising them, and voucher support with dynamic code generation. Underneath those builders sat a custom text editor I built on Meta's Lexical framework. Typing @ opened a merge tag picker right at the cursor, where you could pick a field or enter a custom value, and the editor checked copy for spam triggers and highlighted errors as you wrote. I also built the auth flows and a one-click onboarding setup, so a new brand could connect their Shopify store, sync their customers and start sending without waiting on us.
+On the frontend I owned most of what brands used to run their marketing: the campaign builder and journey builder, the builders for email, app push and popup messages, merge tags for personalising them, and voucher support with dynamic code generation. Underneath those builders sat a custom text editor I built on Meta's Lexical framework. Typing @ opened a merge tag picker right at the cursor, where you could pick a field or enter a custom value, and the editor checked copy for spam triggers and highlighted errors as you wrote. I also built the auth flows and a one-click onboarding setup, so a new brand could connect their Shopify store, sync their customers and start sending without waiting on us.
 
 Getting Mergn into a brand's own systems was the other half of the job, and I cared about making that easy for their developers. I built the [Shopify app](https://apps.shopify.com/mergn) and the [web SDK on npm](https://www.npmjs.com/package/mergn-webapp-sdk), which together handle 10M+ events a month. The SDK tracks events, properties and user attributes intelligently, syncs anonymous IDs, runs web push notifications through a service worker, and shows content cards, custom popups and gamified popups on the brand's site. Those lifted engagement by 60% and conversions by 75% for the brands using them.
 
@@ -28,7 +28,7 @@ Behind that, I wrote the backend for the Segment Builder and the campaign engine
 
 I also built Mergn's whole website, [mergn.com](https://mergn.com), on my own: multilingual, on Next.js with Sanity as the CMS, so the team could publish blog posts, case studies and page changes themselves without a developer. And like anyone at a startup, I spent plenty of time on support, helping brands get set up and fixing whatever got in their way. That still leaves out a lot: dozens of smaller features, integrations with other systems, and the ETL pipelines that kept brand data flowing into the platform.
 
-In Aug 2024 Mergn won Gold at the PASHA ICT Awards, and it took second place at Allied Bank's startup competition in Lahore. You can read more about the work in [my Mergn write-ups](/projects?tags=mergn).
+In Aug 2024 Mergn won Gold at the PASHA ICT Awards in Business Services and Marketing Solutions, and it took second place at Allied Bank's startup competition in Lahore. You can read more about the work in [my Mergn write-ups](/projects?tags=mergn).
 
 **Full Stack Engineer on Science37 at Nisum**, Jul 2021 to Oct 2023.
 
@@ -42,7 +42,7 @@ I automated 90% of data archival with AWS Fargate, S3 and a NestJS cron, which t
 
 ## Recognition
 
-Microsoft certified me on Azure Fundamentals in Jun 2023. Mergn took the Gold Award at the PASHA ICT Awards in Aug 2024, in Business Services and Marketing Solutions. SZABIST gave me the University Chancellor's Certificate in Jul 2023 for placing in the top 10.
+Microsoft certified me on Azure Fundamentals in Jun 2023, and SZABIST gave me the University Chancellor's Certificate in Jul 2023 for placing in the top 10.
 
 ## Writing
 
