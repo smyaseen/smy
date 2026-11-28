@@ -49,7 +49,7 @@ Then Vercel. My free tier ended, and one day the site was answering every reques
 
 ## The server I already had
 
-About a year ago I bought a small Hetzner cloud server: 4 vCPUs, 8 GB of RAM, 40 GB of disk. Hetzner still sells that plan, but it's very hard to get hold of now, so I'm glad I grabbed it when I did. It has been running Coolify for my other projects ever since, including [reversedwithai.com](https://reversedwithai.com), and it hasn't given me any trouble.
+About a year ago I bought a small Hetzner cloud server: 4 vCPUs, 8 GB of RAM, 40 GB of disk. Hetzner still sells that plan, but it's very hard to get hold of now, so I'm glad I grabbed it when I did. It has been running Coolify ever since and hasn't given me any trouble.
 
 Coolify is a self-hosted alternative to Vercel or Heroku. You point it at a GitHub repo, it builds a Docker image on every push and runs it behind Traefik, which handles routing and Let's Encrypt certificates. For a solo developer it's most of what I used Vercel for, on hardware I pay for once a month.
 
